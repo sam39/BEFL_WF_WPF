@@ -13,6 +13,7 @@
                 <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
                 <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding DepId}" DisplayMemberPath="Dep.Name" Header="Должность" Width="100" />
+                
             </DataGrid.Columns>
             
         </DataGrid> 
