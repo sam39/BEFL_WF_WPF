@@ -5,18 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="403.292" Width="644.547">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="231" Width="497">
+        <DataGrid AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="181" Width="617">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
                 <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
-                <DataGridComboBoxColumn SelectedValueBinding="{Binding DepId}" DisplayMemberPath="Dep.Name" Header="Должность" Width="100" />
-                
+                <DataGridComboBoxColumn x:Name="PosColumn" DisplayMemberPath="Name" SelectedItemBinding="{Binding Pos}" Header="Должность" Width="100" />
+                <DataGridComboBoxColumn x:Name="DepColumn"  DisplayMemberPath="Name" SelectedItemBinding="{Binding Dep}" Header="Отдел" Width="100"/>
+                <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
             </DataGrid.Columns>
-            
-        </DataGrid> 
+
+        </DataGrid>
+        <Button x:Name="Savebutton" Content="Сохранить" HorizontalAlignment="Left" Height="31" Margin="261,280,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="Editbutton" Content="Редактировать" HorizontalAlignment="Left" Height="31" Margin="516,280,0,0" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Margin="391,280,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="SearchtextBox" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
+        <Button x:Name="Searchbutton" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
