@@ -3,17 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF"
+        xmlns:local="clr-namespace:WPF.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="403.292" Width="644.547">
+
+    <Window.DataContext>
+        <local:empsViewModel></local:empsViewModel>
+    </Window.DataContext>
+
     <Grid>
-        <DataGrid AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="181" Width="617">
+        <DataGrid AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="181" Width="617" ItemsSource = "{Binding Path=Emps}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
                 <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
-                <DataGridComboBoxColumn x:Name="PosColumn" DisplayMemberPath="Name" SelectedItemBinding="{Binding Pos}" Header="Должность" Width="100" />
-                <DataGridComboBoxColumn x:Name="DepColumn"  DisplayMemberPath="Name" SelectedItemBinding="{Binding Dep}" Header="Отдел" Width="100"/>
+                <DataGridComboBoxColumn x:Name="PosColumn" ItemsSource="{Binding Path=Poss}" DisplayMemberPath="Name" SelectedItemBinding="{Binding Pos}" Header="Должность" Width="100" />
+
+                <DataGridComboBoxColumn x:Name="DepColumn"  DisplayMemberPath="Name"  Header="Отдел" Width="100" >
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Deps}" />
+                            <Setter Property="IsReadOnly" Value="True" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Deps}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                
                 <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
             </DataGrid.Columns>
 

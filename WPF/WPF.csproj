@@ -64,8 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastrucrure\RelayCommand.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Page Include="View\emps.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -73,8 +75,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\emps.xaml.cs">
+      <DependentUpon>emps.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

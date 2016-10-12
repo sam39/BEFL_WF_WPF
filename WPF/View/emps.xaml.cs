@@ -23,15 +23,15 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
-            BL.UnitOfWork uw = new BL.UnitOfWork();
-            IEnumerable<BL.Emp> emps =  uw.EmpRepository.GetAll();
-            empGrid.ItemsSource = emps;
+            //BL.UnitOfWork uw = new BL.UnitOfWork();
+            //IEnumerable<BL.Emp> emps =  uw.EmpRepository.GetAll();
+            //empGrid.ItemsSource = emps;
 
-            IEnumerable<BL.Pos> posList = uw.PosRepository.GetAll();
-            PosColumn.ItemsSource = posList;
+            //IEnumerable<BL.Pos> posList = uw.PosRepository.GetAll();
+            //PosColumn.ItemsSource = posList;
 
-            IEnumerable<BL.Dep> depList = uw.DivisionRepository.GetAll();
-            DepColumn.ItemsSource = depList;
+            //IEnumerable<BL.Dep> depList = uw.DivisionRepository.GetAll();
+            //DepColumn.ItemsSource = depList;
         }
     }
 }
