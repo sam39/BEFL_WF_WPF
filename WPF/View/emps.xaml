@@ -17,22 +17,8 @@
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
                 <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
-                <DataGridComboBoxColumn x:Name="PosColumn" ItemsSource="{Binding Path=Poss}" DisplayMemberPath="Name" SelectedItemBinding="{Binding Pos}" Header="Должность" Width="100" />
-
-                <DataGridComboBoxColumn x:Name="DepColumn"  DisplayMemberPath="Name"  Header="Отдел" Width="100" >
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Deps}" />
-                            <Setter Property="IsReadOnly" Value="True" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="{x:Type ComboBox}">
-                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Deps}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                </DataGridComboBoxColumn>
-                
+                <DataGridTextColumn Binding="{Binding Pos.Name}" Header="Должность" Width="100" />
+                <DataGridTextColumn Binding="{Binding Dep.Name}" Header="Отдел" Width="100" />
                 <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
             </DataGrid.Columns>
 
