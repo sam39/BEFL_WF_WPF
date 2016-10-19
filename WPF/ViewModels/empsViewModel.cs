@@ -31,54 +31,73 @@ namespace WPF.ViewModels
             }
         }
 
-        IEnumerable <BL.Emp> _emps;
-        public IEnumerable<BL.Emp> Emps
+        ObservableCollection<BL.Emp> _emps;
+        public ObservableCollection<BL.Emp> Emps
         {
             get
             {
                 if (_emps == null)
-                    _emps = UoW.EmpRepository.GetAll();
+                    _emps = (ObservableCollection<BL.Emp>)UoW.EmpRepository.GetAll();
                 return _emps;
             }
         }
 
-        IEnumerable<BL.Pos> _poss;
-        public IEnumerable<BL.Pos> Poss
+        ObservableCollection<BL.Pos> _poss;
+        public ObservableCollection<BL.Pos> Poss
         {
             get
             {
                 if (_poss == null)
-                    _poss = UoW.PosRepository.GetAll();
+                    _poss = UoW.PosRepository.GetAll() as ObservableCollection<BL.Pos>;
                 return _poss;
             }
         }
 
-        IEnumerable<BL.Dep> _deps;
-        public IEnumerable<BL.Dep> Deps
+        ObservableCollection<BL.Dep> _deps;
+        public ObservableCollection<BL.Dep> Deps
         {
             get
             {
                 if (_deps == null)
-                    _deps = UoW.DivisionRepository.GetAll();
+                    _deps = UoW.DivisionRepository.GetAll() as ObservableCollection<BL.Dep>;
                 return _deps;
             }
         }
 
 
 
-        RelayCommand _addClientCommand;
-        public ICommand AddClient
+        RelayCommand _saveEmpCommand;
+        public ICommand SaveEmp
         {
             get
             {
-                if (_addClientCommand == null)
-                    _addClientCommand = new RelayCommand(ExecuteAddClientCommand, CanExecuteAddClientCommand);
-                return _addClientCommand;
+                if (_saveEmpCommand == null)
+                    _saveEmpCommand = new RelayCommand(ExecuteSaveEmpCommand, CanExecuteAddClientCommand);
+                return _saveEmpCommand;
             }
+        }
+
+        RelayCommand _addEmpCommand;
+        public ICommand AddEmp
+        {
+            get
+            {
+                if (_addEmpCommand == null)
+                    _addEmpCommand = new RelayCommand(ExecuteAddClientCommand, CanExecuteAddClientCommand);
+                return _addEmpCommand;
+            }
+        }
+
+        public void ExecuteSaveEmpCommand(object parameter)
+        {
+            UoW.Save();
+            //Clients.Add(CurrentClient);
+            //CurrentClient = null;
         }
 
         public void ExecuteAddClientCommand(object parameter)
         {
+            Emps.Add(CurrentEmp);
             //Clients.Add(CurrentClient);
             //CurrentClient = null;
         }
