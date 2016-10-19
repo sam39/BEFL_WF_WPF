@@ -37,7 +37,7 @@ namespace WPF.ViewModels
             get
             {
                 if (_emps == null)
-                    _emps = (ObservableCollection<BL.Emp>)UoW.EmpRepository.GetAll();
+                    _emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.GetAll());
                 return _emps;
             }
         }
