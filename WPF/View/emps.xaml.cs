@@ -31,19 +31,15 @@ namespace WPF
             empGrid.SelectedIndex =  empGrid.Items.Count - 1;
         }
 
-        private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void Editbutton_Click(object sender, RoutedEventArgs e)
         {
-            EditForm.Visibility = Visibility.Visible;
+            //EditForm.Visibility = Visibility.Visible;
         }
 
         private void Savebutton_Click(object sender, RoutedEventArgs e)
         {
-            EditForm.Visibility = Visibility.Collapsed;
+            //EditForm.Visibility = Visibility.Collapsed;
         }
     }
 }
