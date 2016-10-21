@@ -22,16 +22,28 @@ namespace WPF
     {
         public MainWindow()
         {
-            InitializeComponent();
-            //BL.UnitOfWork uw = new BL.UnitOfWork();
-            //IEnumerable<BL.Emp> emps =  uw.EmpRepository.GetAll();
-            //empGrid.ItemsSource = emps;
+            InitializeComponent();           
+        }
 
-            //IEnumerable<BL.Pos> posList = uw.PosRepository.GetAll();
-            //PosColumn.ItemsSource = posList;
 
-            //IEnumerable<BL.Dep> depList = uw.DivisionRepository.GetAll();
-            //DepColumn.ItemsSource = depList;
+        private void Newbutton_Click(object sender, RoutedEventArgs e)
+        {
+            empGrid.SelectedIndex =  empGrid.Items.Count - 1;
+        }
+
+        private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Editbutton_Click(object sender, RoutedEventArgs e)
+        {
+            EditForm.Visibility = Visibility.Visible;
+        }
+
+        private void Savebutton_Click(object sender, RoutedEventArgs e)
+        {
+            EditForm.Visibility = Visibility.Collapsed;
         }
     }
 }

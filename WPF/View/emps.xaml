@@ -10,44 +10,60 @@
     <Window.DataContext>
         <local:empsViewModel></local:empsViewModel>
     </Window.DataContext>
-
     <Grid>
-        <DataGrid AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Height="181" Width="617" ItemsSource = "{Binding Path=Emps}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
-                <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
-                <DataGridTextColumn Binding="{Binding Pos.Name}" Header="Должность" Width="100" />
-                <DataGridTextColumn Binding="{Binding Dep.Name}" Header="Отдел" Width="100" />
-                <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
-            </DataGrid.Columns>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions> 
+        <TextBox x:Name="SearchtextBox" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
+        <Button x:Name="Searchbutton" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75"/>
 
-        </DataGrid>
-        <Button x:Name="Savebutton" Content="Сохранить" HorizontalAlignment="Left" Height="31" Margin="270,442,0,0" VerticalAlignment="Top" Width="101" Command="{Binding SaveEmp}"/>
-        <Button x:Name="Editbutton" Content="Редактировать" HorizontalAlignment="Left" Height="31" Margin="525,442,0,0" VerticalAlignment="Top" Width="101"/>
-        <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Margin="400,442,0,0" VerticalAlignment="Top" Width="101" Command="{Binding AddEmp}"/>
-        <TextBox x:Name="SearchtextBox" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="265"/>
-        <Button x:Name="Searchbutton" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75"/>
-        <Border>
-            <Grid Margin="10,272,10,58" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Height="24" Grid.Column="0">Фамилия</TextBlock>
-                <TextBox Grid.Column="1" Text="{Binding Path=LastName}"></TextBox>
-                
-            </Grid>
-        </Border>
+
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition  />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+        <DataGrid RowDetailsVisibilityMode="Visible" Grid.Row="0"  ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}" SelectionChanged="empGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
+                    <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
+                    <DataGridTextColumn Binding="{Binding Pos.Name}" Header="Должность" Width="100" />
+                    <DataGridTextColumn Binding="{Binding Dep.Name}" Header="Отдел" Width="100" />
+                    <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Border Grid.Row="1" DockPanel.Dock="Bottom"   x:Name="EditForm" Height="150"  Visibility="Collapsed">
+                <Grid DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Height="24" Grid.Column="0">Фамилия</TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Path=LastName}"></TextBox>
+                </Grid>
+            </Border>            
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}" Click="Savebutton_Click"/>
+            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Click="Editbutton_Click"/>
+            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}" Click="Newbutton_Click"/>
+        </StackPanel>
+
 
     </Grid>
+
 </Window>

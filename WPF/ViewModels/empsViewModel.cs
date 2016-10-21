@@ -48,7 +48,7 @@ namespace WPF.ViewModels
             get
             {
                 if (_poss == null)
-                    _poss = UoW.PosRepository.GetAll() as ObservableCollection<BL.Pos>;
+                    _poss = new ObservableCollection<BL.Pos>(UoW.PosRepository.GetAll());
                 return _poss;
             }
         }
@@ -59,7 +59,7 @@ namespace WPF.ViewModels
             get
             {
                 if (_deps == null)
-                    _deps = UoW.DivisionRepository.GetAll() as ObservableCollection<BL.Dep>;
+                    _deps = new ObservableCollection<BL.Dep>(UoW.DivisionRepository.GetAll());
                 return _deps;
             }
         }
@@ -91,15 +91,11 @@ namespace WPF.ViewModels
         public void ExecuteSaveEmpCommand(object parameter)
         {
             UoW.Save();
-            //Clients.Add(CurrentClient);
-            //CurrentClient = null;
         }
 
         public void ExecuteAddClientCommand(object parameter)
         {
-            Emps.Add(CurrentEmp);
-            //Clients.Add(CurrentClient);
-            //CurrentClient = null;
+            Emps.Add(new BL.Emp());
         }
 
         public bool CanExecuteAddClientCommand(object parameter)
