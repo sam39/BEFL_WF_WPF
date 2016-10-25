@@ -31,6 +31,9 @@ namespace WPF.ViewModels
             }
         }
 
+
+      
+
         ObservableCollection<BL.Emp> _emps;
         public ObservableCollection<BL.Emp> Emps
         {
@@ -64,8 +67,6 @@ namespace WPF.ViewModels
             }
         }
 
-
-
         RelayCommand _saveEmpCommand;
         public ICommand SaveEmp
         {
@@ -88,6 +89,17 @@ namespace WPF.ViewModels
             }
         }
 
+        RelayCommand _searchCommand;
+        public ICommand Search
+        {
+            get
+            {
+                if (_searchCommand == null)
+                    _searchCommand = new RelayCommand(ExecuteSearchCommand, CanExecuteSearchCommand);
+                return _searchCommand;
+            }
+        }
+
         public void ExecuteSaveEmpCommand(object parameter)
         {
             UoW.Save();
@@ -98,6 +110,14 @@ namespace WPF.ViewModels
             Emps.Add(new BL.Emp());
         }
 
+        public void ExecuteSearchCommand(object parameter)
+        {
+            
+            _emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.Get(filter: emp => emp.LastName.Contains("Анц")));
+            //Emps.Add(new BL.Emp());
+        }
+
+
         public bool CanExecuteAddClientCommand(object parameter)
         {
             //if (string.IsNullOrEmpty(CurrentClient.FirstName) ||
@@ -105,6 +125,12 @@ namespace WPF.ViewModels
             //    return false;
             return true;
         }
+
+        public bool CanExecuteSearchCommand(object parametr)
+        {
+            return true;
+        }
+
 
         protected override void OnDispose()
         {
