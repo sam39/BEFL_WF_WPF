@@ -31,11 +31,6 @@ namespace WPF
             empGrid.SelectedIndex =  empGrid.Items.Count - 1;
         }
 
-        private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Editbutton_Click(object sender, RoutedEventArgs e)
         {
             EditForm.Visibility = Visibility.Visible;
@@ -44,6 +39,11 @@ namespace WPF
         private void Savebutton_Click(object sender, RoutedEventArgs e)
         {
             EditForm.Visibility = Visibility.Collapsed;
+        }
+
+        private void Searchbutton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

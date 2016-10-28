@@ -21,7 +21,7 @@ namespace WPF.ViewModels
             get
             {
                 if (_currentEmp == null)
-                    _currentEmp = new BL.Emp();
+                    _currentEmp = new BL.Emp{LastName = "" };
                 return _currentEmp;
             }
             set
@@ -29,10 +29,7 @@ namespace WPF.ViewModels
                 _currentEmp = value;
                 OnPropertyChanged("CurrentEmp");
             }
-        }
-
-
-      
+        }   
 
         ObservableCollection<BL.Emp> _emps;
         public ObservableCollection<BL.Emp> Emps
@@ -112,8 +109,9 @@ namespace WPF.ViewModels
 
         public void ExecuteSearchCommand(object parameter)
         {
-            
-            _emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.Get(filter: emp => emp.LastName.Contains("Анц")));
+            _emps.Where(s => s.LastName.Contains(CurrentEmp.LastName));
+
+            //_emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.Get(filter: emp => emp.LastName.Contains("Анц")));
             //Emps.Add(new BL.Emp());
         }
 
