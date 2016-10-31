@@ -19,7 +19,7 @@
                 <Button Content="Page 2" Command="{Binding GoToPage2Command}" CommandParameter="{Binding Page2ViewModel}"/>
                 <Button Content="Page 3" Command="{Binding GoToPage3Command}" CommandParameter="{Binding Page3ViewModel}"/>
                 <Button Content="Тест1" Click="Button_Click" />
-                <Button Content="Тест2" />                
+                <Button Content="Тест2" Click="Button_Click_1" />                
             </StackPanel>
         </ScrollViewer>
 
