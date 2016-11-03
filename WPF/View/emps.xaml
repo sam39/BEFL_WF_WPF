@@ -4,28 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.ViewModels"
+     
         mc:Ignorable="d"
         Title="MainWindow" Height="512.792" Width="644.547">
-
+    
+    <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
     <Window.DataContext>
         <local:empsViewModel></local:empsViewModel>
     </Window.DataContext>
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" MaxHeight="180"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions> 
         <TextBox x:Name="SearchtextBox" Text="{Binding CurrentEmp.LastName}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
         <Button x:Name="Searchbutton" Command="{Binding Search}" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75" Click="Searchbutton_Click"/>
 
 
+        
         <Grid Grid.Row="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition  />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-        <DataGrid RowDetailsVisibilityMode="Visible" Grid.Row="0"  ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>-->
+            <DataGrid SelectedValue="{Binding SelectedEmp,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
@@ -35,68 +42,76 @@
                     <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-
-            <Border Grid.Row="1" DockPanel.Dock="Bottom"   x:Name="EditForm" Height="165"  Visibility="Collapsed">
-                <Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>                        
-                    </Grid.ColumnDefinitions>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="0">Фамилия</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding Path=LastName}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="1">Имя</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="1"  Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="2">Отчеставо</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SName}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="0">Domain Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="0" Text="{Binding Path=DomainPass}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="1">Email</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="1" Text="{Binding Path=Email}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="2">Email Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="2" Text="{Binding Path=EmailPass}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="0">ERoom Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="0" Text="{Binding Path=ERoomPass}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="1">TCrypt Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="1" Text="{Binding Path=TrueCryptPass}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="2">Mango</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="2" Text="{Binding Path=Mango}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="0">ICQ Name</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="0" Text="{Binding Path=IcqName}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="1">ICQ Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="1" Text="{Binding Path=IcqPass}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="2">Gmail</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="2" Text="{Binding Path=Gmail}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="0">Skype Name</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="0" Text="{Binding Path=SkypeName}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="1">Skype Pass</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="1" Text="{Binding Path=SkypeName}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="2">Моб тел</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="2" Text="{Binding Path=MobileTel }"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
-                    <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
-                    <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4">Скрыть в справочнике</TextBlock>
-                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
-                </Grid>
-            </Border>            
+         
         </Grid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>                    
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="0">Фамилия</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding Path=LastName}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="1">Имя</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1"  Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="2">Отчеставо</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SName}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="0">Domain Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="0" Text="{Binding Path=DomainPass}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="1">Email</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="1" Text="{Binding Path=Email}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="2">Email Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="2" Text="{Binding Path=EmailPass}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="0">ERoom Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="0" Text="{Binding Path=ERoomPass}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="1">TCrypt Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="1" Text="{Binding Path=TrueCryptPass}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="2">Mango</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="2" Text="{Binding Path=Mango}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="0">ICQ Name</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="0" Text="{Binding Path=IcqName}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="1">ICQ Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="1" Text="{Binding Path=IcqPass}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="2">Gmail</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="2" Text="{Binding Path=Gmail}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="0">Skype Name</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="0" Text="{Binding Path=SkypeName}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="1">Skype Pass</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="1" Text="{Binding Path=SkypeName}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="2">Моб тел</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="2" Text="{Binding Path=MobileTel }"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4">Должность</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4">Отдел</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4"></ComboBox>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
+                <CheckBox Grid.Column="1" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
+            </Grid>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}" Click="Savebutton_Click"/>
             <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Click="Editbutton_Click"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}" Click="Newbutton_Click"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding DeleteEmp}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
         </StackPanel>
 
 

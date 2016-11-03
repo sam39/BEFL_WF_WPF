@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Convertors.cs" />
     <Compile Include="Infrastrucrure\RelayCommand.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

@@ -28,22 +28,35 @@ namespace WPF
 
         private void Newbutton_Click(object sender, RoutedEventArgs e)
         {
-            empGrid.SelectedIndex =  empGrid.Items.Count - 1;
+
         }
 
         private void Editbutton_Click(object sender, RoutedEventArgs e)
         {
-            EditForm.Visibility = Visibility.Visible;
+            //EditForm.Visibility = Visibility.Visible;
         }
 
         private void Savebutton_Click(object sender, RoutedEventArgs e)
         {
-            EditForm.Visibility = Visibility.Collapsed;
+            //EditForm.Visibility = Visibility.Collapsed;
         }
 
         private void Searchbutton_Click(object sender, RoutedEventArgs e)
         {
+            //empGrid.Items.MoveCurrentToLast();
+            
+        }
 
+        private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (empGrid.SelectedValue != null)
+                empGrid.ScrollIntoView(empGrid.SelectedValue);
+        }
+
+        private void empGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (empGrid.SelectedValue != null)
+            empGrid.ScrollIntoView(empGrid.SelectedValue);
         }
     }
 }
