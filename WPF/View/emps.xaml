@@ -101,7 +101,7 @@
                 <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4">Отдел</TextBlock>
                 <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
-                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4"></ComboBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding Dep}" DisplayMemberPath="Dep.Name"></ComboBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
                 <CheckBox Grid.Column="1" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
             </Grid>
