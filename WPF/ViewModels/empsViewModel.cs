@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPF.Infrastrucrure;
-
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace WPF.ViewModels
 {
@@ -15,7 +16,38 @@ namespace WPF.ViewModels
     {
         BL.UnitOfWork UoW = new BL.UnitOfWork();
 
-        public bool EditMode { get; set;}
+        private bool _editMode;
+        public bool EditMode
+        {
+            get
+            {
+                return _editMode;
+            }
+            set
+            {
+                _editMode = value;
+                OnPropertyChanged("EditMode");
+            }
+        }
+
+
+        private string _findText;
+        public string FindText
+        {
+            get
+            {
+                if (_findText == null)
+                    _findText = "";
+                return _findText;
+            }
+            set
+            {
+                _findText = value;
+                _empCollectionView.Filter = null;
+                _empCollectionView.Filter = EmpFilter;
+            }
+        }
+
 
         BL.Emp _currentEmp;
         public BL.Emp CurrentEmp
@@ -60,17 +92,35 @@ namespace WPF.ViewModels
             }
         }
 
-
+        private ICollectionView _empCollectionView {get; set;}
         ObservableCollection<BL.Emp> _emps;
         public ObservableCollection<BL.Emp> Emps
         {
             get
             {
                 if (_emps == null)
+                {
                     _emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.GetAll());
+                    _empCollectionView = CollectionViewSource.GetDefaultView(_emps);
+                    _empCollectionView.Filter = EmpFilter;
+                }                   
                 return _emps;
             }
         }
+
+        private bool EmpFilter(object item)
+        {
+            BL.Emp emp = item as BL.Emp;
+            bool result = true;
+            if (!string.IsNullOrWhiteSpace(FindText) && !(emp.LastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.Name ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.SName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.PosName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.DepName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.MobileTel ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.InternalTel ?? string.Empty).ToLower().Contains(FindText.ToLower()))
+            {
+                result = false;
+            }
+            return result;
+        }
+
+
+
 
         ObservableCollection<BL.Pos> _poss;
         public ObservableCollection<BL.Pos> Poss
@@ -138,6 +188,7 @@ namespace WPF.ViewModels
             }
         }
 
+
         public void ExecuteDeleteEmpCommand(object parameter)
         {
             BL.Emp empToDel = parameter as BL.Emp;
@@ -150,6 +201,31 @@ namespace WPF.ViewModels
         {
             return true;
         }
+
+
+        RelayCommand _editCommand;
+        public ICommand EditEmp
+        {
+            get
+            {
+                if (_editCommand == null)
+                    _editCommand = new RelayCommand(ExecuteEditEmpCommand, CanExecuteEditEmpCommand);
+                return _editCommand;
+            }
+        }
+
+
+        public void ExecuteEditEmpCommand(object parameter)
+        {
+            EditMode = true;
+        }
+
+        public bool CanExecuteEditEmpCommand(object parametr)
+        {
+            return true;
+        }
+
+
 
 
         public void ExecuteSaveEmpCommand(object parameter)
@@ -174,12 +250,15 @@ namespace WPF.ViewModels
 
         public void ExecuteSearchCommand(object parameter)
         {
-            //_emps.Where(s => s.LastName.Contains(CurrentEmp.LastName));
-
-            //_emps = new ObservableCollection<BL.Emp>(UoW.EmpRepository.Get(filter: emp => emp.LastName.Contains("Анц")));
-            //Emps.Add(new BL.Emp());
+            FilterRebind();
         }
 
+        private void FilterRebind()
+        {
+            _empCollectionView.Filter = null;
+            _empCollectionView.Filter = EmpFilter;
+        }
+              
 
         public bool CanExecuteAddClientCommand(object parameter)
         {

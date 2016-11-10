@@ -19,27 +19,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" MaxHeight="180"/>
+            <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions> 
-        <TextBox x:Name="SearchtextBox" Text="{Binding CurrentEmp.LastName}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
         <Button x:Name="Searchbutton" Command="{Binding Search}" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75" Click="Searchbutton_Click"/>
-
-
         
         <Grid Grid.Row="1" >
-            <!--<Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>-->
             <DataGrid SelectedValue="{Binding SelectedEmp,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100" />
-                    <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="100" />
-                    <DataGridTextColumn Binding="{Binding Pos.Name}" Header="Должность" Width="100" />
-                    <DataGridTextColumn Binding="{Binding Dep.Name}" Header="Отдел" Width="100" />
-                    <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="*"/>
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="auto" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding SName}" Header="Отчество" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding Pos.Name}" Header="Должность" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Dep.Name}" Header="Отдел" Width="*" />
+                    <DataGridTextColumn Binding="{Binding MobileTel}" Header="Вн.тел." Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding InternalTel}" Header="Вн.тел." Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
          
@@ -98,18 +93,17 @@
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
                 <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4">Должность</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},Path=DataContext.Poss}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Pos, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4">Отдел</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" Text="{Binding Path=Comments}"></TextBox>
-                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},Path = DataContext}" ItemsSource="{Binding Deps}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Dep}"></ComboBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
-                <CheckBox Grid.Column="1" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},Path=DataContext.Deps}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Dep, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
+                <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
+                <CheckBox Grid.Column="3" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
             </Grid>
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}" Click="Savebutton_Click"/>
-            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Click="Editbutton_Click"/>
+            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Click="Editbutton_Click" Command="{Binding EditEmp}"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}" Click="Newbutton_Click"/>
             <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding DeleteEmp}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
         </StackPanel>
