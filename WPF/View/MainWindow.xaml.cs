@@ -26,8 +26,7 @@ namespace WPF.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("View\\Page1.xaml", UriKind.Relative));
-            //frame.NavigationService.Navigate(new Uri("Find.xaml", UriKind.Relative));
+            MainFrame.NavigationService.Navigate(new Uri("View\\emps.xaml", UriKind.Relative));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

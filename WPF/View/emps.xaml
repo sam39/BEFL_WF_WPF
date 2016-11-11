@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPF.MainWindow"
+﻿<Page x:Class="WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:WPF.ViewModels"
      
         mc:Ignorable="d"
-        Title="MainWindow" Height="512.792" Width="644.547">
+        Title="MainWindow"  Background="White">
     
-    <Window.Resources>
+    <Page.Resources>
         <local:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    </Window.Resources>
-    
-    <Window.DataContext>
+    </Page.Resources>
+
+    <Page.DataContext>
         <local:empsViewModel></local:empsViewModel>
-    </Window.DataContext>
+    </Page.DataContext>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -23,7 +23,7 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions> 
         <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
-        <Button x:Name="Searchbutton" Command="{Binding Search}" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75" Click="Searchbutton_Click"/>
+        <Button x:Name="Searchbutton" Command="{Binding Search}" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75"/>
         
         <Grid Grid.Row="1" >
             <DataGrid SelectedValue="{Binding SelectedEmp,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
@@ -93,22 +93,22 @@
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
                 <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4">Должность</TextBlock>
-                <ComboBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},Path=DataContext.Poss}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Pos, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page},Path=DataContext.Poss}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Pos, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4">Отдел</TextBlock>
-                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window},Path=DataContext.Deps}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Dep, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
+                <ComboBox Padding="2" Margin="5" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page},Path=DataContext.Deps}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Dep, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
                 <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
                 <CheckBox Grid.Column="3" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
             </Grid>
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}" Click="Savebutton_Click"/>
-            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Click="Editbutton_Click" Command="{Binding EditEmp}"/>
-            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}" Click="Newbutton_Click"/>
+            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}"/>
+            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding EditEmp}"/>
+            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}"/>
             <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding DeleteEmp}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
         </StackPanel>
 
 
     </Grid>
 
-</Window>
+</Page>

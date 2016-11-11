@@ -18,33 +18,11 @@ namespace WPF
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         public MainWindow()
         {
             InitializeComponent();           
-        }
-
-
-        private void Newbutton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Editbutton_Click(object sender, RoutedEventArgs e)
-        {
-            //EditForm.Visibility = Visibility.Visible;
-        }
-
-        private void Savebutton_Click(object sender, RoutedEventArgs e)
-        {
-            //EditForm.Visibility = Visibility.Collapsed;
-        }
-
-        private void Searchbutton_Click(object sender, RoutedEventArgs e)
-        {
-            //empGrid.Items.MoveCurrentToLast();
-            
         }
 
         private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
