@@ -23,10 +23,10 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions> 
         <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
-        <Button x:Name="Searchbutton" Command="{Binding Search}" Grid.Row="0" Content="Поиск" HorizontalAlignment="Left" Margin="287,36,0,0" VerticalAlignment="Top" Width="75"/>
+
         
         <Grid Grid.Row="1" >
-            <DataGrid SelectedValue="{Binding SelectedEmp,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=Emps}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
+            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="auto" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="Auto" />
@@ -102,10 +102,11 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SaveEmp}"/>
-            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding EditEmp}"/>
-            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding AddEmp}"/>
-            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding DeleteEmp}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
+            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>
+            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
         </StackPanel>
 
 

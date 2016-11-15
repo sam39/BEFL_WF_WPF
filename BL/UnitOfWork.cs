@@ -14,6 +14,27 @@ namespace BL
         private GenericRepository<Emp> empRepository;
         private GenericRepository<Pos> posRepository;
         private GenericRepository<Dep> depRepository;
+        
+        // Возвращает все объекты произвольного типа
+        public IEnumerable<T> GetAll<T>() where T : class
+        {
+            GenericRepository<T> rep = new GenericRepository<T>(context);
+            return rep.GetAll();
+        }
+
+        // Возвращает репозитроий требуемого типа
+        public GenericRepository<T> Repository<T>() where T : class
+        {
+            Type tt = typeof(T);
+            if (tt == typeof(BL.Emp))
+                return EmpRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Pos)) return PosRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Dep)) return DivisionRepository as GenericRepository<T>;
+            else return null;
+            //GenericRepository<T> rep = new GenericRepository<T>(context);
+            //return rep;
+        }
+
 
 
         public GenericRepository<Pos> PosRepository
