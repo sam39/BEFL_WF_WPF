@@ -26,7 +26,7 @@
 
         
         <Grid Grid.Row="1" >
-            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
+            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="auto" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="Auto" />

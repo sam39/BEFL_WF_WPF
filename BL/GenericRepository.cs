@@ -88,5 +88,10 @@ namespace BL
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
+
+        public virtual void Reload(TEntity entityToUpdate)
+        {
+            context.Entry(entityToUpdate).Reload();
+        }
     }
 }

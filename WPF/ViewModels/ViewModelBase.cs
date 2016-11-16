@@ -12,7 +12,7 @@ using System.Windows.Data;
 
 namespace WPF.ViewModels
 {
-    public abstract class ViewModelBase<T> :INotifyPropertyChanged, IDisposable where T : class
+    public abstract class ViewModelBase<T> :INotifyPropertyChanged, IDisposable where T : class, new()
     {
         protected ViewModelBase()
         {
@@ -31,6 +31,7 @@ namespace WPF.ViewModels
 
         protected BL.UnitOfWork UoW = new BL.UnitOfWork();
 
+        private bool _addNewMode;
         private bool _editMode;
         public bool EditMode
         {
@@ -45,8 +46,8 @@ namespace WPF.ViewModels
             }
         }
 
-        BL.Emp _selected;
-        public BL.Emp Selected
+        T _selected;
+        public T Selected
         {
             get
             {
@@ -66,7 +67,7 @@ namespace WPF.ViewModels
             {
                 if (_entityList == null)
                 {
-                    _entityList = new ObservableCollection<T>(UoW.GetAll<T>());
+                    _entityList = new ObservableCollection<T>(UoW.Repository<T>().GetAll());
                     _empCollectionView = CollectionViewSource.GetDefaultView(_entityList);
                     _empCollectionView.Filter = Filter;
                 }
@@ -111,14 +112,16 @@ namespace WPF.ViewModels
 
         public void ExecuteAddCommand(object parameter)
         {
-            //T emp = new T();
+            T entity = new T();
             ////emp.DepId = 1;
             ////emp.PosId = 1;
-            //EntityList.Add(emp);
+            EntityList.Add(entity);
+            UoW.Repository<T>().Insert(entity);
             //UoW.EmpRepository.Insert(emp);
-            //Selected = emp;
-            //OnPropertyChanged("SelectedEmp");
-            //EditMode = true;
+            Selected = entity;
+            OnPropertyChanged("SelectedEmp");
+            EditMode = true;
+            _addNewMode = true;
             //OnPropertyChanged("EditMode");
         }
 
@@ -153,7 +156,7 @@ namespace WPF.ViewModels
         }
         #endregion Редактирование
 
-        #region Отмена редактирования
+        #region Отмена редактирования(добавления)
         RelayCommand _cancelCommand;
         public ICommand Cancel
         {
@@ -167,12 +170,17 @@ namespace WPF.ViewModels
 
         public void ExecuteCancelCommand(object parameter)
         {
-            T ToDel = parameter as T;
-            EntityList.Remove(ToDel);
-            //UoW.EmpRepository.Delete(ToDel);
-            //UoW.Repository<T> rep = new UoW.Repository<T>;
-            UoW.Repository<T>().Delete(ToDel);
+            T EntityToCancel = parameter as T;
+            if (_addNewMode)
+            {
+                EntityList.Remove(EntityToCancel);
+                UoW.Repository<T>().Delete(EntityToCancel);
+                _addNewMode = false;
+            }
+            else UoW.Repository<T>().Reload(EntityToCancel);
+            EditMode = false;
             OnPropertyChanged("EntityList");
+            OnPropertyChanged("Selected");
         }
 
         public bool CanExecuteCancelCommand(object parametr)
@@ -198,7 +206,8 @@ namespace WPF.ViewModels
         {
             T ToDel = parameter as T;
             EntityList.Remove(ToDel);
-            UoW.EmpRepository.Delete(ToDel);
+            UoW.Repository<T>().Delete(ToDel);
+            UoW.Save();
             OnPropertyChanged("EntityList");
         }
 
@@ -225,7 +234,7 @@ namespace WPF.ViewModels
         {
             UoW.Save();
             EditMode = false;
-            OnPropertyChanged("Emps");
+            OnPropertyChanged("Emps");     
         }
 
         public bool CanExecuteSaveCommand(object parametr)
