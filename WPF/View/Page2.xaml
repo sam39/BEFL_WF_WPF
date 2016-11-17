@@ -9,6 +9,8 @@
       Title="Page2">
 
     <Grid>
-        <TextBlock>Страница2</TextBlock>
+        <TextBlock><Run Text="Страница2"/><InlineUIContainer>
+        		<Button x:Name="button" Content="Button" Width="75" Click="button_Click"/>
+        	</InlineUIContainer></TextBlock>
     </Grid>
 </Page>

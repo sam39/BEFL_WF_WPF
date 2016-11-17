@@ -18,6 +18,8 @@
                 <Button Content="Компьютеры" Click="Button_Click_1" />
                 <Button Content="Мониторы" />
                 <Button Content="Принтеры" />
+                <Button x:Name="btnDeps" Content="Отделы" Click="btnDeps_Click" />
+                <Button x:Name="btnPoss" Content="Должности" Click="btnPoss_Click" />                
             </StackPanel>
         </ScrollViewer>
 

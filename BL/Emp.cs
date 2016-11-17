@@ -64,7 +64,6 @@ namespace BL
         }
 
         private Dep _dep;
-
         public Dep Dep
         {
             get { return _dep; }

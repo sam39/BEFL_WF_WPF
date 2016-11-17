@@ -1,4 +1,5 @@
 ﻿using System;
+using GalaSoft.MvvmLight.Messaging;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace WPF.ViewModels
     {
         protected ViewModelBase()
         {
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,6 +34,23 @@ namespace WPF.ViewModels
         protected BL.UnitOfWork UoW = new BL.UnitOfWork();
 
         private bool _addNewMode;
+
+        //Включает(выключает) ражим выбора на форме
+        private bool _selectionMode;
+        public bool SelectionMode
+        {
+            get
+            {
+                return _selectionMode;
+            }
+            set
+            {
+                _selectionMode = value;
+                OnPropertyChanged("SelectionMode");
+            }
+        }
+
+
         private bool _editMode;
         public bool EditMode
         {
@@ -243,6 +262,36 @@ namespace WPF.ViewModels
             else return false;
         }
         #endregion Сохранение
+
+        #region Выбор
+        RelayCommand _selectCommand;
+        public ICommand Select
+        {
+            get
+            {
+                if (_selectCommand == null)
+                    _selectCommand = new RelayCommand(ExecuteSelectCommand, CanExecuteSelectCommand);
+                return _selectCommand;
+            }
+        }
+
+        public void ExecuteSelectCommand(object parameter)
+        {
+            Messenger.Default.Send<T>(Selected);
+            Messenger.Default.Send<string>("GoBack");
+            //UoW.Save();
+            //EditMode = false;
+            //OnPropertyChanged("Emps");
+        }
+
+        public bool CanExecuteSelectCommand(object parametr)
+        {
+            if (SelectionMode) return true;
+            else return false;
+        }
+        #endregion Выбор
+
+
         #endregion Команды
 
 

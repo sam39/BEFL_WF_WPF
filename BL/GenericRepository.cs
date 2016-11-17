@@ -15,8 +15,6 @@ namespace BL
         public event RepositoryChangeHandler Changed;
         public delegate void RepositoryChangeHandler(GenericRepository<TEntity> source, EventArgs e);
 
-
-
         public GenericRepository(DbContextBEFL context)
         {
             this.context = context;

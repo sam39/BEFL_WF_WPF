@@ -22,7 +22,7 @@ namespace WPF
     {
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

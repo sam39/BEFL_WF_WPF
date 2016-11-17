@@ -12,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GalaSoft.MvvmLight.Messaging;
-
 
 namespace WPF.View
 {
     /// <summary>
-    /// Логика взаимодействия для Page2.xaml
+    /// Логика взаимодействия для deps.xaml
     /// </summary>
-    public partial class Page2 : Page
+    public partial class deps : Page
     {
-        public Page2()
+        public deps()
         {
             InitializeComponent();
-        }
-
-        BL.UnitOfWork UoW = new BL.UnitOfWork();
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            BL.Dep dep  = UoW.DivisionRepository.GetByID(1);
-            Messenger.Default.Send<BL.Dep>(dep);
         }
     }
 }

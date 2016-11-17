@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.ViewModels"
      
         mc:Ignorable="d"
-        Title="MainWindow"  Background="White">
+        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
     
     <Page.Resources>
         <local:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -107,6 +107,7 @@
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
             <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
             <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="SetDepbutton" Content="Отдел" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding SetDep}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
         </StackPanel>
 
 

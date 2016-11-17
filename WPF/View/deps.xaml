@@ -1,0 +1,74 @@
+﻿<Page x:Class="WPF.View.deps"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.ViewModels"
+     
+        mc:Ignorable="d"
+        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
+
+    <Page.Resources>
+        <local:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <local:depsViewModel></local:depsViewModel>
+    </Page.DataContext>
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" MaxHeight="210"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+
+
+        <Grid Grid.Row="1" >
+            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="auto" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" Width="Auto" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="0">Наименование</TextBlock>
+                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}"></TextBox>
+            </Grid>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button x:Name="Selectbutton"  Content="Выбрать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Select}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
+            <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>
+            <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>
