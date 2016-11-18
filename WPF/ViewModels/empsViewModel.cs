@@ -18,6 +18,18 @@ namespace WPF.ViewModels
         public empsViewModel()
         {
             Messenger.Default.Register(this, new Action<BL.Dep>(SetDepForCurrentEmp));
+            Messenger.Default.Register(this, new Action<BL.Pos>(SetDepForCurrentEmp));
+        }
+
+        private void SetDepForCurrentEmp(BL.Pos pos)
+        {
+            if (Selected != null)
+            {
+                BL.Emp emp = Selected as BL.Emp;
+                //Получаем объект из локального репозитория
+                BL.Pos pos_local = UoW.PosRepository.GetByID(pos.Id);
+                emp.Pos = pos_local;
+            }
         }
 
         private void SetDepForCurrentEmp(BL.Dep dep)
@@ -25,7 +37,9 @@ namespace WPF.ViewModels
             if (Selected != null)
             {
                 BL.Emp emp = Selected as BL.Emp;
-                emp.Dep = dep;
+                //Получаем объект из локального репозитория
+                BL.Dep dep_local = UoW.DivisionRepository.GetByID(dep.Id);
+                emp.Dep = dep_local;
             }
         }
 
@@ -62,7 +76,7 @@ namespace WPF.ViewModels
             }
         }
 
-        #region Установка отдела
+        #region Выбор отдела
         RelayCommand _setDep;
         public ICommand SetDep
         {
@@ -84,7 +98,32 @@ namespace WPF.ViewModels
             if (EditMode) return true;
             else return false;
         }
-        #endregion Установка отдела
+        #endregion Выбор отдела
+
+        #region Выбор должности
+        RelayCommand _setPos    ;
+        public ICommand SetPos
+        {
+            get
+            {
+                if (_setPos == null)
+                    _setPos = new RelayCommand(ExecuteSetPosCommand, CanExecuteSetPosCommand);
+                return _setPos;
+            }
+        }
+
+        public void ExecuteSetPosCommand(object parameter)
+        {
+            Messenger.Default.Send<Uri>(new Uri("View\\poss.xaml", UriKind.Relative));
+        }
+
+        public bool CanExecuteSetPosCommand(object parametr)
+        {
+            if (EditMode) return true;
+            else return false;
+        }
+        #endregion Выбор должности
+
 
         protected override void OnDispose()
         {
