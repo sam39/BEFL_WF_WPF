@@ -21,25 +21,31 @@ namespace WPF.ViewModels
             Messenger.Default.Register(this, new Action<BL.Pos>(SetDepForCurrentEmp));
         }
 
+        private bool posRequered;
+        private bool depRequered;
+
         private void SetDepForCurrentEmp(BL.Pos pos)
         {
-            if (Selected != null)
+
+            if (posRequered && Selected != null)
             {
                 BL.Emp emp = Selected as BL.Emp;
                 //Получаем объект из локального репозитория
                 BL.Pos pos_local = UoW.PosRepository.GetByID(pos.Id);
                 emp.Pos = pos_local;
+                posRequered = false;
             }
         }
 
         private void SetDepForCurrentEmp(BL.Dep dep)
         {
-            if (Selected != null)
+            if (depRequered && Selected != null)
             {
                 BL.Emp emp = Selected as BL.Emp;
                 //Получаем объект из локального репозитория
                 BL.Dep dep_local = UoW.DivisionRepository.GetByID(dep.Id);
                 emp.Dep = dep_local;
+                depRequered = false;
             }
         }
 
@@ -91,6 +97,7 @@ namespace WPF.ViewModels
         public void ExecuteSetDepCommand(object parameter)
         {
             Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
+            depRequered = true;
         }
 
         public bool CanExecuteSetDepCommand(object parametr)
@@ -115,6 +122,7 @@ namespace WPF.ViewModels
         public void ExecuteSetPosCommand(object parameter)
         {
             Messenger.Default.Send<Uri>(new Uri("View\\poss.xaml", UriKind.Relative));
+            posRequered = true;
         }
 
         public bool CanExecuteSetPosCommand(object parametr)

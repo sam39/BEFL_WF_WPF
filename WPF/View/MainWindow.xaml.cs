@@ -33,7 +33,7 @@ namespace WPF.View
 
         private void Back(string cmd)
         {
-            if (cmd == "GoBack") MainFrame.NavigationService.GoBack();
+            if (cmd == "GoBack" && MainFrame.NavigationService.CanGoBack) MainFrame.NavigationService.GoBack();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace WPF.View
 
         private void btnDeps_Click(object sender, RoutedEventArgs e)
         {
-            Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
+            Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml?Mode=1", UriKind.Relative));
         }
 
         private void btnPoss_Click(object sender, RoutedEventArgs e)
