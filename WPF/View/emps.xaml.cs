@@ -40,7 +40,7 @@ namespace WPF
         private void Dep_Click(object sender, RoutedEventArgs e)
         {
             View.dep d = new View.dep();
-            this.NavigationService.Navigate(new View.dep(new BL.Dep()));
+            this.NavigationService.Navigate(d);
             d.Return += new ReturnEventHandler<BL.Dep>(setdep);
 
         }

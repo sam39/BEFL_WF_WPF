@@ -3,10 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
     x:Class="WPF.View.dep"
-    x:TypeArguments="sys:String"
+    x:TypeArguments="bl:Dep"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPF.ViewModels"
+    xmlns:bl="clr-namespace:BL;assembly=BL"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="300" Title="dep">
     
@@ -64,7 +65,7 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button x:Name="Testbutton"  Content="test" HorizontalAlignment="Left" Height="31" Width="100" Command="{x:Static NavigationCommands.BrowseBack}" />
+            <Button x:Name="Testbutton"  Content="test" HorizontalAlignment="Left" Height="31" Width="100" Click="Testbutton_Click" />
             <Button x:Name="Selectbutton"  Content="Выбрать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Select}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>

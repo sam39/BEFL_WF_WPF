@@ -18,7 +18,7 @@ namespace WPF.View
     /// <summary>
     /// Логика взаимодействия для dep.xaml
     /// </summary>
-    public partial class dep : PageFunction<String>
+    public partial class dep : PageFunction<BL.Dep>
     {
         public dep()
         {
@@ -27,6 +27,11 @@ namespace WPF.View
         public dep(BL.Dep dep)
         {
             InitializeComponent();
+        }
+
+        private void Testbutton_Click(object sender, RoutedEventArgs e)
+        {
+            this.OnReturn(new ReturnEventArgs<BL.Dep>(new BL.Dep() {Name= "Тестовый"}));
         }
     }
 }
