@@ -36,5 +36,18 @@ namespace WPF
             if (empGrid.SelectedValue != null)
             empGrid.ScrollIntoView(empGrid.SelectedValue);
         }
+
+        private void Dep_Click(object sender, RoutedEventArgs e)
+        {
+            View.dep d = new View.dep();
+            this.NavigationService.Navigate(new View.dep(new BL.Dep()));
+            d.Return += new ReturnEventHandler<BL.Dep>(setdep);
+
+        }
+
+        private void setdep(object sender, ReturnEventArgs<BL.Dep> e)
+        {
+            //this.OnReturn(e);
+        }
     }
 }

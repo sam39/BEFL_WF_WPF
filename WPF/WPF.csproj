@@ -92,6 +92,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\dep.xaml.cs">
+      <DependentUpon>dep.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\deps.xaml.cs">
       <DependentUpon>deps.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
     <Compile Include="View\poss.xaml.cs">
       <DependentUpon>poss.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\dep.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\deps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

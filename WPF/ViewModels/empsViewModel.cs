@@ -95,9 +95,9 @@ namespace WPF.ViewModels
         }
 
         public void ExecuteSetDepCommand(object parameter)
-        {
-            Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
-            depRequered = true;
+        {          
+            //Messenger.Default.Send<Uri>(new Uri("View\\dep.xaml", UriKind.Relative));
+            //depRequered = true;
         }
 
         public bool CanExecuteSetDepCommand(object parametr)

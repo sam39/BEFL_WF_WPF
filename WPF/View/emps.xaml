@@ -108,6 +108,7 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button x:Name="Dep" Content="Отдел" HorizontalAlignment="Left" Height="31" Width="100" Click="Dep_Click"/>
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
