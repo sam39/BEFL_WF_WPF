@@ -31,7 +31,8 @@ namespace WPF.View
 
         private void Testbutton_Click(object sender, RoutedEventArgs e)
         {
-            this.OnReturn(new ReturnEventArgs<BL.Dep>(new BL.Dep() {Name= "Тестовый"}));
+            ViewModels.depsViewModel dc = DataContext as ViewModels.depsViewModel;
+            this.OnReturn(new ReturnEventArgs<BL.Dep>(dc.Selected as BL.Dep));
         }
     }
 }

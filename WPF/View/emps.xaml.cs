@@ -47,6 +47,8 @@ namespace WPF
 
         private void setdep(object sender, ReturnEventArgs<BL.Dep> e)
         {
+
+            //e.Result.
             //this.OnReturn(e);
         }
     }

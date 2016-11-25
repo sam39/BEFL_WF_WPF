@@ -10,6 +10,7 @@ using WPF.Infrastrucrure;
 using System.ComponentModel;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Navigation;
 
 namespace WPF.ViewModels
 {
@@ -95,7 +96,11 @@ namespace WPF.ViewModels
         }
 
         public void ExecuteSetDepCommand(object parameter)
-        {          
+        {
+            View.dep d = new View.dep();
+            //this.NavigationService.Navigate(d);
+            Messenger.Default.Send<PageFunction<BL.Dep>>(d);
+            d.Return += new ReturnEventHandler<BL.Dep>(setdep);
             //Messenger.Default.Send<Uri>(new Uri("View\\dep.xaml", UriKind.Relative));
             //depRequered = true;
         }
@@ -104,6 +109,11 @@ namespace WPF.ViewModels
         {
             if (EditMode) return true;
             else return false;
+        }
+
+        private void setdep(object sender, ReturnEventArgs<BL.Dep> e)
+        {
+            Selected.Dep = e.Result;
         }
         #endregion Выбор отдела
 

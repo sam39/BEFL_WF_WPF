@@ -23,12 +23,18 @@ namespace WPF.View
         {
             InitializeComponent();
             Messenger.Default.Register(this, new Action<Uri>(Navigete));
+            Messenger.Default.Register(this, new Action<System.Windows.Navigation.PageFunction<BL.Dep>>(Navigete));
             Messenger.Default.Register(this, new Action<string>(Back));
         }
 
         private void Navigete(Uri uri)
         {
             MainFrame.NavigationService.Navigate(uri);
+        }
+
+        private void Navigete(System.Windows.Navigation.PageFunction<BL.Dep> page)
+        {
+            MainFrame.NavigationService.Navigate(page);
         }
 
         private void Back(string cmd)
