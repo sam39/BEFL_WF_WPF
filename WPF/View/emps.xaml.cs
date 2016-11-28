@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF
+namespace WPF.View
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Page
+    public partial class emps : Page
     {
-        public MainWindow()
+        public emps()
         {
             InitializeComponent();
         }

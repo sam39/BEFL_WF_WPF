@@ -27,6 +27,64 @@ namespace WPF.View
             Messenger.Default.Register(this, new Action<string>(Back));
         }
 
+        private View.emps _empsView;
+        public View.emps EmpsView
+        {
+            get
+            {
+                if (_empsView == null) _empsView = new View.emps();
+                return _empsView;
+            }
+            set
+            {
+                _empsView = value;
+            }
+        }
+
+        private ViewModels.empsViewModel _empsViewModel;
+        public ViewModels.empsViewModel EmpsViewModel
+        {
+            get
+            {
+                if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
+                return _empsViewModel;
+            }
+            set
+            {
+                _empsViewModel = value;
+            }    
+        }
+
+        private View.deps _depsView;
+        public View.deps DepsView
+        {
+            get
+            {
+                if (_depsView == null) _depsView = new View.deps();
+                return _depsView;
+            }
+            set
+            {
+                _depsView = value;
+            }
+        }
+
+        private ViewModels.depsViewModel _depsViewModel;
+        public ViewModels.depsViewModel DepsViewModel
+        {
+            get
+            {
+                if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
+                return _depsViewModel;
+            }
+            set
+            {
+                _depsViewModel = value;
+            }
+
+        }
+
+
         private void Navigate(Uri uri)
         {
             MainFrame.NavigationService.Navigate(uri);
@@ -43,8 +101,10 @@ namespace WPF.View
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {           
-            Messenger.Default.Send<Uri>(new Uri("View\\emps.xaml", UriKind.Relative));
+        {
+            EmpsView.DataContext = EmpsViewModel;
+            MainFrame.NavigationService.Navigate(EmpsView);
+            //Messenger.Default.Send<Uri>(new Uri("View\\emps.xaml", UriKind.Relative));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -55,7 +115,9 @@ namespace WPF.View
 
         private void btnDeps_Click(object sender, RoutedEventArgs e)
         {
-            Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml?Mode=1", UriKind.Relative));
+            DepsView.DataContext = DepsViewModel;
+            MainFrame.NavigationService.Navigate(DepsView);
+            //Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml?Mode=1", UriKind.Relative));
         }
 
         private void btnPoss_Click(object sender, RoutedEventArgs e)

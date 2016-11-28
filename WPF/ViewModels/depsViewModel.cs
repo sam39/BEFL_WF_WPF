@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WPF.ViewModels
 {
-    class depsViewModel : ViewModelBase<BL.Dep>
+    public class depsViewModel : ViewModelBase<BL.Dep>
     {
         public depsViewModel()
         {
-            SelectionMode = true;
+            //SelectionMode = true;
         }
         protected override bool Filter(object item)
         {

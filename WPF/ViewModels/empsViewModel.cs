@@ -13,19 +13,12 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace WPF.ViewModels
 {
-    class empsViewModel : ViewModelBase<BL.Emp> 
+    public class empsViewModel : ViewModelBase<BL.Emp> 
     {
         public empsViewModel()
         {
-            //Messenger.Default.Register(this, new Action<BL.Dep>(SetDepForCurrentEmp));
-            //Messenger.Default.Register(this, new Action<BL.Pos>(SetDepForCurrentEmp));
+
         }
-
-        private bool posRequered;
-        private bool depRequered;
-
-
-
 
 
         protected override bool Filter(object item)
@@ -81,7 +74,7 @@ namespace WPF.ViewModels
 
         private void SetDepForCurrentEmp(BL.Dep dep)
         {
-            if (depRequered && Selected != null)
+            if (Selected != null)
             {
                 BL.Emp emp = Selected as BL.Emp;
                 //Получаем объект из локального репозитория
@@ -120,7 +113,7 @@ namespace WPF.ViewModels
 
         private void SetPosForCurrentEmp(BL.Pos pos)
         {
-            if (posRequered && Selected != null)
+            if (Selected != null)
             {
                 BL.Emp emp = Selected as BL.Emp;
                 //Получаем объект из локального репозитория
