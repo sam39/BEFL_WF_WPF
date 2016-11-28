@@ -25,6 +25,18 @@ namespace WPF.View
             Messenger.Default.Register(this, new Action<Uri>(Navigate));
             Messenger.Default.Register(this, new Action<Page>(Navigate));
             Messenger.Default.Register(this, new Action<string>(Back));
+            Messenger.Default.Register(this, new Action<Infrastrucrure.PageMessage>(test));
+        }
+
+        private void test(Infrastrucrure.PageMessage mess)
+        {
+            if (mess.PageType == typeof(View.deps) && mess.Action == Infrastrucrure.MessageAction.Select)
+            {
+                DepsViewModel.SelectionMode = true;
+                DepsView.DataContext = DepsViewModel;
+                MainFrame.Navigate(DepsView);
+            } 
+
         }
 
         private View.emps _empsView;

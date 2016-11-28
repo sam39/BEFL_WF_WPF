@@ -68,7 +68,11 @@ namespace WPF.ViewModels
 
         public void ExecuteSetDepCommand(object parameter)
         {
-            Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
+            Infrastrucrure.PageMessage mess = new Infrastrucrure.PageMessage();
+            mess.Action = MessageAction.Select;
+            mess.PageType = typeof(View.deps);
+            Messenger.Default.Send<PageMessage>(mess);
+            //Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
             Messenger.Default.Register(this, new Action<BL.Dep>(SetDepForCurrentEmp));
         }
 

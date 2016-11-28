@@ -278,10 +278,8 @@ namespace WPF.ViewModels
         public void ExecuteSelectCommand(object parameter)
         {
             Messenger.Default.Send<T>(Selected);
+            SelectionMode = false;
             Messenger.Default.Send<string>("GoBack");
-            //UoW.Save();
-            //EditMode = false;
-            //OnPropertyChanged("Emps");
         }
 
         public bool CanExecuteSelectCommand(object parametr)
