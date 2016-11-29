@@ -61,7 +61,7 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button x:Name="Testbutton"  Content="test" HorizontalAlignment="Left" Height="31" Width="100" Command="{x:Static NavigationCommands.BrowseBack}" />
+            <Button x:Name="Backbutton"  Content="Назад" HorizontalAlignment="Left" Height="31" Width="30" Command="{Binding Back}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button x:Name="Selectbutton"  Content="Выбрать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Select}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>

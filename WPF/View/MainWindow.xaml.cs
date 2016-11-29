@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
+using WPF.Infrastrucrure;
+
 namespace WPF.View
 {
     /// <summary>
@@ -25,19 +27,28 @@ namespace WPF.View
             Messenger.Default.Register(this, new Action<Uri>(Navigate));
             Messenger.Default.Register(this, new Action<Page>(Navigate));
             Messenger.Default.Register(this, new Action<string>(Back));
-            Messenger.Default.Register(this, new Action<Infrastrucrure.PageMessage>(test));
+            Messenger.Default.Register(this, new Action<Infrastrucrure.PageMessage>(navigateToPage));
         }
 
-        private void test(Infrastrucrure.PageMessage mess)
+
+        private void navigateToPage(Infrastrucrure.PageMessage mess)
         {
-            if (mess.PageType == typeof(View.deps) && mess.Action == Infrastrucrure.MessageAction.Select)
+            Page v =  null;
+            ViewModels.IViewModel vm = null;
+            if (mess.PageType == typeof(View.deps))
             {
-                DepsViewModel.SelectionMode = true;
-                DepsView.DataContext = DepsViewModel;
-                MainFrame.Navigate(DepsView);
-            } 
+                v = DepsView;
+                vm = _depsViewModel;
+            }
 
+            if (mess.Action == Infrastrucrure.MessageAction.Select)
+            {
+                vm.SelectionMode = true;
+            }
+         
+            MainFrame.Navigate(v);
         }
+
 
         private View.emps _empsView;
         public View.emps EmpsView
@@ -45,26 +56,21 @@ namespace WPF.View
             get
             {
                 if (_empsView == null) _empsView = new View.emps();
+                if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
+                _empsView.DataContext = _empsViewModel;
                 return _empsView;
-            }
-            set
-            {
-                _empsView = value;
             }
         }
 
+        //Времменно оставляем
         private ViewModels.empsViewModel _empsViewModel;
         public ViewModels.empsViewModel EmpsViewModel
         {
             get
             {
-                if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
+                //if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
                 return _empsViewModel;
             }
-            set
-            {
-                _empsViewModel = value;
-            }    
         }
 
         private View.deps _depsView;
@@ -73,28 +79,30 @@ namespace WPF.View
             get
             {
                 if (_depsView == null) _depsView = new View.deps();
+                if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
+                _depsView.DataContext = _depsViewModel;
                 return _depsView;
             }
-            set
-            {
-                _depsView = value;
-            }
+            //set
+            //{
+            //    _depsView = value;
+            //}
         }
 
         private ViewModels.depsViewModel _depsViewModel;
-        public ViewModels.depsViewModel DepsViewModel
-        {
-            get
-            {
-                if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
-                return _depsViewModel;
-            }
-            set
-            {
-                _depsViewModel = value;
-            }
+        //public ViewModels.depsViewModel DepsViewModel
+        //{
+        //    get
+        //    {
+        //        if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
+        //        return _depsViewModel;
+        //    }
+        //    set
+        //    {
+        //        _depsViewModel = value;
+        //    }
 
-        }
+        //}
 
 
         private void Navigate(Uri uri)
@@ -127,9 +135,9 @@ namespace WPF.View
 
         private void btnDeps_Click(object sender, RoutedEventArgs e)
         {
-            DepsView.DataContext = DepsViewModel;
-            MainFrame.NavigationService.Navigate(DepsView);
-            //Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml?Mode=1", UriKind.Relative));
+
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.deps) });
         }
 
         private void btnPoss_Click(object sender, RoutedEventArgs e)

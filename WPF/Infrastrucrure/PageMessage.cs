@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPF.Infrastrucrure
 {
-    public enum MessageAction {Select, Return}
+    public enum MessageAction {Select, Return, Browse, Edit}
     public class PageMessage
     {
         public MessageAction Action {get; set;}

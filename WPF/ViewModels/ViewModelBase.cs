@@ -13,7 +13,7 @@ using System.Windows.Data;
 
 namespace WPF.ViewModels
 {
-    public abstract class ViewModelBase<T> :INotifyPropertyChanged, IDisposable where T : class, new()
+    public abstract class ViewModelBase<T> :INotifyPropertyChanged, IDisposable, IViewModel where T : class, new()
     {
         protected ViewModelBase()
         {
@@ -289,6 +289,33 @@ namespace WPF.ViewModels
         }
         #endregion Выбор
 
+        #region Назад
+        RelayCommand _backCommand;
+        public ICommand Back
+        {
+            get
+            {
+                if (_backCommand == null)
+                    _backCommand = new RelayCommand(ExecuteBackCommand, CanExecuteBackCommand);
+                return _backCommand;
+            }
+        }
+
+        public void ExecuteBackCommand(object parameter)
+        {
+            Messenger.Default.Send<T>(Selected);
+            SelectionMode = false;
+            Messenger.Default.Send<string>("GoBack");
+        }
+
+        public bool CanExecuteBackCommand(object parametr)
+        {
+            if (SelectionMode) return true;
+            else return false;
+        }
+        #endregion Назад
+
+
 
         #endregion Команды
 
@@ -303,5 +330,6 @@ namespace WPF.ViewModels
         protected virtual void OnDispose()
         {
         }
+
     }
 }

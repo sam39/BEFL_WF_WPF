@@ -23,6 +23,6 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Frame x:Name="MainFrame" Grid.Column="1" Background="#CCCCCC"/>
+        <Frame NavigationUIVisibility="Hidden"  x:Name="MainFrame" Grid.Column="1" Background="#CCCCCC"/>
     </Grid>
 </Window>

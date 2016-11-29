@@ -68,11 +68,15 @@ namespace WPF.ViewModels
 
         public void ExecuteSetDepCommand(object parameter)
         {
-            Infrastrucrure.PageMessage mess = new Infrastrucrure.PageMessage();
-            mess.Action = MessageAction.Select;
-            mess.PageType = typeof(View.deps);
-            Messenger.Default.Send<PageMessage>(mess);
-            //Messenger.Default.Send<Uri>(new Uri("View\\deps.xaml", UriKind.Relative));
+            //Infrastrucrure.PageMessage mess = new Infrastrucrure.PageMessage();
+            //mess.Action = MessageAction.Select;
+            //mess.PageType = typeof(View.deps);
+            //Messenger.Default.Send<PageMessage>(mess);
+
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Select, PageType = typeof(View.deps)});
+
+
             Messenger.Default.Register(this, new Action<BL.Dep>(SetDepForCurrentEmp));
         }
 
@@ -80,10 +84,13 @@ namespace WPF.ViewModels
         {
             if (Selected != null)
             {
-                BL.Emp emp = Selected as BL.Emp;
-                //Получаем объект из локального репозитория
-                BL.Dep dep_local = UoW.DivisionRepository.GetByID(dep.Id);
-                emp.Dep = dep_local;
+                if (dep != null)
+                {
+                    BL.Emp emp = Selected as BL.Emp;
+                    //Получаем объект из локального репозитория
+                    BL.Dep dep_local = UoW.DivisionRepository.GetByID(dep.Id);
+                    emp.Dep = dep_local;
+                }
                 //Отписываемся от сообщения
                 Messenger.Default.Unregister(this, new Action<BL.Dep>(SetDepForCurrentEmp));
             }
