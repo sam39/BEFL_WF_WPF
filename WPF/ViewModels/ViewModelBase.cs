@@ -151,30 +151,6 @@ namespace WPF.ViewModels
         }
         #endregion Добавление
 
-        #region Редактироване
-        RelayCommand _editCommand;
-        public ICommand Edit
-        {
-            get
-            {
-                if (_editCommand == null)
-                    _editCommand = new RelayCommand(ExecuteEditCommand, CanExecuteEditCommand);
-                return _editCommand;
-            }
-        }
-
-        public void ExecuteEditCommand(object parameter)
-        {
-            EditMode = true;
-        }
-
-        public bool CanExecuteEditCommand(object parametr)
-        {
-            if (!EditMode) return true;
-            else return false;
-        }
-        #endregion Редактирование
-
         #region Отмена редактирования(добавления)
         RelayCommand _cancelCommand;
         public ICommand Cancel
@@ -263,14 +239,17 @@ namespace WPF.ViewModels
         }
         #endregion Сохранение
 
-        #region Выбор
+        #region Выбор/Редактирование
         RelayCommand _selectCommand;
         public ICommand Select
         {
             get
             {
-                if (_selectCommand == null)
+                if (SelectionMode)
+                {
                     _selectCommand = new RelayCommand(ExecuteSelectCommand, CanExecuteSelectCommand);
+                }
+                else _selectCommand = new RelayCommand(ExecuteEditCommand, CanExecuteEditCommand);
                 return _selectCommand;
             }
         }
@@ -287,7 +266,18 @@ namespace WPF.ViewModels
             if (SelectionMode) return true;
             else return false;
         }
-        #endregion Выбор
+
+        public void ExecuteEditCommand(object parameter)
+        {
+            EditMode = true;
+        }
+
+        public bool CanExecuteEditCommand(object parametr)
+        {
+            if (!EditMode) return true;
+            else return false;
+        }
+        #endregion Выбор/Редактирование
 
         #region Назад
         RelayCommand _backCommand;
@@ -303,7 +293,7 @@ namespace WPF.ViewModels
 
         public void ExecuteBackCommand(object parameter)
         {
-            Messenger.Default.Send<T>(Selected);
+            //Messenger.Default.Send<T>(Selected);
             SelectionMode = false;
             Messenger.Default.Send<string>("GoBack");
         }
@@ -314,8 +304,6 @@ namespace WPF.ViewModels
             else return false;
         }
         #endregion Назад
-
-
 
         #endregion Команды
 

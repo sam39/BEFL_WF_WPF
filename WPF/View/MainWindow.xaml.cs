@@ -45,7 +45,6 @@ namespace WPF.View
             {
                 vm.SelectionMode = true;
             }
-         
             MainFrame.Navigate(v);
         }
 
