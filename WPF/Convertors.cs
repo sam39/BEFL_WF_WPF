@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace WPF.ViewModels
+namespace WPF
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

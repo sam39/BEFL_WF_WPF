@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
 using WPF.Infrastrucrure;
+using System.Management;
 
 namespace WPF.View
 {
@@ -38,6 +39,12 @@ namespace WPF.View
             if (mess.PageType == typeof(View.deps))
             {
                 v = DepsView;
+                vm = _depsViewModel;
+            }
+
+            if (mess.PageType == typeof(View.comps))
+            {
+                v = CompsView;
                 vm = _depsViewModel;
             }
 
@@ -82,13 +89,26 @@ namespace WPF.View
                 _depsView.DataContext = _depsViewModel;
                 return _depsView;
             }
-            //set
-            //{
-            //    _depsView = value;
-            //}
         }
 
         private ViewModels.depsViewModel _depsViewModel;
+
+        #region Страница Компы
+        private View.comps _compsView;
+        private ViewModels.compsViewModel _compsViewModel;
+        public View.comps CompsView
+        {
+            get
+            {
+                if (_compsView == null) _compsView = new View.comps();
+                if (_compsViewModel == null) _compsViewModel = new ViewModels.compsViewModel();
+                _compsView.DataContext = _compsViewModel;
+                return _compsView;
+            }
+        }
+        #endregion Страница Компы
+
+
         //public ViewModels.depsViewModel DepsViewModel
         //{
         //    get
@@ -128,7 +148,47 @@ namespace WPF.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("View\\Page2.xaml", UriKind.Relative));
+
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.comps) });
+
+
+
+            //ConnectionOptions options = new ConnectionOptions();
+            //options.Username = "BEFL\\god";
+            //options.Password = "Yt<jubUjhirbJ,;buf.n!";
+
+            //ManagementScope scope =
+            //new ManagementScope(
+            //"\\\\MAYZNER\\root\\CIMV2", options);
+            //scope.Connect();
+
+            //ObjectQuery query = new ObjectQuery(
+            //           "SELECT * FROM Win32_Processor");
+            //ManagementObjectSearcher searcher8 =
+            //    new ManagementObjectSearcher(scope, query);
+
+            //foreach (ManagementObject queryObj in searcher8.Get())
+            //{
+            //    Console.WriteLine("------------- Win32_Processor instance ---------------");
+            //    Console.WriteLine("Name: {0}", queryObj["Name"]);
+            //    Console.WriteLine("NumberOfCores: {0}", queryObj["NumberOfCores"]);
+            //    Console.WriteLine("ProcessorId: {0}", queryObj["ProcessorId"]);
+            //}
+
+            //ObjectQuery query1 = new ObjectQuery(
+            //           "SELECT * FROM Win32_PhysicalMemory");
+            //ManagementObjectSearcher searcher9 =
+            // new ManagementObjectSearcher(scope, query1);
+
+            //Console.WriteLine("------------- Win32_PhysicalMemory instance --------");
+            //foreach (ManagementObject queryObj in searcher9.Get())
+            //{
+            //    Console.WriteLine("BankLabel: {0} ; Capacity: {1} Gb; Speed: {2} ", queryObj["BankLabel"],
+            //                      Math.Round(System.Convert.ToDouble(queryObj["Capacity"]) / 1024 / 1024 / 1024, 2),
+            //                       queryObj["Speed"]);
+            //}
+                        
         }
          
 

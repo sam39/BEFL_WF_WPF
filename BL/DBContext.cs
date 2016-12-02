@@ -24,6 +24,7 @@ namespace BL
         public virtual DbSet<BL.Emp> Emps { get; set; }
         public virtual DbSet<BL.Pos> Poss { get; set; }
         public virtual DbSet<BL.Dep> Deps { get; set; }
+        public virtual DbSet<BL.Comp> Comps { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,8 +39,8 @@ namespace BL
         }
     }
 
-    //public class dbInit : System.Data.Entity.MigrateDatabaseToLatestVersion<DbContextBEFL, BL.Migrations.Configuration>
-    public class dbInit : System.Data.Entity.CreateDatabaseIfNotExists<DbContextBEFL>
+    public class dbInit : System.Data.Entity.MigrateDatabaseToLatestVersion<DbContextBEFL, BL.Migrations.Configuration>
+    //public class dbInit : System.Data.Entity.CreateDatabaseIfNotExists<DbContextBEFL>
     //DropCreateDatabaseIfModelChanges<DbContextBEFL>
     {
         //protected override void Seed(DbContextBEFL context)

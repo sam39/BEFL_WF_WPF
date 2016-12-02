@@ -49,13 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comp.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Dep.cs" />
     <Compile Include="Emp.cs" />
     <Compile Include="GenericRepository.cs" />
-    <Compile Include="Migrations\201609261433539_Field HideForAll.cs" />
-    <Compile Include="Migrations\201609261433539_Field HideForAll.Designer.cs">
-      <DependentUpon>201609261433539_Field HideForAll.cs</DependentUpon>
+    <Compile Include="Migrations\201612021448053_compsAdd.cs" />
+    <Compile Include="Migrations\201612021448053_compsAdd.Designer.cs">
+      <DependentUpon>201612021448053_compsAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pos.cs" />
@@ -67,8 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609261433539_Field HideForAll.resx">
-      <DependentUpon>201609261433539_Field HideForAll.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612021448053_compsAdd.resx">
+      <DependentUpon>201612021448053_compsAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,13 +7,13 @@ namespace BL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class FieldHideForAll : IMigrationMetadata
+    public sealed partial class compsAdd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FieldHideForAll));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(compsAdd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609261433539_Field HideForAll"; }
+            get { return "201612021448053_compsAdd"; }
         }
         
         string IMigrationMetadata.Source

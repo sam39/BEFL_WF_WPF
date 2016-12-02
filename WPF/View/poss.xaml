@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.ViewModels"
-     
+        xmlns:root="clr-namespace:WPF"     
         mc:Ignorable="d"
         Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
 
     <Page.Resources>
-        <local:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <root:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Page.Resources>
 
     <Page.DataContext>
