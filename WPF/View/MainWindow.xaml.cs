@@ -36,6 +36,12 @@ namespace WPF.View
         {
             Page v =  null;
             ViewModels.IViewModel vm = null;
+            if (mess.PageType == typeof(View.emps))
+            {
+                v = EmpsView;
+                vm = _empsViewModel;
+            }
+
             if (mess.PageType == typeof(View.deps))
             {
                 v = DepsView;
@@ -48,10 +54,17 @@ namespace WPF.View
                 vm = _depsViewModel;
             }
 
+            if (mess.PageType == typeof(View.poss))
+            {
+                v = PossView;
+                vm = _possViewModel;
+            }
+
             if (mess.Action == Infrastrucrure.MessageAction.Select)
             {
                 vm.SelectionMode = true;
             }
+
             MainFrame.Navigate(v);
         }
 
@@ -106,7 +119,22 @@ namespace WPF.View
                 return _compsView;
             }
         }
-        #endregion Страница Компы
+        #endregion Страница Компы 
+
+        #region Страница должности
+        private View.poss _possView;
+        private ViewModels.possViewModel _possViewModel;
+        public View.poss PossView
+        {
+            get
+            {
+                if (_possView == null) _possView = new View.poss();
+                if (_possViewModel == null) _possViewModel = new ViewModels.possViewModel();
+                _possView.DataContext = _possViewModel;
+                return _possView;
+            }
+        }
+        #endregion Страница должности
 
 
         //public ViewModels.depsViewModel DepsViewModel

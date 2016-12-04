@@ -32,27 +32,27 @@ namespace WPF.ViewModels
             return result;
         }
 
-        ObservableCollection<BL.Pos> _poss;
-        public ObservableCollection<BL.Pos> Poss
-        {
-            get
-            {
-                if (_poss == null)
-                    _poss = new ObservableCollection<BL.Pos>(UoW.PosRepository.GetAll());
-                return _poss;
-            }
-        }
+        //ObservableCollection<BL.Pos> _poss;
+        //public ObservableCollection<BL.Pos> Poss
+        //{
+        //    get
+        //    {
+        //        if (_poss == null)
+        //            _poss = new ObservableCollection<BL.Pos>(UoW.PosRepository.GetAll());
+        //        return _poss;
+        //    }
+        //}
 
-        ObservableCollection<BL.Dep> _deps;
-        public ObservableCollection<BL.Dep> Deps
-        {
-            get
-            {
-                if (_deps == null)
-                    _deps = new ObservableCollection<BL.Dep>(UoW.DivisionRepository.GetAll());
-                return _deps;
-            }
-        }
+        //ObservableCollection<BL.Dep> _deps;
+        //public ObservableCollection<BL.Dep> Deps
+        //{
+        //    get
+        //    {
+        //        if (_deps == null)
+        //            _deps = new ObservableCollection<BL.Dep>(UoW.DivisionRepository.GetAll());
+        //        return _deps;
+        //    }
+        //}
 
         #region Выбор отдела
         RelayCommand _setDep;
@@ -68,13 +68,8 @@ namespace WPF.ViewModels
 
         public void ExecuteSetDepCommand(object parameter)
         {
-            //Infrastrucrure.PageMessage mess = new Infrastrucrure.PageMessage();
-            //mess.Action = MessageAction.Select;
-            //mess.PageType = typeof(View.deps);
-            //Messenger.Default.Send<PageMessage>(mess);
-
             Messenger.Default.Send<PageMessage>
-                (new PageMessage { Action = MessageAction.Select, PageType = typeof(View.deps)});
+                (new PageMessage { Action = MessageAction.Select, PageType = typeof(View.deps) });
 
 
             Messenger.Default.Register(this, new Action<BL.Dep>(SetDepForCurrentEmp));
@@ -104,7 +99,7 @@ namespace WPF.ViewModels
         #endregion Выбор отдела
 
         #region Выбор должности
-        RelayCommand _setPos    ;
+        RelayCommand _setPos;
         public ICommand SetPos
         {
             get
@@ -117,8 +112,10 @@ namespace WPF.ViewModels
 
         public void ExecuteSetPosCommand(object parameter)
         {
-            View.poss form = new View.poss() {};
-            Messenger.Default.Send<Uri>(new Uri("View\\poss.xaml", UriKind.Relative));
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Select, PageType = typeof(View.poss) });
+
+
             Messenger.Default.Register(this, new Action<BL.Pos>(SetPosForCurrentEmp));
         }
 
@@ -141,6 +138,12 @@ namespace WPF.ViewModels
         }
         #endregion Выбор должности
 
+        public override bool CanExecuteSaveCommand(object parametr)
+        {
+            if (EditMode && (Selected as BL.Emp).Pos != null && (Selected as BL.Emp).Dep != null)
+                return true;
+            else return false;
+        }
 
         protected override void OnDispose()
         {

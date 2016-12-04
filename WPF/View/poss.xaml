@@ -22,13 +22,24 @@
             <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
+        <Button Height="22" Width="21" HorizontalAlignment="Right" VerticalAlignment="Top"  Command="{Binding Back}" >X</Button>
         <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
 
 
         <Grid Grid.Row="1" >
             <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="auto" />
+                    <DataGridTemplateColumn Header="Id">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.Select, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" >
+                                         <TextBlock Text="{Binding Id}" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Наименование" Width="Auto" />
                 </DataGrid.Columns>
             </DataGrid>

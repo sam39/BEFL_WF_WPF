@@ -232,7 +232,7 @@ namespace WPF.ViewModels
             OnPropertyChanged("Emps");     
         }
 
-        public bool CanExecuteSaveCommand(object parametr)
+        public virtual bool CanExecuteSaveCommand(object parametr)
         {
             if (EditMode) return true;
             else return false;

@@ -69,6 +69,38 @@ namespace BL
             }
         }
 
+        private string _hdd;
+        public string Hdd
+        {
+            get { return _hdd; }
+            set
+            {
+                _hdd = value;
+                OnPropertyChanged("Hdd");
+            }
+        }
+
+        private string _cdcom;
+        public string CdRom
+        {
+            get { return _cdcom; }
+            set
+            {
+                _cdcom = value;
+                OnPropertyChanged("CdRom");
+            }
+        }
+
+        private Emp _emp;
+        public Emp Emp
+        {
+            get { return _emp; }
+            set
+            {
+                _emp = value;
+                OnPropertyChanged("Emp");
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

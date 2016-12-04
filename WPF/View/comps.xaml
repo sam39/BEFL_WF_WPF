@@ -26,7 +26,7 @@
 
 
         <Grid Grid.Row="1" >
-            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}">
+            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="Grid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Id">
                         <DataGridTemplateColumn.CellTemplate>
@@ -44,7 +44,7 @@
             </DataGrid>
         </Grid>
         <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
+            <!--<Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -63,9 +63,37 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="0">Наименование</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding Path=NetName}"></TextBox>
-            </Grid>
+            </Grid>-->
+            <WrapPanel  DataContext="{Binding ElementName=Grid, Path=SelectedItem}">
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">NetName</TextBlock>
+                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=NetName}"></TextBox>                                      
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">CPU</TextBlock>
+                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=CpuName}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">RAM</TextBlock>
+                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Memory}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Hdd</TextBlock>
+                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Hdd}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">CdRom</TextBlock>
+                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=CdRom}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Пользователь</TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+                            <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Emp.Name}"></TextBox>
+                            <Button x:Name="SetEmpbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetEmp, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                    </StackPanel>
+                </StackPanel>                
+            </WrapPanel>
+
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">

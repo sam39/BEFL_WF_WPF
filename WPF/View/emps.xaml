@@ -99,14 +99,14 @@
                 <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="2" Text="{Binding Path=MobileTel }"></TextBox>
                 <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
                 <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4">Должность</TextBlock>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4"></TextBlock>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4">
-                    <ComboBox Padding="2" Margin="5"  ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page},Path=DataContext.Poss}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Pos, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
+                    <TextBlock Text="{Binding Path=Pos.Name}"></TextBlock>
                     <Button x:Name="SetPosbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetPos, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4">Отдел</TextBlock>
+                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4"></TextBlock>
                 <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" >
-                    <ComboBox Padding="2" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page},Path=DataContext.Deps}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedItem="{Binding Path=Dep, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"></ComboBox>
+                    <TextBlock Text="{Binding Path=Dep.Name}"></TextBlock>
                     <Button x:Name="SetDepbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDep, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                 </StackPanel>
                 <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>

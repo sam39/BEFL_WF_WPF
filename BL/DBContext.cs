@@ -39,8 +39,8 @@ namespace BL
         }
     }
 
-    public class dbInit : System.Data.Entity.MigrateDatabaseToLatestVersion<DbContextBEFL, BL.Migrations.Configuration>
-    //public class dbInit : System.Data.Entity.CreateDatabaseIfNotExists<DbContextBEFL>
+    //public class dbInit : System.Data.Entity.MigrateDatabaseToLatestVersion<DbContextBEFL, BL.Migrations.Configuration>
+    public class dbInit : System.Data.Entity.DropCreateDatabaseAlways<DbContextBEFL>
     //DropCreateDatabaseIfModelChanges<DbContextBEFL>
     {
         //protected override void Seed(DbContextBEFL context)

@@ -7,13 +7,13 @@ namespace BL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class compsAdd : IMigrationMetadata
+    public sealed partial class CompProps : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(compsAdd));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CompProps));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612021448053_compsAdd"; }
+            get { return "201612031838423_CompProps"; }
         }
         
         string IMigrationMetadata.Source
