@@ -38,27 +38,37 @@ namespace WPF.View
             ViewModels.IViewModel vm = null;
             if (mess.PageType == typeof(View.emps))
             {
-                v = EmpsView;
-                vm = _empsViewModel;
+                v = new View.emps();
+                vm = new ViewModels.empsViewModel();
+                //v = EmpsView;
+                //vm = _empsViewModel;
             }
 
             if (mess.PageType == typeof(View.deps))
             {
-                v = DepsView;
-                vm = _depsViewModel;
+                v = new View.deps();
+                vm = new ViewModels.depsViewModel();
+                //v = DepsView;
+                //vm = _depsViewModel;
             }
 
             if (mess.PageType == typeof(View.comps))
             {
-                v = CompsView;
-                vm = _depsViewModel;
+                v = new View.comps();
+                vm = new ViewModels.compsViewModel();
+                //v = CompsView;
+                //vm = _depsViewModel;
             }
 
             if (mess.PageType == typeof(View.poss))
             {
-                v = PossView;
-                vm = _possViewModel;
+                v = new View.poss();
+                vm = new ViewModels.possViewModel();
+                //v = PossView;
+                //vm = _possViewModel;
             }
+
+            v.DataContext = vm;
 
             if (mess.Action == Infrastrucrure.MessageAction.Select)
             {
@@ -68,74 +78,74 @@ namespace WPF.View
             MainFrame.Navigate(v);
         }
 
+#region Страницы 
+        //private View.emps _empsView;
+        //public View.emps EmpsView
+        //{
+        //    get
+        //    {
+        //        if (_empsView == null) _empsView = new View.emps();
+        //        if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
+        //        _empsView.DataContext = _empsViewModel;
+        //        return _empsView;
+        //    }
+        //}
 
-        private View.emps _empsView;
-        public View.emps EmpsView
-        {
-            get
-            {
-                if (_empsView == null) _empsView = new View.emps();
-                if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
-                _empsView.DataContext = _empsViewModel;
-                return _empsView;
-            }
-        }
+        ////Времменно оставляем
+        //private ViewModels.empsViewModel _empsViewModel;
+        //public ViewModels.empsViewModel EmpsViewModel
+        //{
+        //    get
+        //    {
+        //        //if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
+        //        return _empsViewModel;
+        //    }
+        //}
 
-        //Времменно оставляем
-        private ViewModels.empsViewModel _empsViewModel;
-        public ViewModels.empsViewModel EmpsViewModel
-        {
-            get
-            {
-                //if (_empsViewModel == null) _empsViewModel = new ViewModels.empsViewModel();
-                return _empsViewModel;
-            }
-        }
+        //private View.deps _depsView;
+        //public View.deps DepsView
+        //{
+        //    get
+        //    {
+        //        if (_depsView == null) _depsView = new View.deps();
+        //        if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
+        //        _depsView.DataContext = _depsViewModel;
+        //        return _depsView;
+        //    }
+        //}
 
-        private View.deps _depsView;
-        public View.deps DepsView
-        {
-            get
-            {
-                if (_depsView == null) _depsView = new View.deps();
-                if (_depsViewModel == null) _depsViewModel = new ViewModels.depsViewModel();
-                _depsView.DataContext = _depsViewModel;
-                return _depsView;
-            }
-        }
+        //private ViewModels.depsViewModel _depsViewModel;
 
-        private ViewModels.depsViewModel _depsViewModel;
+        //#region Страница Компы
+        //private View.comps _compsView;
+        //private ViewModels.compsViewModel _compsViewModel;
+        //public View.comps CompsView
+        //{
+        //    get
+        //    {
+        //        if (_compsView == null) _compsView = new View.comps();
+        //        if (_compsViewModel == null) _compsViewModel = new ViewModels.compsViewModel();
+        //        _compsView.DataContext = _compsViewModel;
+        //        return _compsView;
+        //    }
+        //}
+        //#endregion Страница Компы 
 
-        #region Страница Компы
-        private View.comps _compsView;
-        private ViewModels.compsViewModel _compsViewModel;
-        public View.comps CompsView
-        {
-            get
-            {
-                if (_compsView == null) _compsView = new View.comps();
-                if (_compsViewModel == null) _compsViewModel = new ViewModels.compsViewModel();
-                _compsView.DataContext = _compsViewModel;
-                return _compsView;
-            }
-        }
-        #endregion Страница Компы 
-
-        #region Страница должности
-        private View.poss _possView;
-        private ViewModels.possViewModel _possViewModel;
-        public View.poss PossView
-        {
-            get
-            {
-                if (_possView == null) _possView = new View.poss();
-                if (_possViewModel == null) _possViewModel = new ViewModels.possViewModel();
-                _possView.DataContext = _possViewModel;
-                return _possView;
-            }
-        }
-        #endregion Страница должности
-
+        //#region Страница должности
+        //private View.poss _possView;
+        //private ViewModels.possViewModel _possViewModel;
+        //public View.poss PossView
+        //{
+        //    get
+        //    {
+        //        if (_possView == null) _possView = new View.poss();
+        //        if (_possViewModel == null) _possViewModel = new ViewModels.possViewModel();
+        //        _possView.DataContext = _possViewModel;
+        //        return _possView;
+        //    }
+        //}
+        //#endregion Страница должности
+#endregion Страницы 
 
         //public ViewModels.depsViewModel DepsViewModel
         //{
@@ -169,8 +179,10 @@ namespace WPF.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EmpsView.DataContext = EmpsViewModel;
-            MainFrame.NavigationService.Navigate(EmpsView);
+            Messenger.Default.Send<PageMessage>
+               (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.emps) });
+            //EmpsView.DataContext = EmpsViewModel;
+            //MainFrame.NavigationService.Navigate(EmpsView);
             //Messenger.Default.Send<Uri>(new Uri("View\\emps.xaml", UriKind.Relative));
         }
 
