@@ -75,7 +75,7 @@
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">RAM</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Memory}"></TextBox>
+                    <TextBox TextWrapping="Wrap" Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Memory}"></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Hdd</TextBlock>
@@ -88,10 +88,11 @@
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Пользователь</TextBlock>
                     <StackPanel Orientation="Horizontal" >
-                            <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Emp.Name}"></TextBox>
+                            <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Emp.LastName}"></TextBox>
                             <Button x:Name="SetEmpbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetEmp, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
-                </StackPanel>                
+                </StackPanel>
+                <Button Height="30" Content="SysInfoUpdate" Width="90"  Command="{Binding DataContext.SysInfoUpdate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"></Button>
             </WrapPanel>
 
         </Border>

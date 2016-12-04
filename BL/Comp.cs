@@ -92,7 +92,7 @@ namespace BL
         }
 
         private Emp _emp;
-        public Emp Emp
+        public virtual Emp Emp
         {
             get { return _emp; }
             set

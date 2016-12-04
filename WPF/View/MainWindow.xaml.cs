@@ -241,8 +241,8 @@ namespace WPF.View
 
         private void btnPoss_Click(object sender, RoutedEventArgs e)
         {
-            //Messenger.Default.Send<Uri>(new Uri("View\\poss.xaml", UriKind.Relative));
-            //MainFrame.NavigationService.Navigate(new poss(true);
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.poss) });
         }
     }
 }

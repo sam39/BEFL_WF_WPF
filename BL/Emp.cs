@@ -46,7 +46,7 @@ namespace BL
         }
 
         private Pos _pos;
-        public Pos Pos
+        public virtual Pos Pos
         {
             get { return _pos; }
             set
@@ -64,7 +64,7 @@ namespace BL
         }
 
         private Dep _dep;
-        public Dep Dep
+        public virtual Dep Dep
         {
             get { return _dep; }
             set

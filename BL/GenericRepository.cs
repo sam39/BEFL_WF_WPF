@@ -21,6 +21,20 @@ namespace BL
             this.dbSet = context.Set<TEntity>();
         }
 
+        //private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
+        //{
+        //    IQueryable<TEntity> query = dbSet;
+        //    return includeProperties
+        //        .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        //}
+
+
+        //public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includeProperties)
+        //{
+        //    return Include(includeProperties).ToList();
+        //}
+
+
         public virtual IEnumerable<TEntity> GetAll()
         {
             IQueryable<TEntity> query = dbSet;
@@ -89,7 +103,8 @@ namespace BL
 
         public virtual void Reload(TEntity entityToUpdate)
         {
-            context.Entry(entityToUpdate).Reload();
+            if (entityToUpdate != null)
+                context.Entry(entityToUpdate).Reload();
         }
     }
 }
