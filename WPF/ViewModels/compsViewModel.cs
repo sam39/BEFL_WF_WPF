@@ -91,27 +91,29 @@ namespace WPF.ViewModels
                 ConnectionOptions options = new ConnectionOptions();
                 options.Username = "BEFL\\god";
                 options.Password = "Yt<jubUjhirbJ,;buf.n!";
+                string path = "\\\\" + comp.NetName + "\\root\\CIMV2";
 
-                ManagementScope scope =
-                new ManagementScope(
-                "\\root\\CIMV2");
                 //ManagementScope scope =
                 //new ManagementScope(
-                //"\\\\MAYZNER\\root\\CIMV2", options);
+                //"\\root\\CIMV2");
+                ManagementScope scope =
+                new ManagementScope(
+                path, options);
                 scope.Connect();
 
                 ObjectQuery query = new ObjectQuery(
                            "SELECT * FROM Win32_Processor");
                 ManagementObjectSearcher searcher8 =
                     new ManagementObjectSearcher(scope, query);
-
+                string cpu = string.Empty;
                 foreach (ManagementObject queryObj in searcher8.Get())
                 {
-                    Console.WriteLine("------------- Win32_Processor instance ---------------");
-                    Console.WriteLine("Name: {0}", queryObj["Name"]);
-                    Console.WriteLine("NumberOfCores: {0}", queryObj["NumberOfCores"]);
-                    Console.WriteLine("ProcessorId: {0}", queryObj["ProcessorId"]);
+                    cpu = cpu + "" 
+                        + queryObj["Name"] 
+                        + "; " + queryObj["NumberOfCores"] 
+                        + "; " + queryObj["ProcessorId"];
                 }
+                comp.CpuName = cpu;
 
                 ObjectQuery query1 = new ObjectQuery(
                            "SELECT * FROM Win32_PhysicalMemory");
@@ -130,8 +132,35 @@ namespace WPF.ViewModels
                 }
                 comp.Memory = mem;
 
-            }
 
+
+
+
+                ObjectQuery queryHDD = new ObjectQuery(
+                           "SELECT * FROM Win32_Volume");
+                ManagementObjectSearcher searcherHDD =
+                    new ManagementObjectSearcher(scope, query);
+                string hdd = string.Empty;
+
+                foreach (ManagementObject queryObj in searcherHDD.Get())
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("Win32_Volume instance");
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("Capacity: {0}", queryObj["Capacity"]);
+                    Console.WriteLine("Caption: {0}", queryObj["Caption"]);
+                    Console.WriteLine("DriveLetter: {0}", queryObj["DriveLetter"]);
+                    Console.WriteLine("DriveType: {0}", queryObj["DriveType"]);
+                    Console.WriteLine("FileSystem: {0}", queryObj["FileSystem"]);
+                    Console.WriteLine("FreeSpace: {0}", queryObj["FreeSpace"]);
+                }
+
+                Console.Write("Press any key to continue . . . ");
+                Console.ReadKey(true);
+
+
+
+            }
         }
 
         public bool CanExecuteSysInfoUpdateCommand(object parametr)
