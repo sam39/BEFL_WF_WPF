@@ -91,6 +91,40 @@ namespace BL
             }
         }
 
+        private string _os;
+        public string OS
+        {
+            get { return _os; }
+            set
+            {
+                _os = value;
+                OnPropertyChanged("OS");
+            }
+        }
+
+        private string _mainBoadr;
+        public string MainBoard
+        {
+            get { return _mainBoadr; }
+            set
+            {
+                _mainBoadr = value;
+                OnPropertyChanged("MainBoard");
+            }
+        }
+
+        private string _video;
+        public string Video
+        {
+            get { return _video; }
+            set
+            {
+                _video = value;
+                OnPropertyChanged("Video");
+            }
+        }
+
+
         private Emp _emp;
         public virtual Emp Emp
         {

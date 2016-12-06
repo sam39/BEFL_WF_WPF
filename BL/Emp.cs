@@ -45,6 +45,18 @@ namespace BL
             }
         }
 
+        public string FIO
+        {
+            get
+            {
+                string result = string.Empty;
+                if (_lastname != null) result += _lastname;
+                if (_name != null) result += " " + _name.Substring(0, 1) + ".";
+                if (_sname != null) result += _sname.Substring(0, 1) + ".";
+                return result;
+            }
+        }
+
         private Pos _pos;
         public virtual Pos Pos
         {

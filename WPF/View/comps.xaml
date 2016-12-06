@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WPF.View"
       xmlns:root="clr-namespace:WPF"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="400" d:DesignWidth="300"
       Title="comp" Background="White" KeepAlive="{Binding EditMode}">
 
     <Page.Resources>
@@ -67,28 +67,40 @@
             <WrapPanel  DataContext="{Binding ElementName=Grid, Path=SelectedItem}">
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">NetName</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=NetName}"></TextBox>                                      
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=NetName}"></TextBox>                                      
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">CPU</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=CpuName}"></TextBox>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=CpuName}"></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">RAM</TextBlock>
-                    <TextBox TextWrapping="Wrap" Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Memory}"></TextBox>
+                    <TextBox TextWrapping="Wrap" Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Memory}"></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Hdd</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Hdd}"></TextBox>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Hdd}"></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">CdRom</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=CdRom}"></TextBox>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=CdRom}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">MainBoard</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=MainBoard}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">VideoCard</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Video}"></TextBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">ОС</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=OS}"></TextBox>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Пользователь</TextBlock>
                     <StackPanel Orientation="Horizontal" >
-                            <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Emp.LastName}"></TextBox>
+                            <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Emp.FIO,Mode=OneWay}"></TextBox>
                             <Button x:Name="SetEmpbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetEmp, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>

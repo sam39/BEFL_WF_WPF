@@ -93,74 +93,47 @@ namespace WPF.ViewModels
                 options.Password = "Yt<jubUjhirbJ,;buf.n!";
                 string path = "\\\\" + comp.NetName + "\\root\\CIMV2";
 
-                //ManagementScope scope =
-                //new ManagementScope(
-                //"\\root\\CIMV2");
                 ManagementScope scope =
                 new ManagementScope(
                 path, options);
-                scope.Connect();
 
-                ObjectQuery query = new ObjectQuery(
-                           "SELECT * FROM Win32_Processor");
-                ManagementObjectSearcher searcher8 =
-                    new ManagementObjectSearcher(scope, query);
-                string cpu = string.Empty;
-                foreach (ManagementObject queryObj in searcher8.Get())
+                //try
+                //{
+                    scope.Connect();
+                    comp.CpuName = getWmiProp("Win32_Processor", new string[] { "Name", "NumberOfCores"}, scope);
+                    comp.Memory = getWmiProp("Win32_PhysicalMemory", new string[] { "BankLabel", "Capacity", "Speed" }, scope);
+                    comp.Hdd = getWmiProp("Win32_Volume", new string[] { "DriveLetter", "Capacity", "FileSystem" }, scope);
+                    comp.MainBoard = getWmiProp("Win32_BaseBoard", new string[] { "Manufacturer", "Product" }, scope);
+                    comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
+                    comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
+                    comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
+                //}
+                //catch
+                //{
+                    //System.Windows.MessageBox.Show("Невозможно связаться с " + comp.NetName);
+                //}
+             
+            }
+        }
+
+        private string getWmiProp(string key, string[] prop, ManagementScope scope)
+        {
+            ObjectQuery query = new ObjectQuery("SELECT * FROM " + key);
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+            string result = string.Empty;
+            foreach (ManagementObject queryObj in searcher.Get())
+            {
+                if (result != string.Empty) result += "\n";
+                foreach (string pr in prop)
                 {
-                    cpu = cpu + "" 
-                        + queryObj["Name"] 
-                        + "; " + queryObj["NumberOfCores"] 
-                        + "; " + queryObj["ProcessorId"];
+                    if (pr == "Capacity")
+                        result += Math.Round(System.Convert.ToDouble(queryObj[pr]) / 1024 / 1024 / 1024, 2) + " Gb; ";
+                    else
+                        result += queryObj[pr] + "; ";
                 }
-                comp.CpuName = cpu;
-
-                ObjectQuery query1 = new ObjectQuery(
-                           "SELECT * FROM Win32_PhysicalMemory");
-                ManagementObjectSearcher searcher9 =
-                 new ManagementObjectSearcher(scope, query1);
-
-                Console.WriteLine("------------- Win32_PhysicalMemory instance --------");
-                string mem = string.Empty;
-                foreach (ManagementObject queryObj in searcher9.Get())
-                {
-
-                    mem = mem + queryObj["BankLabel"] +"; " + Math.Round(System.Convert.ToDouble(queryObj["Capacity"]) / 1024 / 1024 / 1024, 2) + " Gb; " + queryObj["Speed"] +"\n";
-                    //Console.WriteLine("BankLabel: {0} ; Capacity: {1} Gb; Speed: {2} ", queryObj["BankLabel"],
-                    //                  Math.Round(System.Convert.ToDouble(queryObj["Capacity"]) / 1024 / 1024 / 1024, 2),
-                    //                   queryObj["Speed"]);
-                }
-                comp.Memory = mem;
-
-
-
-
-
-                ObjectQuery queryHDD = new ObjectQuery(
-                           "SELECT * FROM Win32_Volume");
-                ManagementObjectSearcher searcherHDD =
-                    new ManagementObjectSearcher(scope, query);
-                string hdd = string.Empty;
-
-                foreach (ManagementObject queryObj in searcherHDD.Get())
-                {
-                    Console.WriteLine("-----------------------------------");
-                    Console.WriteLine("Win32_Volume instance");
-                    Console.WriteLine("-----------------------------------");
-                    Console.WriteLine("Capacity: {0}", queryObj["Capacity"]);
-                    Console.WriteLine("Caption: {0}", queryObj["Caption"]);
-                    Console.WriteLine("DriveLetter: {0}", queryObj["DriveLetter"]);
-                    Console.WriteLine("DriveType: {0}", queryObj["DriveType"]);
-                    Console.WriteLine("FileSystem: {0}", queryObj["FileSystem"]);
-                    Console.WriteLine("FreeSpace: {0}", queryObj["FreeSpace"]);
-                }
-
-                Console.Write("Press any key to continue . . . ");
-                Console.ReadKey(true);
-
-
 
             }
+            return result;
         }
 
         public bool CanExecuteSysInfoUpdateCommand(object parametr)
