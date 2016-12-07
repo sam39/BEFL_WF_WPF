@@ -44,26 +44,6 @@
             </DataGrid>
         </Grid>
         <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <!--<Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-            </Grid>-->
             <WrapPanel  DataContext="{Binding ElementName=Grid, Path=SelectedItem}">
                 <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">NetName</TextBlock>

@@ -56,12 +56,13 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button x:Name="Selectbutton"  Content="Выбрать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Select}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Button Height="31" Width="100" HorizontalAlignment="Right"  Command="{Binding Back}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}">Назад</Button>
+            <!--<Button x:Name="Selectbutton"  Content="Выбрать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Select}" Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Editbutton"  Content="Редактировать" HorizontalAlignment="Left" Height="31" Width="102" Command="{Binding Edit}"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
-            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
-            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
+            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
         </StackPanel>
 
 

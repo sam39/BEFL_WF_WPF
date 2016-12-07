@@ -140,9 +140,14 @@ namespace WPF.ViewModels
 
         public override bool CanExecuteSaveCommand(object parametr)
         {
-            if (EditMode && (Selected as BL.Emp).Pos != null && (Selected as BL.Emp).Dep != null)
-                return true;
-            else return false;
+            bool result = false;
+            if (Selected != null)
+            {
+                if (EditMode && (Selected as BL.Emp).Pos != null && (Selected as BL.Emp).Dep != null)
+                    result = true;
+            }
+            return result;
+
         }
 
         protected override void OnDispose()

@@ -27,14 +27,14 @@ namespace WPF.View
 
         private void empGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (empGrid.SelectedValue != null)
-                empGrid.ScrollIntoView(empGrid.SelectedValue);
+            if (Grid.SelectedValue != null)
+                Grid.ScrollIntoView(Grid.SelectedValue);
         }
 
         private void empGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (empGrid.SelectedValue != null)
-            empGrid.ScrollIntoView(empGrid.SelectedValue);
+            if (Grid.SelectedValue != null)
+            Grid.ScrollIntoView(Grid.SelectedValue);
         }
     }
 }

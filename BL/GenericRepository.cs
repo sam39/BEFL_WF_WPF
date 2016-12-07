@@ -88,6 +88,7 @@ namespace BL
 
         public virtual void Delete(TEntity entityToDelete)
         {
+            
             if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
                 dbSet.Attach(entityToDelete);

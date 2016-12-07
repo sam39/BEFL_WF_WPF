@@ -19,7 +19,6 @@
             <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <Button Height="22" Width="21" HorizontalAlignment="Right" VerticalAlignment="Top"  Command="{Binding Back}" >X</Button>
         <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
 
 
@@ -53,10 +52,11 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button Height="31" Width="100" HorizontalAlignment="Right" Command="{Binding Back}"  Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}">Назад</Button>
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
-            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
-            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
+            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
         </StackPanel>
 
 

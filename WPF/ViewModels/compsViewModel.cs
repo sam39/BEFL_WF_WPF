@@ -97,8 +97,8 @@ namespace WPF.ViewModels
                 new ManagementScope(
                 path, options);
 
-                //try
-                //{
+                try
+                {
                     scope.Connect();
                     comp.CpuName = getWmiProp("Win32_Processor", new string[] { "Name", "NumberOfCores"}, scope);
                     comp.Memory = getWmiProp("Win32_PhysicalMemory", new string[] { "BankLabel", "Capacity", "Speed" }, scope);
@@ -107,12 +107,12 @@ namespace WPF.ViewModels
                     comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
                     comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
                     comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
-                //}
-                //catch
-                //{
-                    //System.Windows.MessageBox.Show("Невозможно связаться с " + comp.NetName);
-                //}
-             
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Невозможно связаться с " + comp.NetName);
+                }
+
             }
         }
 

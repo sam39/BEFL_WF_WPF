@@ -131,17 +131,15 @@ namespace WPF.ViewModels
 
         public void ExecuteAddCommand(object parameter)
         {
+            FindText = string.Empty;
+            OnPropertyChanged("FindText");
             T entity = new T();
-            ////emp.DepId = 1;
-            ////emp.PosId = 1;
             EntityList.Add(entity);
-            UoW.Repository<T>().Insert(entity);
-            //UoW.EmpRepository.Insert(emp);
+            //UoW.Repository<T>().Insert(entity);
             Selected = entity;
-            OnPropertyChanged("SelectedEmp");
+            OnPropertyChanged("Selected");
             EditMode = true;
             _addNewMode = true;
-            //OnPropertyChanged("EditMode");
         }
 
         public bool CanExecuteAddCommand(object parameter)
@@ -165,11 +163,11 @@ namespace WPF.ViewModels
 
         public void ExecuteCancelCommand(object parameter)
         {
-            T EntityToCancel = parameter as T;
+            T EntityToCancel = Selected as T;
             if (_addNewMode)
             {
                 EntityList.Remove(EntityToCancel);
-                UoW.Repository<T>().Delete(EntityToCancel);
+                //UoW.Repository<T>().Delete(EntityToCancel);
                 _addNewMode = false;
             }
             else UoW.Repository<T>().Reload(EntityToCancel);
@@ -200,16 +198,23 @@ namespace WPF.ViewModels
         public void ExecuteDeleteCommand(object parameter)
         {
             T ToDel = parameter as T;
-            EntityList.Remove(ToDel);
-            UoW.Repository<T>().Delete(ToDel);
-            UoW.Save();
-            OnPropertyChanged("EntityList");
+            if (ToDel != null)
+            {
+                EntityList.Remove(ToDel);
+                UoW.Repository<T>().Delete(ToDel);
+                UoW.Save();
+                OnPropertyChanged("EntityList");
+            }
+
         }
 
         public bool CanExecuteDeleteCommand(object parametr)
         {
-            if (!EditMode) return true;
-            else return false;
+            bool result = false;
+            if (Selected != null)
+                if (!EditMode)
+                result =  true;
+            return result;
         }
         #endregion Удаление
 
@@ -227,6 +232,15 @@ namespace WPF.ViewModels
 
         public void ExecuteSaveCommand(object parameter)
         {
+            if (_addNewMode)
+            {
+                T entity = Selected as T;
+                if (entity != null)
+                {
+                    //EntityList.Add(entity);
+                    UoW.Repository<T>().Insert(entity);
+                }
+            }
             UoW.Save();
             EditMode = false;
             OnPropertyChanged("Emps");     

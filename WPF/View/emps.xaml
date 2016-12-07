@@ -10,6 +10,9 @@
     
     <Page.Resources>
         <root:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="SP_Controls">
+            <Setter Property="Control.Margin" Value="1,3,1,3"></Setter>
+        </Style>
     </Page.Resources>
 
     <Grid ShowGridLines="True">
@@ -18,12 +21,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
-        </Grid.RowDefinitions> 
+        </Grid.RowDefinitions>
         <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
-
-        
         <Grid Grid.Row="1" >
-            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="empGrid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
+            <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="Grid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Фамилия"  Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
@@ -48,77 +49,102 @@
         </Grid>
 
         <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid Margin="5" DataContext="{Binding ElementName=empGrid, Path=SelectedItem}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>                    
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="0">Фамилия</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="0" Text="{Binding Path=LastName}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="1">Имя</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1"  Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Margin="5" Grid.Column="0" Grid.Row="2">Отчеставо</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SName}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="0">Domain Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="0" Text="{Binding Path=DomainPass}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="1">Email</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="1" Text="{Binding Path=Email}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="2" Grid.Row="2">Email Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="3" Grid.Row="2" Text="{Binding Path=EmailPass}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="0">ERoom Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="0" Text="{Binding Path=ERoomPass}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="1">TCrypt Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="1" Text="{Binding Path=TrueCryptPass}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="2">Mango</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="5" Grid.Row="2" Text="{Binding Path=Mango}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="0">ICQ Name</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="0" Text="{Binding Path=IcqName}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="1">ICQ Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="1" Text="{Binding Path=IcqPass}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="6" Grid.Row="2">Gmail</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="7" Grid.Row="2" Text="{Binding Path=Gmail}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="0">Skype Name</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="0" Text="{Binding Path=SkypeName}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="1">Skype Pass</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="1" Text="{Binding Path=SkypeName}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="8" Grid.Row="2">Моб тел</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="9" Grid.Row="2" Text="{Binding Path=MobileTel }"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="3">Комментарий</TextBlock>
-                <TextBox Padding="2" Margin="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Text="{Binding Path=Comments}"></TextBox>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="4"></TextBlock>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4">
-                    <TextBlock Text="{Binding Path=Pos.Name}"></TextBlock>
-                    <Button x:Name="SetPosbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetPos, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+            <WrapPanel  DataContext="{Binding ElementName=Grid, Path=SelectedItem}">
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Фамилия</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=LastName}"></TextBox>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Column="4" Grid.Row="4"></TextBlock>
-                <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.ColumnSpan="3" Grid.Row="4" >
-                    <TextBlock Text="{Binding Path=Dep.Name}"></TextBlock>
-                    <Button x:Name="SetDepbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDep, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Имя</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Name}"></TextBox>
                 </StackPanel>
-                <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Right" Padding="5" Grid.Column="0" Grid.Row="5">Скрыть в справочнике</TextBlock>
-                <CheckBox Grid.Column="3" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
-            </Grid>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Отчеставо</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=SName}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Domain Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=DomainPass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Email</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Email}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Email Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=EmailPass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">ERoom Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=ERoomPass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">TCrypt Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=TrueCryptPass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Mango</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Mango}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">ICQ Name</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=IcqName}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">ICQ Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=IcqPass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Gmail</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Gmail}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Skype Name</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=SkypeName}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Skype Pass</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=SkypePass}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Вн. тел</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=InternalTel}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Моб тел</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=MobileTel}"></TextBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Должность</TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Pos.Name,Mode=OneWay}"></TextBox>
+                        <Button x:Name="SetPosbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetPos, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Отдел</TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Dep.Name,Mode=OneWay}"></TextBox>
+                        <Button x:Name="SetDepbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDep, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}" VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <TextBlock FontSize="10" Margin="5,0,0,5"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Скрыть в справочнике</TextBlock>
+                    <CheckBox Grid.Column="3"  Margin="5,0,0,5" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
+                </StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Комментарий</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Comments}"></TextBox>
+                </StackPanel>
+            </WrapPanel>
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button Height="31" Width="100" HorizontalAlignment="Right" Command="{Binding Back}"  Visibility="{Binding SelectionMode, Converter={StaticResource BooleanToVisibilityConverter}}">Назад</Button>            
             <Button x:Name="Savebutton"  Content="Сохранить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Save}"/>
             <Button x:Name="Newbutton" Content="Создать" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Add}"/>
-            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
-            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=empGrid, Path=SelectedItem}"/>
+            <Button x:Name="Deletebutton" Content="Удалить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Delete}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
+            <Button x:Name="Cancelbutton" Content="Отменить" HorizontalAlignment="Left" Height="31" Width="100" Command="{Binding Cancel}" CommandParameter= "{Binding ElementName=Grid, Path=SelectedItem}"/>
             
         </StackPanel>
 
