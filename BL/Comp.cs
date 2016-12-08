@@ -7,9 +7,22 @@ using System.ComponentModel;
 
 namespace BL
 {
+    public enum CompType { Desktop, Notebook};
     public class Comp: INotifyPropertyChanged
     {
         public int Id { get; set; }
+
+        private CompType _compType;
+        public CompType CompType
+        {
+            get { return _compType; }
+            set
+            {
+                _compType = value;
+                OnPropertyChanged("CompType");
+            }
+        }
+
 
         string _netName;
         public string NetName

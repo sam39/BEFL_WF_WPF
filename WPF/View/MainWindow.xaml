@@ -23,7 +23,6 @@
                 <Button Margin="5,1,5,1" x:Name="btnSettings" Content="Настройки" Click="btnSettings_Click"/>
             </StackPanel>
         </ScrollViewer>
-
         <Frame Padding="0,0,0,0" NavigationUIVisibility="Hidden"  x:Name="MainFrame" Grid.Column="1" Background="#CCCCCC"/>
     </Grid>
 </Window>
