@@ -191,44 +191,7 @@ namespace WPF.View
 
             Messenger.Default.Send<PageMessage>
                 (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.comps) });
-
-
-
-            //ConnectionOptions options = new ConnectionOptions();
-            //options.Username = "BEFL\\god";
-            //options.Password = "Yt<jubUjhirbJ,;buf.n!";
-
-            //ManagementScope scope =
-            //new ManagementScope(
-            //"\\\\MAYZNER\\root\\CIMV2", options);
-            //scope.Connect();
-
-            //ObjectQuery query = new ObjectQuery(
-            //           "SELECT * FROM Win32_Processor");
-            //ManagementObjectSearcher searcher8 =
-            //    new ManagementObjectSearcher(scope, query);
-
-            //foreach (ManagementObject queryObj in searcher8.Get())
-            //{
-            //    Console.WriteLine("------------- Win32_Processor instance ---------------");
-            //    Console.WriteLine("Name: {0}", queryObj["Name"]);
-            //    Console.WriteLine("NumberOfCores: {0}", queryObj["NumberOfCores"]);
-            //    Console.WriteLine("ProcessorId: {0}", queryObj["ProcessorId"]);
-            //}
-
-            //ObjectQuery query1 = new ObjectQuery(
-            //           "SELECT * FROM Win32_PhysicalMemory");
-            //ManagementObjectSearcher searcher9 =
-            // new ManagementObjectSearcher(scope, query1);
-
-            //Console.WriteLine("------------- Win32_PhysicalMemory instance --------");
-            //foreach (ManagementObject queryObj in searcher9.Get())
-            //{
-            //    Console.WriteLine("BankLabel: {0} ; Capacity: {1} Gb; Speed: {2} ", queryObj["BankLabel"],
-            //                      Math.Round(System.Convert.ToDouble(queryObj["Capacity"]) / 1024 / 1024 / 1024, 2),
-            //                       queryObj["Speed"]);
-            //}
-                        
+       
         }
          
 
@@ -243,6 +206,13 @@ namespace WPF.View
         {
             Messenger.Default.Send<PageMessage>
                 (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.poss) });
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            View.settings view = new settings();
+            //view.DataContext = new ViewModels.settingsViewModel();
+            MainFrame.Navigate(view);           
         }
     }
 }

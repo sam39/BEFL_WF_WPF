@@ -88,11 +88,13 @@
     <Compile Include="Convertors.cs" />
     <Compile Include="Infrastrucrure\PageMessage.cs" />
     <Compile Include="Infrastrucrure\RelayCommand.cs" />
+    <Compile Include="Infrastrucrure\Settings.cs" />
     <Compile Include="ViewModels\compsViewModel.cs" />
     <Compile Include="ViewModels\depsViewModel.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\possViewModel.cs" />
+    <Compile Include="ViewModels\settingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -116,6 +118,9 @@
     </Compile>
     <Compile Include="View\poss.xaml.cs">
       <DependentUpon>poss.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\settings.xaml.cs">
+      <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
     <Page Include="View\comps.xaml">
       <SubType>Designer</SubType>
@@ -154,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\poss.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -88,9 +88,12 @@ namespace WPF.ViewModels
             BL.Comp comp = Selected as BL.Comp;
             if (comp != null)
             {
+                Infrastrucrure.Settings settings = Settings.read();
                 ConnectionOptions options = new ConnectionOptions();
-                options.Username = "BEFL\\god";
-                options.Password = "Yt<jubUjhirbJ,;buf.n!";
+                //options.Username = "BEFL\\god";
+                //options.Password = "Yt<jubUjhirbJ,;buf.n!";
+                options.Username = settings.LoginAdminWS;
+                options.Password = settings.PassAdminWS;
                 string path = "\\\\" + comp.NetName + "\\root\\CIMV2";
 
                 ManagementScope scope =

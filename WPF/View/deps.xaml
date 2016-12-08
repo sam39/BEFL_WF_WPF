@@ -10,6 +10,9 @@
 
     <Page.Resources>
         <root:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="SP_Controls">
+            <Setter Property="Control.Margin" Value="1,3,1,3"></Setter>
+        </Style>
     </Page.Resources>
 
     <Grid ShowGridLines="True">
@@ -44,9 +47,9 @@
 
         <Border Grid.Row="2" x:Name="EditForm" Visibility="{Binding EditMode, Converter={StaticResource BooleanToVisibilityConverter}}">
             <WrapPanel  DataContext="{Binding ElementName=Grid, Path=SelectedItem}">
-                <StackPanel>
+                <StackPanel Style="{StaticResource SP_Controls}">
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Нименование</TextBlock>
-                    <TextBox Padding="1" Width="130" Margin="5,0,0,0" Text="{Binding Path=Name}"></TextBox>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Name}"></TextBox>
                 </StackPanel>
             </WrapPanel>
         </Border>
