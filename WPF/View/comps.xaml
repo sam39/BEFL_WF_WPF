@@ -39,6 +39,8 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Binding="{Binding NetName}" Header="NetName" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding CompType.Name}" Header="Тип" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding Emp.FIO}" Header="Пользователь" Width="Auto" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -77,12 +79,24 @@
                     <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=OS}"></TextBox>
                 </StackPanel>
                 <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Монитор</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Monitor}"></TextBox>
+                </StackPanel>                
+                <StackPanel>
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Пользователь</TextBlock>
                     <StackPanel Orientation="Horizontal" >
                             <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Emp.FIO,Mode=OneWay}"></TextBox>
                             <Button x:Name="SetEmpbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetEmp, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Тип</TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=CompType.Name,Mode=OneWay}"></TextBox>
+                        <Button x:Name="SetCompTypebutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetCompType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                    </StackPanel>
+                </StackPanel>
+
                 <StackPanel  VerticalAlignment="Bottom">
                     <Button Margin="5,5,5,0" Height="25" Content="SysInfo" Width="90"  Command="{Binding DataContext.SysInfoUpdate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"></Button>
                 </StackPanel>

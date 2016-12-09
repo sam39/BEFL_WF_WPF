@@ -7,19 +7,27 @@ using System.ComponentModel;
 
 namespace BL
 {
-    public enum CompType { Desktop, Notebook};
     public class Comp: INotifyPropertyChanged
     {
         public int Id { get; set; }
 
         private CompType _compType;
-        public CompType CompType
+        public virtual CompType CompType
         {
             get { return _compType; }
             set
             {
                 _compType = value;
                 OnPropertyChanged("CompType");
+            }
+        }
+
+        public string CompTypeName
+        {
+            get
+            {
+                if (_compType != null) return _compType.Name;
+                else return string.Empty;
             }
         }
 
@@ -50,7 +58,6 @@ namespace BL
             {
                 _cpuName = value;
                 OnPropertyChanged("CpuName");
-
             }
         }
 
@@ -137,6 +144,16 @@ namespace BL
             }
         }
 
+        private string _monitor;
+        public string Monitor
+        {
+            get { return _monitor; }
+            set
+            {
+                _monitor = value;
+                OnPropertyChanged("Monitor");
+            }
+        }
 
         private Emp _emp;
         public virtual Emp Emp
@@ -146,6 +163,15 @@ namespace BL
             {
                 _emp = value;
                 OnPropertyChanged("Emp");
+            }
+        }
+
+        public string EmpLastName
+        {
+            get
+            {
+                if (Emp != null) return Emp.LastName;
+                else return string.Empty;
             }
         }
 

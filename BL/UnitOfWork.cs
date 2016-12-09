@@ -15,7 +15,8 @@ namespace BL
         private GenericRepository<Pos> posRepository;
         private GenericRepository<Dep> depRepository;
         private GenericRepository<Comp> compRepository;
-              
+        private GenericRepository<CompType> compTypeRepository;
+        private GenericRepository<Monitor> monitorRepository;
 
         // Возвращает репозитроий требуемого типа
         public GenericRepository<T> Repository<T>() where T : class
@@ -26,10 +27,35 @@ namespace BL
             else if (tt == typeof(BL.Pos)) return PosRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Dep)) return DivisionRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Comp)) return CompRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.CompType)) return CompTypeRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
             else return null;
         }
 
+        public GenericRepository<Monitor> MonitorRepository
+        {
+            get
+            {
+                if (this.monitorRepository == null)
+                {
+                    this.monitorRepository = new GenericRepository<Monitor>(context);
+                }
+                return monitorRepository;
+            }
+        }
 
+        public GenericRepository<CompType> CompTypeRepository
+        {
+            get
+            {
+
+                if (this.compTypeRepository == null)
+                {
+                    this.compTypeRepository = new GenericRepository<CompType>(context);
+                }
+                return compTypeRepository;
+            }
+        }
 
         public GenericRepository<Pos> PosRepository
         {

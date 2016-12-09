@@ -59,6 +59,18 @@ namespace WPF.View
                 vm = new ViewModels.possViewModel();
             }
 
+            if (mess.PageType == typeof(View.monitor))
+            {
+                v = new View.monitor();
+                vm = new ViewModels.monitorViewModel();
+            }
+
+            if (mess.PageType == typeof(ViewModels.comptypeViewModel))
+            {
+                v = new View.dicdata();
+                vm = new ViewModels.comptypeViewModel();
+            }
+
             v.DataContext = vm;
 
             if (mess.Action == Infrastrucrure.MessageAction.Select)
@@ -116,6 +128,16 @@ namespace WPF.View
         {
             View.settings view = new settings();
             MainFrame.Navigate(view);           
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.monitor) });
+
+            //View.dicdata  view = new dicdata();
+            //view.DataContext = new ViewModels.comptypeViewModel();
+            //MainFrame.Navigate(view);
         }
     }
 }

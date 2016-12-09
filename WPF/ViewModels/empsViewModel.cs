@@ -25,7 +25,14 @@ namespace WPF.ViewModels
         {
             BL.Emp emp = item as BL.Emp;
             bool result = true;
-            if (!string.IsNullOrWhiteSpace(FindText) && !(emp.LastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.Name ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.SName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.PosName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.DepName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.MobileTel ?? string.Empty).ToLower().Contains(FindText.ToLower()) && !(emp.InternalTel ?? string.Empty).ToLower().Contains(FindText.ToLower()))
+            if (!string.IsNullOrWhiteSpace(FindText) && 
+                !(emp.LastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.Name ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.SName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.PosName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.DepName ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.MobileTel ?? string.Empty).ToLower().Contains(FindText.ToLower()) && 
+                !(emp.InternalTel ?? string.Empty).ToLower().Contains(FindText.ToLower()))
             {
                 result = false;
             }
@@ -147,7 +154,6 @@ namespace WPF.ViewModels
                     result = true;
             }
             return result;
-
         }
 
         protected override void OnDispose()

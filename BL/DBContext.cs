@@ -25,6 +25,7 @@ namespace BL
         public virtual DbSet<BL.Pos> Poss { get; set; }
         public virtual DbSet<BL.Dep> Deps { get; set; }
         public virtual DbSet<BL.Comp> Comps { get; set; }
+        public virtual DbSet<BL.Monitor> Monitors {get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

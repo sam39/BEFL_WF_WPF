@@ -18,6 +18,8 @@ namespace WPF.ViewModels
             bool result = true;
             if (!string.IsNullOrWhiteSpace(FindText) &&
                 !(comp.NetName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
+                !(comp.CompTypeName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
+                !(comp.EmpLastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
                 !(comp.Id.ToString() ?? string.Empty).ToLower().Contains(FindText.ToLower())
                 )
             {
@@ -26,6 +28,7 @@ namespace WPF.ViewModels
             return result;
         }
 
+        #region Команды
         #region Выбор пользователя
         RelayCommand _setEmp;
         public ICommand SetEmp
@@ -70,6 +73,48 @@ namespace WPF.ViewModels
         }
         #endregion Выбор пользователя
 
+        #region Выбор Типа
+        RelayCommand _setCompType;
+        public ICommand SetCompType
+        {
+            get
+            {
+                if (_setCompType == null)
+                    _setCompType = new RelayCommand(ExecuteSetCompTypeCommand, CanExecuteSetCompTypeCommand);
+                return _setCompType;
+            }
+        }
+
+        public void ExecuteSetCompTypeCommand(object parameter)
+        {
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Select, PageType = typeof(ViewModels.comptypeViewModel) });
+
+            Messenger.Default.Register(this, new Action<BL.CompType>(SetCompTypeForCurrentEmp));
+        }
+
+        private void SetCompTypeForCurrentEmp(BL.CompType type)
+        {
+            if (Selected != null)
+            {
+                if (type != null)
+                {
+                    BL.Comp comp = Selected as BL.Comp;
+                    //Получаем объект из локального репозитория
+                    BL.CompType comptype_local = UoW.CompTypeRepository.GetByID(type.Id);
+                    comp.CompType = comptype_local;
+                }
+                //Отписываемся от сообщения
+                Messenger.Default.Unregister(this, new Action<BL.CompType>(SetCompTypeForCurrentEmp));
+            }
+        }
+
+        public bool CanExecuteSetCompTypeCommand(object parametr)
+        {
+            if (EditMode) return true;
+            else return false;
+        }
+        #endregion Выбор Типа
 
         #region SysInfoUpdate
         RelayCommand _sysInfpUpdate;
@@ -90,8 +135,6 @@ namespace WPF.ViewModels
             {
                 Infrastrucrure.Settings settings = Settings.read();
                 ConnectionOptions options = new ConnectionOptions();
-                //options.Username = "BEFL\\god";
-                //options.Password = "Yt<jubUjhirbJ,;buf.n!";
                 options.Username = settings.LoginAdminWS;
                 options.Password = settings.PassAdminWS;
                 string path = "\\\\" + comp.NetName + "\\root\\CIMV2";
@@ -110,6 +153,7 @@ namespace WPF.ViewModels
                     comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
                     comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
                     comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
+                    comp.Monitor = getWmiProp("Win32_Desktopmonitor", new string[] { "Caption", "ScreenWidth", "ScreenHeight" }, scope);
                 }
                 catch
                 {
@@ -147,6 +191,22 @@ namespace WPF.ViewModels
             else return false;
         }
         #endregion SysInfoUpdate
+
+        #endregion Команды
+
+        public override bool CanExecuteSaveCommand(object parametr)
+        {
+            bool result = false;
+            if (Selected != null)
+            {
+                if (EditMode && (Selected as BL.Comp).CompType != null)
+                    result = true;
+            }
+            return result;
+        }
+
+
+
 
 
     }

@@ -90,11 +90,12 @@
     <Compile Include="Infrastrucrure\RelayCommand.cs" />
     <Compile Include="Infrastrucrure\Settings.cs" />
     <Compile Include="ViewModels\compsViewModel.cs" />
+    <Compile Include="ViewModels\comptypeViewModel.cs" />
     <Compile Include="ViewModels\depsViewModel.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\monitorViewModel.cs" />
     <Compile Include="ViewModels\possViewModel.cs" />
-    <Compile Include="ViewModels\settingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -104,8 +105,14 @@
     <Compile Include="View\deps.xaml.cs">
       <DependentUpon>deps.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\dicdata.xaml.cs">
+      <DependentUpon>dicdata.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\monitor.xaml.cs">
+      <DependentUpon>monitor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
@@ -130,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\dicdata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\emps.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,6 +154,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\monitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
