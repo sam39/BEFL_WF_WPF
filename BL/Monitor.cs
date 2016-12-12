@@ -25,7 +25,10 @@ namespace BL
         {
             get
             {
-                return _model + " " + _diazonal.Name;
+                string result = string.Empty;
+                if (_model != null) result += _model;
+                if (_diazonal != null) result += " " + _diazonal;
+                return result;
             }
         }
 
@@ -67,7 +70,6 @@ namespace BL
                 else return string.Empty;
             }
         }
-
 
         private string _comment;
         public string Comment
