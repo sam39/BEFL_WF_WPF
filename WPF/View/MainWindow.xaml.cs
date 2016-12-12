@@ -29,6 +29,16 @@ namespace WPF.View
             Messenger.Default.Register(this, new Action<Page>(Navigate));
             Messenger.Default.Register(this, new Action<string>(Back));
             Messenger.Default.Register(this, new Action<Infrastrucrure.PageMessage>(navigateToPage));
+            Messenger.Default.Register(this, new Action<BL.Dic>(SelectFromDic));
+        }
+
+        private void SelectFromDic(BL.Dic dic)
+        {
+            Page v = new View.dicdata();
+            ViewModels.dicdataViewModel vm = new ViewModels.dicdataViewModel(dic.Id);
+            vm.SelectionMode = true;
+            v.DataContext = vm;
+            MainFrame.Navigate(v);
         }
 
         private void navigateToPage(Infrastrucrure.PageMessage mess)
@@ -65,11 +75,11 @@ namespace WPF.View
                 vm = new ViewModels.monitorViewModel();
             }
 
-            if (mess.PageType == typeof(ViewModels.comptypeViewModel))
-            {
-                v = new View.dicdata();
-                vm = new ViewModels.comptypeViewModel();
-            }
+            //if (mess.PageType == typeof(ViewModels.comptypeViewModel))
+            //{
+            //    v = new View.dicdata();
+            //    vm = new ViewModels.comptypeViewModel();
+            //}
 
             v.DataContext = vm;
 

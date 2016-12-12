@@ -22,7 +22,7 @@ namespace WFAdmin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //System.Data.Entity.Database.SetInitializer(new dbInit());
+            System.Data.Entity.Database.SetInitializer(new dbInit());
             frmMain form = new frmMain();
             PresenterMain presenter = new PresenterMain(form);
             Application.Run(form);

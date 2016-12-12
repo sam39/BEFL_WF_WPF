@@ -73,26 +73,27 @@ namespace WPF.ViewModels
         #endregion Выбор пользователя
 
         #region Выбор Диагонали
-        RelayCommand _setCompType;
-        public ICommand SetCompType
+        RelayCommand _setDiagonal;
+        public ICommand SetDiagonal
         {
             get
             {
-                if (_setCompType == null)
-                    _setCompType = new RelayCommand(ExecuteSetCompTypeCommand, CanExecuteSetCompTypeCommand);
-                return _setCompType;
+                if (_setDiagonal == null)
+                    _setDiagonal = new RelayCommand(ExecuteSetCompTypeCommand, CanExecuteSetCompTypeCommand);
+                return _setDiagonal;
             }
         }
 
         public void ExecuteSetCompTypeCommand(object parameter)
         {
-            Messenger.Default.Send<PageMessage>
-                (new PageMessage { Action = MessageAction.Select, PageType = typeof(ViewModels.comptypeViewModel) });
+            BL.Dic dic = UoW.DicRepository.Get(m => m.Name == "ДиагональЭкрана").FirstOrDefault();
+            if (dic != null)
+                Messenger.Default.Send<BL.Dic>(dic);
 
-            Messenger.Default.Register(this, new Action<BL.CompType>(SetDiagonal));
+            Messenger.Default.Register(this, new Action<BL.DicData>(setDiagonal));
         }
 
-        private void SetDiagonal(BL.DicData dd)
+        private void setDiagonal(BL.DicData dd)
         {
             if (Selected != null)
             {
@@ -100,11 +101,11 @@ namespace WPF.ViewModels
                 {
                     BL.Monitor monitor = Selected as BL.Monitor;
                     //Получаем объект из локального репозитория
-                    BL.DicData diag_local = UoW.CompTypeRepository.GetByID(dd.Id);
+                    BL.DicData diag_local = UoW.DicDataRepository.GetByID(dd.Id);
                     monitor.Diagonal = diag_local;
                 }
                 //Отписываемся от сообщения
-                Messenger.Default.Unregister(this, new Action<BL.CompType>(SetDiagonal));
+                Messenger.Default.Unregister(this, new Action<BL.DicData>(setDiagonal));
             }
         }
 

@@ -87,25 +87,32 @@ namespace WPF.ViewModels
 
         public void ExecuteSetCompTypeCommand(object parameter)
         {
-            Messenger.Default.Send<PageMessage>
-                (new PageMessage { Action = MessageAction.Select, PageType = typeof(ViewModels.comptypeViewModel) });
+            Messenger.Default.Send<>
+                (new PageMessage {Action = MessageAction.Select, PageType = typeof(ViewModels.dicdataViewModel)});
 
-            Messenger.Default.Register(this, new Action<BL.CompType>(SetCompTypeForCurrentEmp));
+            Messenger.Default.Register(this, new Action<BL.DicData>(SetDD));
         }
 
-        private void SetCompTypeForCurrentEmp(BL.CompType type)
+        private void SetDD(BL.DicData dd)
         {
             if (Selected != null)
             {
-                if (type != null)
+                if (dd != null)
                 {
-                    BL.Comp comp = Selected as BL.Comp;
-                    //Получаем объект из локального репозитория
-                    BL.CompType comptype_local = UoW.CompTypeRepository.GetByID(type.Id);
-                    comp.CompType = comptype_local;
+                    switch (dd.Dic.Name)
+                    {
+                        case "ТипСистемы" :
+                            BL.Comp comp = Selected as BL.Comp;
+                            //Получаем объект из локального репозитория
+                            BL.DicData dd_local = UoW.DicDataRepository.GetByID(dd.Id);
+                            comp.CompType = dd_local;
+                            break;                      
+                        default:
+                            break;
+                    }
                 }
                 //Отписываемся от сообщения
-                Messenger.Default.Unregister(this, new Action<BL.CompType>(SetCompTypeForCurrentEmp));
+                Messenger.Default.Unregister(this, new Action<BL.DicData>(SetDD));
             }
         }
 

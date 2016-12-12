@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+
 namespace BL
 {
-    public class DicData : INotifyPropertyChanged
+    public class Dic: INotifyPropertyChanged
     {
         private int _id;
         public int Id
@@ -29,18 +30,6 @@ namespace BL
                 OnPropertyChanged("Name");
             }
         }
-
-        private Dic _dic;
-        public virtual Dic Dic
-        {
-            get { return _dic; }
-            set
-            {
-                _dic = value;
-                OnPropertyChanged("Dic");
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

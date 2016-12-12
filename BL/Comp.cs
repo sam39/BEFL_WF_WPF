@@ -11,8 +11,8 @@ namespace BL
     {
         public int Id { get; set; }
 
-        private CompType _compType;
-        public virtual CompType CompType
+        private DicData _compType;
+        public virtual DicData CompType
         {
             get { return _compType; }
             set

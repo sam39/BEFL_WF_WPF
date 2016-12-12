@@ -50,26 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comp.cs" />
-    <Compile Include="CompType.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Dep.cs" />
+    <Compile Include="Dic.cs" />
     <Compile Include="DicData.cs" />
     <Compile Include="Emp.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Mc.cs" />
-    <Compile Include="Migrations\201612031838423_CompProps.cs" />
-    <Compile Include="Migrations\201612031838423_CompProps.Designer.cs">
-      <DependentUpon>201612031838423_CompProps.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612061148407_NewCOmpAttr.cs" />
-    <Compile Include="Migrations\201612061148407_NewCOmpAttr.Designer.cs">
-      <DependentUpon>201612061148407_NewCOmpAttr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612090757519_DicData.cs" />
-    <Compile Include="Migrations\201612090757519_DicData.Designer.cs">
-      <DependentUpon>201612090757519_DicData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="Pos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,17 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612031838423_CompProps.resx">
-      <DependentUpon>201612031838423_CompProps.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612061148407_NewCOmpAttr.resx">
-      <DependentUpon>201612061148407_NewCOmpAttr.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612090757519_DicData.resx">
-      <DependentUpon>201612090757519_DicData.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

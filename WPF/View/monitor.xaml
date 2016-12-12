@@ -61,7 +61,7 @@
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Диагональ</TextBlock>
                     <StackPanel Orientation="Horizontal" >
                         <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Diagonal.Name,Mode=OneWay}"></TextBox>
-                        <Button x:Name="SetDiagbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDiag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
+                        <Button x:Name="SetDiagbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDiagonal, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>
             </WrapPanel>

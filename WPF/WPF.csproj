@@ -90,7 +90,6 @@
     <Compile Include="Infrastrucrure\RelayCommand.cs" />
     <Compile Include="Infrastrucrure\Settings.cs" />
     <Compile Include="ViewModels\compsViewModel.cs" />
-    <Compile Include="ViewModels\comptypeViewModel.cs" />
     <Compile Include="ViewModels\depsViewModel.cs" />
     <Compile Include="ViewModels\dicdataViewModel.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />

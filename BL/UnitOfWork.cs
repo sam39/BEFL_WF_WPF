@@ -15,8 +15,10 @@ namespace BL
         private GenericRepository<Pos> posRepository;
         private GenericRepository<Dep> depRepository;
         private GenericRepository<Comp> compRepository;
-        private GenericRepository<CompType> compTypeRepository;
+        //private GenericRepository<CompType> compTypeRepository;
         private GenericRepository<Monitor> monitorRepository;
+        private GenericRepository<Dic> dicRepository;
+        private GenericRepository<DicData> dicdataRepository;
 
         // Возвращает репозитроий требуемого типа
         public GenericRepository<T> Repository<T>() where T : class
@@ -27,9 +29,36 @@ namespace BL
             else if (tt == typeof(BL.Pos)) return PosRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Dep)) return DivisionRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Comp)) return CompRepository as GenericRepository<T>;
-            else if (tt == typeof(BL.CompType)) return CompTypeRepository as GenericRepository<T>;
+            //else if (tt == typeof(BL.CompType)) return CompTypeRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.DicData)) return DicDataRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Dic)) return DicRepository as GenericRepository<T>;
             else return null;
+        }
+
+
+        public GenericRepository<Dic> DicRepository
+        {
+            get
+            {
+                if (this.dicRepository == null)
+                {
+                    this.dicRepository = new GenericRepository<Dic>(context);
+                }
+                return dicRepository;
+            }
+        }
+
+        public GenericRepository<DicData> DicDataRepository
+        {
+            get
+            {
+                if (this.dicdataRepository == null)
+                {
+                    this.dicdataRepository = new GenericRepository<DicData>(context);
+                }
+                return dicdataRepository;
+            }
         }
 
         public GenericRepository<Monitor> MonitorRepository
@@ -44,18 +73,18 @@ namespace BL
             }
         }
 
-        public GenericRepository<CompType> CompTypeRepository
-        {
-            get
-            {
+        //public GenericRepository<CompType> CompTypeRepository
+        //{
+        //    get
+        //    {
 
-                if (this.compTypeRepository == null)
-                {
-                    this.compTypeRepository = new GenericRepository<CompType>(context);
-                }
-                return compTypeRepository;
-            }
-        }
+        //        if (this.compTypeRepository == null)
+        //        {
+        //            this.compTypeRepository = new GenericRepository<CompType>(context);
+        //        }
+        //        return compTypeRepository;
+        //    }
+        //}
 
         public GenericRepository<Pos> PosRepository
         {
@@ -116,7 +145,6 @@ namespace BL
         }
 
         private bool disposed = false;
-
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
