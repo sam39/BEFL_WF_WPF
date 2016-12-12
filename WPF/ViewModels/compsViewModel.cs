@@ -87,8 +87,7 @@ namespace WPF.ViewModels
 
         public void ExecuteSetCompTypeCommand(object parameter)
         {
-            Messenger.Default.Send<>
-                (new PageMessage {Action = MessageAction.Select, PageType = typeof(ViewModels.dicdataViewModel)});
+            Messenger.Default.Send<BL.Dic>(BL.Dic.ТипСистемы);
 
             Messenger.Default.Register(this, new Action<BL.DicData>(SetDD));
         }
@@ -99,16 +98,13 @@ namespace WPF.ViewModels
             {
                 if (dd != null)
                 {
-                    switch (dd.Dic.Name)
+
+                    if (dd.Dic == BL.Dic.ТипСистемы)
                     {
-                        case "ТипСистемы" :
                             BL.Comp comp = Selected as BL.Comp;
                             //Получаем объект из локального репозитория
                             BL.DicData dd_local = UoW.DicDataRepository.GetByID(dd.Id);
                             comp.CompType = dd_local;
-                            break;                      
-                        default:
-                            break;
                     }
                 }
                 //Отписываемся от сообщения

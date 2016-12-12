@@ -17,7 +17,6 @@ namespace BL
         private GenericRepository<Comp> compRepository;
         //private GenericRepository<CompType> compTypeRepository;
         private GenericRepository<Monitor> monitorRepository;
-        private GenericRepository<Dic> dicRepository;
         private GenericRepository<DicData> dicdataRepository;
 
         // Возвращает репозитроий требуемого типа
@@ -32,22 +31,10 @@ namespace BL
             //else if (tt == typeof(BL.CompType)) return CompTypeRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
             else if (tt == typeof(BL.DicData)) return DicDataRepository as GenericRepository<T>;
-            else if (tt == typeof(BL.Dic)) return DicRepository as GenericRepository<T>;
             else return null;
         }
 
 
-        public GenericRepository<Dic> DicRepository
-        {
-            get
-            {
-                if (this.dicRepository == null)
-                {
-                    this.dicRepository = new GenericRepository<Dic>(context);
-                }
-                return dicRepository;
-            }
-        }
 
         public GenericRepository<DicData> DicDataRepository
         {
@@ -73,18 +60,6 @@ namespace BL
             }
         }
 
-        //public GenericRepository<CompType> CompTypeRepository
-        //{
-        //    get
-        //    {
-
-        //        if (this.compTypeRepository == null)
-        //        {
-        //            this.compTypeRepository = new GenericRepository<CompType>(context);
-        //        }
-        //        return compTypeRepository;
-        //    }
-        //}
 
         public GenericRepository<Pos> PosRepository
         {

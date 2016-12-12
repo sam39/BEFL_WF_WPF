@@ -86,9 +86,7 @@ namespace WPF.ViewModels
 
         public void ExecuteSetCompTypeCommand(object parameter)
         {
-            BL.Dic dic = UoW.DicRepository.Get(m => m.Name == "ДиагональЭкрана").FirstOrDefault();
-            if (dic != null)
-                Messenger.Default.Send<BL.Dic>(dic);
+            Messenger.Default.Send<BL.Dic>(BL.Dic.ДиагональЭкрана);
 
             Messenger.Default.Register(this, new Action<BL.DicData>(setDiagonal));
         }

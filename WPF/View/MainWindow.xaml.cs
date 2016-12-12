@@ -35,7 +35,7 @@ namespace WPF.View
         private void SelectFromDic(BL.Dic dic)
         {
             Page v = new View.dicdata();
-            ViewModels.dicdataViewModel vm = new ViewModels.dicdataViewModel(dic.Id);
+            ViewModels.dicdataViewModel vm = new ViewModels.dicdataViewModel(dic);
             vm.SelectionMode = true;
             v.DataContext = vm;
             MainFrame.Navigate(v);

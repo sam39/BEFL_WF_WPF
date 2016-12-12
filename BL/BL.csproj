@@ -52,11 +52,19 @@
     <Compile Include="Comp.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Dep.cs" />
-    <Compile Include="Dic.cs" />
     <Compile Include="DicData.cs" />
     <Compile Include="Emp.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Mc.cs" />
+    <Compile Include="Migrations\201612121207280_InitialCreate.cs" />
+    <Compile Include="Migrations\201612121207280_InitialCreate.Designer.cs">
+      <DependentUpon>201612121207280_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612121255236_DicEnum.cs" />
+    <Compile Include="Migrations\201612121255236_DicEnum.Designer.cs">
+      <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="Pos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +73,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612121207280_InitialCreate.resx">
+      <DependentUpon>201612121207280_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121255236_DicEnum.resx">
+      <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 namespace BL
 {
+    public enum Dic {ДиагональЭкрана = 1, ТипСистемы};
+
     public class DicData : INotifyPropertyChanged
     {
         private int _id;

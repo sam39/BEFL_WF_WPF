@@ -27,7 +27,6 @@ namespace BL
         public virtual DbSet<BL.Comp> Comps { get; set; }
         public virtual DbSet<BL.Monitor> Monitors {get; set;}
         public virtual DbSet<BL.DicData> DicDatas { get; set;}
-        public virtual DbSet<BL.Dic> Dics { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -14,11 +14,11 @@ namespace WPF.ViewModels
 {
     public class dicdataViewModel: IDisposable
     {
-        private int _currentDic;
+        private BL.Dic _currentDic;
 
-        public dicdataViewModel(int dicId)
+        public dicdataViewModel(BL.Dic dic)
         {
-            _currentDic = dicId;
+            _currentDic = dic;
         }
 
         protected BL.UnitOfWork UoW = new BL.UnitOfWork();
@@ -27,16 +27,13 @@ namespace WPF.ViewModels
         {
             BL.DicData dd = item as BL.DicData;
             bool result = true;
-            if (dd.Dic.Id != _currentDic) result = false;
-            //if (!string.IsNullOrWhiteSpace(FindText) &&
-            //    !(comp.NetName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
-            //    !(comp.CompTypeName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
-            //    !(comp.EmpLastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
-            //    !(comp.Id.ToString() ?? string.Empty).ToLower().Contains(FindText.ToLower())
-            //    )
-            //{
-            //    result = false;
-            //}
+
+            if (!string.IsNullOrWhiteSpace(FindText) &&
+                !(dd.Name ?? string.Empty).ToLower().Contains(FindText.ToLower())
+                )
+                result = false;
+
+            if (dd.Dic != _currentDic) result = false;
             return result;
         }
 
