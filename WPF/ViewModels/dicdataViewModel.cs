@@ -12,7 +12,7 @@ using System.ComponentModel;
 
 namespace WPF.ViewModels
 {
-    public class dicdataViewModel: IDisposable
+    public class dicdataViewModel: INotifyPropertyChanged, IDisposable, IViewModel
     {
         private BL.Dic _currentDic;
 
@@ -50,7 +50,7 @@ namespace WPF.ViewModels
             set
             {
                 _selectionMode = value;
-                //OnPropertyChanged("SelectionMode");
+                OnPropertyChanged("SelectionMode");
             }
         }
 
@@ -65,7 +65,7 @@ namespace WPF.ViewModels
             set
             {
                 _editMode = value;
-                //OnPropertyChanged("EditMode");
+                OnPropertyChanged("EditMode");
             }
         }
 
@@ -79,7 +79,7 @@ namespace WPF.ViewModels
             set
             {
                 _selected = value;
-                //OnPropertyChanged("Selected");
+                OnPropertyChanged("Selected");
             }
         }
 
@@ -133,12 +133,12 @@ namespace WPF.ViewModels
         public void ExecuteAddCommand(object parameter)
         {
             FindText = string.Empty;
-            //OnPropertyChanged("FindText");
-            BL.DicData entity = new BL.DicData();
+            OnPropertyChanged("FindText");
+            BL.DicData entity = new BL.DicData() { Dic = _currentDic};
             EntityList.Add(entity);
             //UoW.Repository<T>().Insert(entity);
             Selected = entity;
-            //OnPropertyChanged("Selected");
+            OnPropertyChanged("Selected");
             EditMode = true;
             _addNewMode = true;
         }
@@ -173,8 +173,8 @@ namespace WPF.ViewModels
             }
             else UoW.Repository<BL.DicData>().Reload(EntityToCancel);
             EditMode = false;
-            //OnPropertyChanged("EntityList");
-            //OnPropertyChanged("Selected");
+            OnPropertyChanged("EntityList");
+            OnPropertyChanged("Selected");
         }
 
         public bool CanExecuteCancelCommand(object parametr)
@@ -244,7 +244,7 @@ namespace WPF.ViewModels
             }
             UoW.Save();
             EditMode = false;
-            //OnPropertyChanged("Emps");
+            OnPropertyChanged("Emps");
         }
 
         public virtual bool CanExecuteSaveCommand(object parametr)
@@ -323,6 +323,16 @@ namespace WPF.ViewModels
         #endregion Команды
 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
 
         public void Dispose()

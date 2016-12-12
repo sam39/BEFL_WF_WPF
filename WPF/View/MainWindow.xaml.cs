@@ -142,12 +142,15 @@ namespace WPF.View
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
+            View.dicdata view = new dicdata();
+            view.DataContext = new ViewModels.dicdataViewModel(BL.Dic.ТипСистемы);
+            MainFrame.Navigate(view);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
             Messenger.Default.Send<PageMessage>
                 (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.monitor) });
-
-            //View.dicdata  view = new dicdata();
-            //view.DataContext = new ViewModels.comptypeViewModel();
-            //MainFrame.Navigate(view);
         }
     }
 }

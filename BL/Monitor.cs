@@ -44,7 +44,7 @@ namespace BL
         }
 
         private DicData _diazonal;
-        public DicData Diagonal
+        public virtual DicData Diagonal
         {
             get { return _diazonal; }
             set
@@ -59,14 +59,19 @@ namespace BL
         public virtual Emp Emp
         {
             get { return _emp; }
-            set { _emp = value; }
+            set
+            {
+                _emp = value;
+                OnPropertyChanged("Emp");
+                OnPropertyChanged("EmpFIO");
+            }
         }
 
-        public string EmpName
+        public string EmpFIO
         {
             get
             {
-                if (_emp != null) return _emp.Name;
+                if (_emp != null) return _emp.FIO;
                 else return string.Empty;
             }
         }

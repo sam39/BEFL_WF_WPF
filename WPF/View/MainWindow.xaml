@@ -16,7 +16,7 @@
             <StackPanel>
                 <Button Margin="5,1,5,1" Content="Сотрудники" Click="Button_Click" />
                 <Button Margin="5,1,5,1" Content="Компьютеры" Click="Button_Click_1" />
-                <Button Margin="5,1,5,1" Content="Мониторы" />
+                <Button Margin="5,1,5,1" Content="Мониторы" Click="Button_Click_2" />
                 <Button Margin="5,1,5,1" Content="Принтеры" />
                 <Button Margin="5,1,5,1" x:Name="btnDeps" Content="Отделы" Click="btnDeps_Click" />
                 <Button Margin="5,1,5,1" x:Name="btnPoss" Content="Должности" Click="btnPoss_Click" />
