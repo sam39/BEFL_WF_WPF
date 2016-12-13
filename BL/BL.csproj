@@ -64,7 +64,16 @@
     <Compile Include="Migrations\201612121255236_DicEnum.Designer.cs">
       <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612131246492_miscAdded.cs" />
+    <Compile Include="Migrations\201612131246492_miscAdded.Designer.cs">
+      <DependentUpon>201612131246492_miscAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612131252482_EmpForMisc.cs" />
+    <Compile Include="Migrations\201612131252482_EmpForMisc.Designer.cs">
+      <DependentUpon>201612131252482_EmpForMisc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Misc.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="Pos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +89,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612121255236_DicEnum.resx">
       <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131246492_miscAdded.resx">
+      <DependentUpon>201612131246492_miscAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612131252482_EmpForMisc.resx">
+      <DependentUpon>201612131252482_EmpForMisc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

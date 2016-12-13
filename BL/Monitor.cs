@@ -57,26 +57,26 @@ namespace BL
 
         }
 
-        private Emp _emp;
-        public virtual Emp Emp
-        {
-            get { return _emp; }
-            set
-            {
-                _emp = value;
-                OnPropertyChanged("Emp");
-                OnPropertyChanged("EmpFIO");
-            }
-        }
+        //private Emp _emp;
+        //public virtual Emp Emp
+        //{
+        //    get { return _emp; }
+        //    set
+        //    {
+        //        _emp = value;
+        //        OnPropertyChanged("Emp");
+        //        OnPropertyChanged("EmpFIO");
+        //    }
+        //}
 
-        public string EmpFIO
-        {
-            get
-            {
-                if (_emp != null) return _emp.FIO;
-                else return string.Empty;
-            }
-        }
+        //public string EmpFIO
+        //{
+        //    get
+        //    {
+        //        if (_emp != null) return _emp.FIO;
+        //        else return string.Empty;
+        //    }
+        //}
 
         private string _comment;
         public string Comment
@@ -89,11 +89,11 @@ namespace BL
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //protected virtual void OnPropertyChanged(string propertyName)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        //}
     }
 }

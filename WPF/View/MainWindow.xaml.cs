@@ -75,11 +75,11 @@ namespace WPF.View
                 vm = new ViewModels.monitorViewModel();
             }
 
-            //if (mess.PageType == typeof(ViewModels.comptypeViewModel))
-            //{
-            //    v = new View.dicdata();
-            //    vm = new ViewModels.comptypeViewModel();
-            //}
+            if (mess.PageType == typeof(View.misc))
+            {
+                v = new View.misc();
+                vm = new ViewModels.miscViewModel();
+            }
 
             v.DataContext = vm;
 
@@ -151,6 +151,19 @@ namespace WPF.View
         {           
             Messenger.Default.Send<PageMessage>
                 (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.monitor) });
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.misc)});
+        }
+
+        private void btnMc_Click(object sender, RoutedEventArgs e)
+        {
+            View.mc view = new View.mc();
+            view.DataContext = new ViewModels.mcViewModel();
+            MainFrame.Navigate(view);
         }
     }
 }

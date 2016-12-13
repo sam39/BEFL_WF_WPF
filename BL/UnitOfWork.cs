@@ -9,7 +9,6 @@ namespace BL
 {
     public class UnitOfWork : IDisposable
     {
-
         private DbContextBEFL context = new DbContextBEFL();
         private GenericRepository<Emp> empRepository;
         private GenericRepository<Pos> posRepository;
@@ -17,9 +16,8 @@ namespace BL
         private GenericRepository<Comp> compRepository;
         private GenericRepository<Monitor> monitorRepository;
         private GenericRepository<DicData> dicdataRepository;
-        private GenericRepository<Mc> mcRepository;
-
-
+        private GenericRepository<Misc> miscRepository;
+        
         // Возвращает репозитроий требуемого типа
         public GenericRepository<T> Repository<T>() where T : class
         {
@@ -31,20 +29,27 @@ namespace BL
             else if (tt == typeof(BL.Comp)) return CompRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
             else if (tt == typeof(BL.DicData)) return DicDataRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Misc)) return MiscRepository as GenericRepository<T>;
             else return null;
         }
 
+        public IEnumerable<BL.Mc> GetAllMc()
+        {
+            IEnumerable<BL.Mc> listMon = MonitorRepository.GetAll();
+            IEnumerable<BL.Mc> listMsc = MiscRepository.GetAll();
+            IEnumerable<BL.Mc> listAll = listMon.Concat(listMsc);
+            return listAll;
+        }
 
-
-        public GenericRepository<Mc> McRepository
+        public GenericRepository<Misc> MiscRepository
         {
             get
             {
-                if (this.mcRepository == null)
+                if (this.miscRepository == null)
                 {
-                    this.mcRepository = new GenericRepository<Mc>(context);
+                    this.miscRepository = new GenericRepository<Misc>(context);
                 }
-                return mcRepository;
+                return miscRepository;
             }
         }
 
@@ -124,7 +129,6 @@ namespace BL
             }
         }
 
-
         public void Save()
         {
             try
@@ -157,6 +161,5 @@ namespace BL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

@@ -94,6 +94,8 @@
     <Compile Include="ViewModels\dicdataViewModel.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\mcViewModel.cs" />
+    <Compile Include="ViewModels\miscViewModel.cs" />
     <Compile Include="ViewModels\monitorViewModel.cs" />
     <Compile Include="ViewModels\possViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -110,6 +112,12 @@
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\mc.xaml.cs">
+      <DependentUpon>mc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\misc.xaml.cs">
+      <DependentUpon>misc.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\monitor.xaml.cs">
       <DependentUpon>monitor.xaml</DependentUpon>
@@ -154,6 +162,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\mc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\misc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
