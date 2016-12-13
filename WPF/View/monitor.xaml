@@ -38,7 +38,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="NetName" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding Model, Mode=OneWay}" Header="Модель" Width="Auto" />
                     <DataGridTextColumn Binding="{Binding Emp.FIO, Mode=OneWay}" Header="Пользователь" Width="Auto" />
                 </DataGrid.Columns>
             </DataGrid>

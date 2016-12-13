@@ -27,7 +27,7 @@ namespace BL
             {
                 string result = string.Empty;
                 if (_model != null) result += _model;
-                if (_diazonal != null) result += " " + _diazonal;
+                if (_diazonal != null) result += " " + _diazonal.Name;
                 return result;
             }
         }
@@ -40,6 +40,7 @@ namespace BL
             {
                 _model = value;
                 OnPropertyChanged("Model");
+                OnPropertyChanged("Name");
             }
         }
 
@@ -51,6 +52,7 @@ namespace BL
             {
                 _diazonal = value;
                 OnPropertyChanged("Diagonal");
+                OnPropertyChanged("Name");
             }
 
         }

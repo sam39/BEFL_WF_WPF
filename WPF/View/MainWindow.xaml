@@ -21,7 +21,7 @@
                 <Button Margin="5,1,5,1" x:Name="btnDeps" Content="Отделы" Click="btnDeps_Click" />
                 <Button Margin="5,1,5,1" x:Name="btnPoss" Content="Должности" Click="btnPoss_Click" />
                 <Button Margin="5,1,5,1" x:Name="btnSettings" Content="Настройки" Click="btnSettings_Click"/>
-                <Button Margin="5,1,5,1" x:Name="btnTest" Content="Тест" Click="btnTest_Click"/>
+                <Button Margin="5,1,5,1" x:Name="btnTest" Content="Словари" Click="btnTest_Click"/>
             </StackPanel>
         </ScrollViewer>
         <Frame Padding="0,0,0,0" NavigationUIVisibility="Hidden"  x:Name="MainFrame" Grid.Column="1" Background="#CCCCCC"/>

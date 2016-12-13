@@ -15,6 +15,21 @@ namespace WPF.ViewModels
     public class dicdataViewModel: INotifyPropertyChanged, IDisposable, IViewModel
     {
         private BL.Dic _currentDic;
+        public BL.Dic CurrentDic
+        {
+            get
+            {
+                return _currentDic;
+            }
+            set
+            {
+                _currentDic = value;
+                OnPropertyChanged("CurrentDic");
+                _empCollectionView.Filter = null;
+                _empCollectionView.Filter = Filter;
+            }
+
+        }
 
         public dicdataViewModel(BL.Dic dic)
         {
@@ -51,6 +66,17 @@ namespace WPF.ViewModels
             {
                 _selectionMode = value;
                 OnPropertyChanged("SelectionMode");
+            }
+        }
+
+        //Включает возможность выбора словаря
+        public bool MultiDicMode
+        {
+            get
+            {
+                if (_selectionMode)
+                    return false;
+                else return true;
             }
         }
 
@@ -198,15 +224,25 @@ namespace WPF.ViewModels
 
         public void ExecuteDeleteCommand(object parameter)
         {
+            
+            //IEnumerable<BL.Mc> list = UoW.McRepository.GetAll();
+
             BL.DicData ToDel = parameter as BL.DicData;
             if (ToDel != null)
             {
+                try
+                {
+                    UoW.Repository<BL.DicData>().Delete(ToDel);
+                    UoW.Save();
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException)
+                {
+                    System.Windows.MessageBox.Show("У данного объекта существуют связи в БД","Ошибка удаления");
+                    return;
+                }
                 EntityList.Remove(ToDel);
-                UoW.Repository<BL.DicData>().Delete(ToDel);
-                UoW.Save();
-                //OnPropertyChanged("EntityList");
+                OnPropertyChanged("EntityList");
             }
-
         }
 
         public bool CanExecuteDeleteCommand(object parametr)

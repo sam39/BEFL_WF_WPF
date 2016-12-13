@@ -148,7 +148,7 @@ namespace WPF.View
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
+        {           
             Messenger.Default.Send<PageMessage>
                 (new PageMessage { Action = MessageAction.Browse, PageType = typeof(View.monitor) });
         }

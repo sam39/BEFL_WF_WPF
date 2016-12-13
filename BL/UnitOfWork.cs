@@ -15,9 +15,10 @@ namespace BL
         private GenericRepository<Pos> posRepository;
         private GenericRepository<Dep> depRepository;
         private GenericRepository<Comp> compRepository;
-        //private GenericRepository<CompType> compTypeRepository;
         private GenericRepository<Monitor> monitorRepository;
         private GenericRepository<DicData> dicdataRepository;
+        private GenericRepository<Mc> mcRepository;
+
 
         // Возвращает репозитроий требуемого типа
         public GenericRepository<T> Repository<T>() where T : class
@@ -28,13 +29,24 @@ namespace BL
             else if (tt == typeof(BL.Pos)) return PosRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Dep)) return DivisionRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Comp)) return CompRepository as GenericRepository<T>;
-            //else if (tt == typeof(BL.CompType)) return CompTypeRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
             else if (tt == typeof(BL.DicData)) return DicDataRepository as GenericRepository<T>;
             else return null;
         }
 
 
+
+        public GenericRepository<Mc> McRepository
+        {
+            get
+            {
+                if (this.mcRepository == null)
+                {
+                    this.mcRepository = new GenericRepository<Mc>(context);
+                }
+                return mcRepository;
+            }
+        }
 
         public GenericRepository<DicData> DicDataRepository
         {
@@ -59,7 +71,6 @@ namespace BL
                 return monitorRepository;
             }
         }
-
 
         public GenericRepository<Pos> PosRepository
         {
@@ -116,7 +127,16 @@ namespace BL
 
         public void Save()
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+
+            catch(System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                throw new System.Data.Entity.Infrastructure.DbUpdateException(e.Message);
+            }
+            
         }
 
         private bool disposed = false;
