@@ -13,5 +13,13 @@ namespace WPF
     /// </summary>
     public partial class App : Application
     {
+        [STAThread]
+        static void Main()
+        {
+            App app = new App();
+            View.MainWindow w = new View.MainWindow();
+            app.Run(w);
+        }
+
     }
 }
