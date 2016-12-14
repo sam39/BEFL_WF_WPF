@@ -21,17 +21,6 @@ namespace BL
             }
         }
 
-        public override string Name
-        {
-            get
-            {
-                string result = string.Empty;
-                if (_model != null) result += _model;
-                if (_diazonal != null) result += " " + _diazonal.Name;
-                return result;
-            }
-        }
-
         private string _model;
         public string Model
         {
@@ -44,18 +33,29 @@ namespace BL
             }
         }
 
-        private DicData _diazonal;
+        private DicData _diagonal;
         public virtual DicData Diagonal
         {
-            get { return _diazonal; }
+            get { return _diagonal; }
             set
             {
-                _diazonal = value;
+                _diagonal = value;
                 OnPropertyChanged("Diagonal");
                 OnPropertyChanged("Name");
             }
-
         }
+
+        public override string Name
+        {
+            get
+            {
+                string result = "Монитор: ";
+                if (_model != null) result += _model;
+                if (Diagonal != null) result += " " + Diagonal.Name;
+                return result;
+            }
+        }
+
 
         //private Emp _emp;
         //public virtual Emp Emp

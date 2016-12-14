@@ -40,6 +40,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Binding="{Binding Model, Mode=OneWay}" Header="Модель" Width="Auto" />
                     <DataGridTextColumn Binding="{Binding Emp.FIO, Mode=OneWay}" Header="Пользователь" Width="Auto" />
+                    <DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Пользователь" Width="Auto" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -67,8 +68,11 @@
                         <Button x:Name="SetDiagbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDiagonal, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Комментарий</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=Comment}"></TextBox>
+                </StackPanel>                
             </WrapPanel>
-
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
