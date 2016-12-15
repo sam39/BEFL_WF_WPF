@@ -10,9 +10,7 @@
 
     <Grid>
         <DocumentViewer x:Name="documentViewer">
-            <FixedDocument Name="custom">
 
-            </FixedDocument>
         </DocumentViewer>
     </Grid>
 </Page>

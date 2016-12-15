@@ -9,5 +9,5 @@
     <ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:WPF.ViewModel" />
     </ResourceDictionary>
-    </Application.Resources>
+  </Application.Resources>
 </Application>
