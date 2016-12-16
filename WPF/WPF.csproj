@@ -92,13 +92,13 @@
     <Compile Include="ViewModels\compsViewModel.cs" />
     <Compile Include="ViewModels\depsViewModel.cs" />
     <Compile Include="ViewModels\dicdataViewModel.cs" />
-    <Compile Include="ViewModels\dockviewerViewModel.cs" />
     <Compile Include="ViewModels\empsViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\mcViewModel.cs" />
     <Compile Include="ViewModels\miscViewModel.cs" />
     <Compile Include="ViewModels\monitorViewModel.cs" />
     <Compile Include="ViewModels\possViewModel.cs" />
+    <Compile Include="ViewModels\printerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -110,9 +110,6 @@
     </Compile>
     <Compile Include="View\dicdata.xaml.cs">
       <DependentUpon>dicdata.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\docviewer.xaml.cs">
-      <DependentUpon>docviewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -138,6 +135,9 @@
     <Compile Include="View\poss.xaml.cs">
       <DependentUpon>poss.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\printer.xaml.cs">
+      <DependentUpon>printer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
@@ -150,10 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\dicdata.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\docviewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\poss.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\printer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

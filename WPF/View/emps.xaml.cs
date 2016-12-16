@@ -36,5 +36,11 @@ namespace WPF.View
             if (Grid.SelectedValue != null)
             Grid.ScrollIntoView(Grid.SelectedValue);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //SearchtextBox.Focus();
+        }
+
     }
 }

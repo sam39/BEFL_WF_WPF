@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.ViewModels"
         xmlns:root="clr-namespace:WPF"     
         mc:Ignorable="d"
-        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
+        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}" Loaded="Page_Loaded" FocusManager.FocusedElement="{Binding ElementName=SearchtextBox}">
     
     <Page.Resources>
         <root:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -22,7 +22,11 @@
             <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding Select}" Key="Enter"/>
+            </TextBox.InputBindings>
+        </TextBox>
         <Grid Grid.Row="1" >
             <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="Grid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}" SelectionChanged="empGrid_SelectionChanged" SizeChanged="empGrid_SizeChanged">
                 <DataGrid.Columns>
@@ -128,9 +132,9 @@
                         <Button x:Name="SetDepbutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetDep, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Style="{StaticResource SP_Controls}" VerticalAlignment="Bottom" Orientation="Horizontal">
-                    <TextBlock FontSize="10" Margin="5,0,0,5"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Скрыть в справочнике</TextBlock>
-                    <CheckBox Grid.Column="3"  Margin="5,0,0,5" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
+                <StackPanel Style="{StaticResource SP_Controls}" VerticalAlignment="Bottom" Orientation="Vertical">
+                    <TextBlock FontSize="10" TextWrapping="Wrap" Margin="5,0,0,5"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Скрыть</TextBlock>
+                    <CheckBox HorizontalAlignment="Center" Grid.Column="3"  Margin="5,0,0,4" Grid.Row="5" IsChecked = "{Binding Path=HideInSpr}"></CheckBox>
                 </StackPanel>
                 <StackPanel Style="{StaticResource SP_Controls}">
                     <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Комментарий</TextBlock>

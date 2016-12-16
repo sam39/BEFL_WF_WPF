@@ -9,7 +9,7 @@
       xmlns:root="clr-namespace:WPF"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
+        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}"  FocusManager.FocusedElement="{Binding ElementName=SearchtextBox}">
 
     <Page.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
@@ -35,7 +35,12 @@
         </Grid.RowDefinitions>
         <ComboBox Height="24" Width="150" HorizontalAlignment="Right" VerticalAlignment="Top"  ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
                   SelectedItem="{Binding Path=CurrentDic}"  Visibility="{Binding MultiDicMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding Select}" Key="Enter"/>
+            </TextBox.InputBindings>
+        </TextBox>
+        
         <Grid Grid.Row="1" >
             <DataGrid SelectedValue="{Binding Selected,Mode=TwoWay}"  CanUserAddRows="False" ScrollViewer.CanContentScroll="True"  AutoGenerateColumns="False" x:Name="Grid" HorizontalAlignment="Left" ItemsSource = "{Binding Path=EntityList, Mode=OneWay}">
                 <DataGrid.Columns>

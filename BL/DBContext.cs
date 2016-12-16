@@ -25,6 +25,7 @@ namespace BL
         public virtual DbSet<BL.Pos> Poss { get; set; }
         public virtual DbSet<BL.Dep> Deps { get; set; }
         public virtual DbSet<BL.Comp> Comps { get; set; }
+        public virtual DbSet<BL.Printer> Printers { get; set; }
         public virtual DbSet<BL.Monitor> Monitors {get; set;}
         public virtual DbSet<BL.DicData> DicDatas { get; set;}
         public virtual DbSet<BL.Misc> Miscs { get; set; }

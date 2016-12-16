@@ -3,7 +3,7 @@ namespace BL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class dbFromSQL : DbMigration
     {
         public override void Up()
         {
@@ -37,70 +37,72 @@ namespace BL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Dic_Id = c.Int(),
+                        Dic = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            //CreateTable(
+            //    "dbo.Emps",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            LastName = c.String(),
+            //            Name = c.String(),
+            //            SName = c.String(),
+            //            PosId = c.Int(),
+            //            DepId = c.Int(),
+            //            InternalTel = c.String(),
+            //            MobileTel = c.String(),
+            //            Email = c.String(),
+            //            EmailPass = c.String(),
+            //            DomainPass = c.String(),
+            //            TrueCryptPass = c.String(),
+            //            ERoomPass = c.String(),
+            //            SkypeName = c.String(),
+            //            SkypePass = c.String(),
+            //            IcqName = c.String(),
+            //            IcqPass = c.String(),
+            //            Gmail = c.String(),
+            //            Mango = c.String(),
+            //            Comments = c.String(),
+            //            HideInSpr = c.Boolean(nullable: false),
+            //        })
+            //    .PrimaryKey(t => t.Id)
+            //    .ForeignKey("dbo.Deps", t => t.DepId)
+            //    .ForeignKey("dbo.Pos", t => t.PosId)
+            //    .Index(t => t.PosId)
+            //    .Index(t => t.DepId);
+            
+            //CreateTable(
+            //    "dbo.Deps",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            Name = c.String(),
+            //        })
+            //    .PrimaryKey(t => t.Id);
+            
+            //CreateTable(
+            //    "dbo.Pos",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            Name = c.String(),
+            //        })
+            //    .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Miscs",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Dsc = c.String(),
+                        InvNum = c.String(),
+                        Emp_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Dics", t => t.Dic_Id)
-                .Index(t => t.Dic_Id);
-            
-            CreateTable(
-                "dbo.Dics",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Emps",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        LastName = c.String(),
-                        Name = c.String(),
-                        SName = c.String(),
-                        PosId = c.Int(),
-                        DepId = c.Int(),
-                        InternalTel = c.String(),
-                        MobileTel = c.String(),
-                        Email = c.String(),
-                        EmailPass = c.String(),
-                        DomainPass = c.String(),
-                        TrueCryptPass = c.String(),
-                        ERoomPass = c.String(),
-                        SkypeName = c.String(),
-                        SkypePass = c.String(),
-                        IcqName = c.String(),
-                        IcqPass = c.String(),
-                        Gmail = c.String(),
-                        Mango = c.String(),
-                        Comments = c.String(),
-                        HideInSpr = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Deps", t => t.DepId)
-                .ForeignKey("dbo.Pos", t => t.PosId)
-                .Index(t => t.PosId)
-                .Index(t => t.DepId);
-            
-            CreateTable(
-                "dbo.Deps",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Pos",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
+                .ForeignKey("dbo.Emps", t => t.Emp_Id)
+                .Index(t => t.Emp_Id);
             
             CreateTable(
                 "dbo.Monitors",
@@ -119,29 +121,45 @@ namespace BL.Migrations
                 .Index(t => t.Diagonal_Id)
                 .Index(t => t.Emp_Id);
             
+            CreateTable(
+                "dbo.Printers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Model = c.String(),
+                        InvNum = c.String(),
+                        Emp_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Emps", t => t.Emp_Id)
+                .Index(t => t.Emp_Id);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Printers", "Emp_Id", "dbo.Emps");
             DropForeignKey("dbo.Monitors", "Emp_Id", "dbo.Emps");
             DropForeignKey("dbo.Monitors", "Diagonal_Id", "dbo.DicDatas");
+            DropForeignKey("dbo.Miscs", "Emp_Id", "dbo.Emps");
             DropForeignKey("dbo.Comps", "Emp_Id", "dbo.Emps");
             DropForeignKey("dbo.Emps", "PosId", "dbo.Pos");
             DropForeignKey("dbo.Emps", "DepId", "dbo.Deps");
             DropForeignKey("dbo.Comps", "CompType_Id", "dbo.DicDatas");
-            DropForeignKey("dbo.DicDatas", "Dic_Id", "dbo.Dics");
+            DropIndex("dbo.Printers", new[] { "Emp_Id" });
             DropIndex("dbo.Monitors", new[] { "Emp_Id" });
             DropIndex("dbo.Monitors", new[] { "Diagonal_Id" });
+            DropIndex("dbo.Miscs", new[] { "Emp_Id" });
             DropIndex("dbo.Emps", new[] { "DepId" });
             DropIndex("dbo.Emps", new[] { "PosId" });
-            DropIndex("dbo.DicDatas", new[] { "Dic_Id" });
             DropIndex("dbo.Comps", new[] { "Emp_Id" });
             DropIndex("dbo.Comps", new[] { "CompType_Id" });
+            DropTable("dbo.Printers");
             DropTable("dbo.Monitors");
+            DropTable("dbo.Miscs");
             DropTable("dbo.Pos");
             DropTable("dbo.Deps");
             DropTable("dbo.Emps");
-            DropTable("dbo.Dics");
             DropTable("dbo.DicDatas");
             DropTable("dbo.Comps");
         }

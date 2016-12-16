@@ -14,6 +14,7 @@ namespace BL
         private GenericRepository<Pos> posRepository;
         private GenericRepository<Dep> depRepository;
         private GenericRepository<Comp> compRepository;
+        private GenericRepository<Printer> printerRepository;
         private GenericRepository<Monitor> monitorRepository;
         private GenericRepository<DicData> dicdataRepository;
         private GenericRepository<Misc> miscRepository;
@@ -27,6 +28,7 @@ namespace BL
             else if (tt == typeof(BL.Pos)) return PosRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Dep)) return DivisionRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Comp)) return CompRepository as GenericRepository<T>;
+            else if (tt == typeof(BL.Printer)) return PrinterRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Monitor)) return MonitorRepository as GenericRepository<T>;
             else if (tt == typeof(BL.DicData)) return DicDataRepository as GenericRepository<T>;
             else if (tt == typeof(BL.Misc)) return MiscRepository as GenericRepository<T>;
@@ -37,8 +39,20 @@ namespace BL
         {
             IEnumerable<BL.Mc> listMon = MonitorRepository.GetAll();
             IEnumerable<BL.Mc> listMsc = MiscRepository.GetAll();
-            IEnumerable<BL.Mc> listAll = listMon.Concat(listMsc);
+            IEnumerable<BL.Mc> listAll = listMon.Concat(listMsc).Concat(PrinterRepository.GetAll());
             return listAll;
+        }
+
+        public GenericRepository<Printer> PrinterRepository
+        {
+            get
+            {
+                if (this.printerRepository == null)
+                {
+                    this.printerRepository = new GenericRepository<Printer>(context);
+                }
+                return printerRepository;
+            }
         }
 
         public GenericRepository<Misc> MiscRepository

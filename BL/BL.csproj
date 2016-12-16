@@ -56,26 +56,15 @@
     <Compile Include="Emp.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Mc.cs" />
-    <Compile Include="Migrations\201612121207280_InitialCreate.cs" />
-    <Compile Include="Migrations\201612121207280_InitialCreate.Designer.cs">
-      <DependentUpon>201612121207280_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612121255236_DicEnum.cs" />
-    <Compile Include="Migrations\201612121255236_DicEnum.Designer.cs">
-      <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612131246492_miscAdded.cs" />
-    <Compile Include="Migrations\201612131246492_miscAdded.Designer.cs">
-      <DependentUpon>201612131246492_miscAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612131252482_EmpForMisc.cs" />
-    <Compile Include="Migrations\201612131252482_EmpForMisc.Designer.cs">
-      <DependentUpon>201612131252482_EmpForMisc.cs</DependentUpon>
+    <Compile Include="Migrations\201612160830439_dbFromSQL.cs" />
+    <Compile Include="Migrations\201612160830439_dbFromSQL.Designer.cs">
+      <DependentUpon>201612160830439_dbFromSQL.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Monitor.cs" />
     <Compile Include="Pos.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
@@ -84,17 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612121207280_InitialCreate.resx">
-      <DependentUpon>201612121207280_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612121255236_DicEnum.resx">
-      <DependentUpon>201612121255236_DicEnum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612131246492_miscAdded.resx">
-      <DependentUpon>201612131246492_miscAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612131252482_EmpForMisc.resx">
-      <DependentUpon>201612131252482_EmpForMisc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612160830439_dbFromSQL.resx">
+      <DependentUpon>201612160830439_dbFromSQL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

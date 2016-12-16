@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WPF.View
 {
     /// <summary>
-    /// Логика взаимодействия для docviewer.xaml
+    /// Логика взаимодействия для printer.xaml
     /// </summary>
-    public partial class docviewer : Page
+    public partial class printer : Page
     {
-        public docviewer()
+        public printer()
         {
             InitializeComponent();
         }

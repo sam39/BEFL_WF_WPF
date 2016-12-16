@@ -91,6 +91,7 @@ namespace WPF.ViewModels
                     _empCollectionView.Filter = Filter;
                 }
                 return _entityList;
+                
             }
         }
 
@@ -270,6 +271,7 @@ namespace WPF.ViewModels
 
         public void ExecuteSelectCommand(object parameter)
         {
+            if (_empCollectionView.Cast<T>().Count() == 1) Selected = _empCollectionView.Cast<T>().FirstOrDefault();
             Messenger.Default.Send<T>(Selected);
             SelectionMode = false;
             Messenger.Default.Send<string>("GoBack");
@@ -288,7 +290,7 @@ namespace WPF.ViewModels
 
         public bool CanExecuteEditCommand(object parametr)
         {
-            if (!EditMode) return true;
+            if (!EditMode && _selected != null) return true;
             else return false;
         }
         #endregion Выбор/Редактирование

@@ -7,13 +7,13 @@ namespace BL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class DicEnum : IMigrationMetadata
+    public sealed partial class dbFromSQL : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DicEnum));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dbFromSQL));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612121255236_DicEnum"; }
+            get { return "201612160830439_dbFromSQL"; }
         }
         
         string IMigrationMetadata.Source

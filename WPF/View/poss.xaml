@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.ViewModels"
         xmlns:root="clr-namespace:WPF"     
         mc:Ignorable="d"
-        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}">
+        Title="MainWindow"  Background="White" KeepAlive="{Binding EditMode}"  FocusManager.FocusedElement="{Binding ElementName=SearchtextBox}">
 
     <Page.Resources>
         <root:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -26,7 +26,11 @@
             <RowDefinition Height="auto" MaxHeight="210"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+        <TextBox x:Name="SearchtextBox" Text="{Binding FindText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding Select}" Key="Enter"/>
+            </TextBox.InputBindings>
+        </TextBox>            
 
 
         <Grid Grid.Row="1" >

@@ -81,6 +81,12 @@ namespace WPF.View
                 vm = new ViewModels.miscViewModel();
             }
 
+            if (mess.PageType == typeof(ViewModels.printerViewModel))
+            {
+                v = new View.printer();
+                vm = new ViewModels.printerViewModel();
+            }
+
             v.DataContext = vm;
 
             if (mess.Action == Infrastrucrure.MessageAction.Select)
@@ -164,6 +170,12 @@ namespace WPF.View
             View.mc view = new View.mc();
             view.DataContext = new ViewModels.mcViewModel();
             MainFrame.Navigate(view);
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<PageMessage>
+                (new PageMessage { Action = MessageAction.Browse, PageType = typeof(ViewModels.printerViewModel) });
         }
     }
 }
