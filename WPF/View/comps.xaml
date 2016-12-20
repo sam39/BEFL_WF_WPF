@@ -99,7 +99,10 @@
                         <Button x:Name="SetCompTypebutton" Content="..." HorizontalAlignment="Left" Height="20" Width="20" Command="{Binding DataContext.SetCompType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter= "{Binding SelectedItem}"/>
                     </StackPanel>
                 </StackPanel>
-
+                <StackPanel>
+                    <TextBlock FontSize="10" Margin="5,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Bottom">Инв.№</TextBlock>
+                    <TextBox Padding="1" Width="auto" Margin="5,0,0,0" Text="{Binding Path=InvNum}"></TextBox>
+                </StackPanel>
                 <StackPanel  VerticalAlignment="Bottom">
                     <Button Margin="5,5,5,0" Height="25" Content="SysInfo" Width="90"  Command="{Binding DataContext.SysInfoUpdate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"></Button>
                 </StackPanel>

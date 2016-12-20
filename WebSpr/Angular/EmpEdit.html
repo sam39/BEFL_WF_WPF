@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<h1>{{Emp.LastName}} {{Emp.Name}} {{Emp.SName}}</h1>
+
+<form name="cont.EmpEditForm" class="form-horizontal">
+
+  <fieldset>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+                <div class="control-group">
+                  <label class="control-label" for="Pos">Должность</label>
+                  <div class="controls">
+                        <select name="Pos" ng-model="Emp.Pos" ng-options="pos.Name for pos in poss | orderBy:'Name' track by pos.Id "></select>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-6">
+                <div class="control-group">
+                  <label class="control-label" for="Dep">Отдел</label>
+                  <div class="controls">
+                        <select name="Dep" ng-model="Emp.Dep" ng-options="dep.Name for dep in deps | orderBy:'Name' track by dep.Id"></select>                    
+                  </div>
+                </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="category">Фамилия</label>
+                      <div class="controls">
+                        <input name="LastName" ng-model="Emp.LastName">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Имя</label>
+                      <div class="controls">
+                        <input name="Name" ng-model="Emp.Name">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Отчество</label>
+                      <div class="controls">
+                        <input name="SName" ng-model="Emp.SName">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Email</label>
+                      <div class="controls">
+                        <input name="Email" type="email" ng-model="Emp.Email">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Пароль e-mail</label>
+                      <div class="controls">
+                        <input name="EmailPass" ng-model="Emp.EmailPass">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Вн. Тел</label>
+                      <div class="controls">
+                        <input name="InternalTel" ng-model="Emp.InternalTel">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Логин Skype</label>
+                      <div class="controls">
+                        <input name="SkypeName" ng-model="Emp.SkypeName">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Пароль Skype</label>
+                      <div class="controls">
+                        <input name="SkypePass" ng-model="Emp.SkypePass">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Моб Тел</label>
+                      <div class="controls">
+                        <input name="MobileTel" ng-model="Emp.MobileTel">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Пароль домена</label>
+                      <div class="controls">
+                        <input name="DomainPass" ng-model="Emp.DomainPass">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Пароль TrueCrypt</label>
+                      <div class="controls">
+                        <input name="TrueCryptPass" ng-model="Emp.TrueCryptPass">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Пароль eRoom</label>
+                      <div class="controls">
+                        <input name="ERoomPass" ng-model="Emp.ERoomPass">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+        <div class="row">
+        <!--col-md-offset-4-->
+          <div class="col-md-12">
+
+                <div class="control-group">
+                  <label class="control-label" for="title">Прочее</label>
+                  <div class="controls">
+                    <textarea name="Comments"  cols="120" rows="5" ng-model="Emp.Comments"></textarea>
+                  </div>
+                </div>
+
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+                <div class="form-actions">
+                  <input type="button" ng-disabled="cont.EmpEditForm.$invalid||cont.EmpEditForm.$pristine" href="#/EmpIndex" ng-click="AddEmp(Emp)" class="btn btn-success" value="Сохранить">
+                   <input type="button" ng-click="CancelEmp(Emp)" class="btn" value="Отмена">
+                </div>
+          </div>
+        </div>
+
+    </div>
+
+  </fieldset>
+</form>
+
+</body>
+</html>

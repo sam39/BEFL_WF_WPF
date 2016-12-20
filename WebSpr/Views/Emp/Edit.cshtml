@@ -1,0 +1,191 @@
+﻿@model BL.Emp
+
+
+@*@using (Html.BeginForm())*@
+@using (Ajax.BeginForm("Save", "Emp", new AjaxOptions { Confirm = "Сохранить?" }, new { @id = "EditFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <a id="Back" style="font-size: 1.1em; font-weight: 600;">&#8592; Назад</a>
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="400">
+                <div class="form-group">
+                    Фамилия
+                    <div class="col-md-10">
+                    </div>
+                        @Html.TextBoxFor(model => model.LastName, new { style ="font-size: 2.3em; font-weight: bold;"})
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                </div>
+                </td>
+                <td width="400">
+                <div class="form-group">
+                    Имя
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Name, new { style = "font-size: 2.3em; font-weight: bold;" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+                <td width="400">
+                <div class="form-group">
+                    Отчество
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.SName, new { style = "font-size: 2.3em; font-weight: bold;" })
+                        @Html.ValidationMessageFor(model => model.SName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan ="2">
+                    <div class="form-group">
+                    Должность
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.PosId, (IEnumerable<SelectListItem>)ViewData["AllPos"], "Выберите должность", new { Style = "width: 650px; height: 29px; font-size: 1.3em;" })
+                        @Html.ValidationMessageFor(model => model.PosId, "", new { @class = "text-danger" })
+                    </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        Отдел
+                        <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.DepId, (IEnumerable<SelectListItem>)ViewData["AllDep"], "Выберите отдел", new { Style = "width: 350px; height: 29px;font-size: 1.3em;" })
+                        @Html.ValidationMessageFor(model => model.DepId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <div class="form-group">
+                    Email
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+                <td>
+                <div class="form-group">
+                Пароль Email
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailPass, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmailPass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+                <td>
+                <div class="form-group">
+                    Вн.телефон
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.InternalTel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InternalTel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        Логин Skype
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SkypeName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SkypeName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        Пароль Skype
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SkypePass, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SkypePass, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+                <td>
+                <div class="form-group">
+                    Моб.телефон
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MobileTel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MobileTel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <div class="form-group">
+                    Пароль домена
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DomainPass, new { htmlAttributes = new { @class = "form-control" } }) 
+                        @Html.ValidationMessageFor(model => model.DomainPass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+                <td>
+                <div class="form-group">
+                    Пароль TrueCrypt
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TrueCryptPass, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TrueCryptPass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+                <td>
+                <div class="form-group">
+                    Пароль eRoom
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ERoomPass, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ERoomPass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="form-group">
+                        Прочее
+                        <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Comments, 5, 55, null)
+                            @*@Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>           
+            </tr>
+        </table>
+
+    <input id="btnSave" type="button" value="Сохранить" class="btn btn-default" />
+
+    </div>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#srchFrm").toggle();
+                
+
+
+        $("#Back").click(function (e) {
+            $("#srchFrm").submit();
+            $("#srchFrm").toggle();
+        });
+
+        $("#btnSave").click(function (e) {
+            $("#EditFrm").submit();
+            $("#srchFrm").submit();
+            $("#srchFrm").toggle();
+        });
+    });
+</script>
+}
+
+

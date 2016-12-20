@@ -1,0 +1,322 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <base href="/" />
+
+    <script src="~/Scripts/angular.js" type="text/javascript"></script>
+    
+
+
+    <script src="~/Scripts/angular-route.js" type="text/javascript"></script>
+    <script src="~/Scripts/angular-ui-router.min.js" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular</title>
+
+    <style>
+        /* Правило для всех элементов, с которыми не взаимодействовал пользователь*/
+        form .ng-pristine {
+            border: 1px dotted gray;
+        }
+
+        /* Данное правило распространяется на все элементы с которыми взаимодействовал прользователь и которые не прошли проверку */
+        form .ng-invalid.ng-dirty {
+            background-color: lightpink;
+        }
+
+        /* Правило для всех элементов, которые прошли проверку после взаимодействия с пользователем */
+        form .ng-valid.ng-dirty {
+            background-color: lightgreen;
+        }
+
+        /* класс, который присваивает оформление для неправильно заполненных полей для email */
+        form .ng-invalid-email {
+            color: red;
+        }
+
+        /*
+            Валидация происходит после каждого изменения в форме.
+            Два следующих правила используются для элемента span в конце формы.
+        */
+        span.summary.ng-invalid {
+            color: red;
+            font-weight: bold;
+        }
+
+        span.summary.ng-valid {
+            color: green;
+        }
+    </style>
+
+    <script>        
+        var app = angular.module("app", ['ui.router'])
+        .config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
+            //$locationProvider.html5Mode(true);
+            $urlRouterProvider.otherwise("/EmpIndex")
+            $stateProvider
+            .state("EmpIndex", {
+                url: "/EmpIndex",
+                templateUrl: "/Angular/EmpIndex.html"
+            })
+            .state("EmpIndex.EmpCreate", {
+                url: "/EmpCreate",
+                templateUrl: "/Angular/EmpEdit.html"
+            })
+            .state("EmpIndex.EmpEdit", {
+                url: "/EmpEdit",
+                templateUrl: "/Angular/EmpEdit.html",
+            })
+            .state("CompIndex", {
+                url: "/CompIndex",
+                templateUrl: "/Angular/CompIndex.html",
+            })
+            .state("CompIndex.CompEdit", {
+                url: "/CompEdit",
+                templateUrl: "/Angular/CompEdit.html",
+            })
+            .state("CompIndex.CompCreate", {
+                url: "/CompCreate",
+                templateUrl: "/Angular/CompEdit.html"
+            })
+
+        });
+
+
+
+        app.controller("EmpCtrl", function ($scope, $http, $location, $state) {
+            // $http сервис для работы с AJAX запросами
+            $scope.sortType = 'LastName'; // значение сортировки по умолчанию
+            $scope.sortReverse = false;  // обратная сортировка
+            $scope.AvtiveTab = 'Emp'; //Активная вкладка
+            $scope.$state = $state;
+            $scope.cont = {};
+
+
+            $http.get("/api/EmpApi").success(function (response) {
+                // при успешной обработке запроса передаем данные в scope
+                $scope.items = response;
+            })
+            $http.get("/api/Dep").success(function (response) {
+                // при успешной обработке запроса передаем данные в scope
+                $scope.deps = response;
+            })
+            $http.get("/api/Pos").success(function (response) {
+                // при успешной обработке запроса передаем данные в scope
+                $scope.poss = response;
+            })
+
+            $scope.CreateEmp = function () {
+                     $scope.Emp = null;
+                     $state.go('EmpIndex.EmpCreate');                
+            }
+
+            $scope.CancelEmp = function (emp) {
+                if ($scope.cont.EmpEditForm.$dirty) {
+                    if (confirm("Данные были изменены сохранить?")) {
+                        $scope.AddEmp(emp);
+                    }
+                    else {
+                        $http.get("/api/EmpApi").success(function (response) {
+                            // при успешной обработке запроса передаем данные в scope
+                            $scope.items = response;
+                        })                  
+                    }
+                }
+                $state.go('EmpIndex');
+            }
+
+            $scope.AddEmp = function (emp) {
+            if (emp.Id != null) {
+                $http.put(
+                '/api/EmpApi/' + emp.Id + '/',
+                emp
+                )
+                .success(function (response, status, headers, config) {
+                    $scope.EditMode.Mode = false;
+                    //alert("Запись сохранена!!!");
+                    $location.path('/EmpIndex');                    
+                })                       
+            }
+            else {
+
+                    $http.post(
+                    '/api/EmpApi/',
+                    emp
+                    )
+                    .success(function (response, status, headers, config) {
+                    $scope.EditMode.Mode = false;
+                    //alert("Запись добавлена");
+                    $state.go('EmpIndex')
+                    //$location.path('/EmpIndex');
+                    $scope.items.splice( 1, 0 , emp);                    
+                })
+            }
+
+            }
+
+            $scope.Delete = function (emp, index) {
+                if (confirm("Удалить сотрудника " + emp.LastName + " ?")) {
+                    $http.delete('/api/EmpApi/' + emp.Id + '/');
+		            var ind = -1;
+                    var Emps = eval( $scope.items );
+                    for( var i = 0; i < Emps.length; i++ ) {
+			            if( Emps[i].Id === emp.Id ) {
+				            ind = i;
+				            break;
+			            }                        
+                    }
+                    $scope.items.splice( ind, 1 );
+                }
+            }
+
+
+             $scope.EditMode = {Mode : false};  // режим редактирования
+             $scope.EditModeOn = function () {
+                if ($scope.EditMode.Mode) return true;
+                else return false;
+             }
+             $scope.EmpForEdit = function (item) {
+                      $scope.Emp = item;
+                      //$scope.EditMode.Mode = true;
+                      $state.go('EmpIndex.EmpEdit')
+                    }
+
+            $scope.EditModeOff = function(){
+                        //$scope.EditMode.Mode = false;
+                        $state.go('EmpIndex');
+                    }
+
+        });       // end controller
+
+        app.controller("EmpDetailCtrl", ['$scope', '$http', '$location',
+          function ($scope, $location, $http, ngFormController) {
+                $scope.EmpEditForm = {};
+
+          } ]);
+
+        app.controller("CompCtrl", function ($scope, $http, $location, $state) {
+                $scope.$state = $state;
+                $scope.cont = {};
+
+                $http.get("/api/Comp").success(function (response) {
+                    // при успешной обработке запроса передаем данные в scope
+                    $scope.items = response;
+                })
+
+                $http.get("/api/EmpApi").success(function (response) {
+                    // при успешной обработке запроса передаем данные в scope
+                    $scope.Emps = response;
+                })
+
+
+                $scope.CompForEdit = function (item) {
+                        $scope.Comp = item;
+                        $state.go('CompIndex.CompEdit')
+                    }
+
+                $scope.CancelComp = function (Comp) {
+                    if ($scope.cont.CompEditForm.$dirty) {
+                        if (confirm("Данные были изменены сохранить?")) {
+                            $scope.AddComp(Comp);
+                        }
+                        else {
+                            $http.get("/api/Comp").success(function (response) {
+                                // при успешной обработке запроса передаем данные в scope
+                                $scope.items = response;
+                            })                  
+                        }
+                    }
+                    $state.go('CompIndex');
+                }
+
+                $scope.Delete = function (emp, index) {
+                    if (confirm("Удалить сотрудника " + emp.LastName + " ?")) {
+                        $http.delete('/api/EmpApi/' + emp.Id + '/');
+		                var ind = -1;
+                        var Emps = eval( $scope.items );
+                        for( var i = 0; i < Emps.length; i++ ) {
+			                if( Emps[i].Id === emp.Id ) {
+				                ind = i;
+				                break;
+			                }                        
+                        }
+                        $scope.items.splice( ind, 1 );
+                    }
+                }
+
+                $scope.CreateComp = function () {
+                         $scope.Comp = null;
+                         $state.go('CompIndex.CompCreate');                
+                }
+
+                $scope.AddComp = function (Comp) {
+                    if (Comp.Id != null) {
+                        $http.put(
+                        '/api/Comp/' + Comp.Id + '/',
+                        Comp
+                        )
+                        .success(function (response, status, headers, config) {
+                            //$scope.EditMode.Mode = false;
+                            alert("Запись сохранена!!!");
+                            $location.path('/CompIndex');                    
+                        })                       
+                    }
+                    else {
+
+                            $http.post(
+                            '/api/Comp/',
+                            Comp
+                            )
+                            .success(function (response, status, headers, config) {
+                            //$scope.EditMode.Mode = false;
+                            alert("Запись добавлена");
+                            $state.go('CompIndex')
+                            $scope.items.splice( 1, 0 , Comp);                    
+                        })
+                    }
+
+                }
+
+        });
+
+
+
+
+    </script>
+
+
+</head>
+<body ng-app="app">
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            @*Панель навигации*@  
+                  
+            <ul class="nav nav-tabs">
+              <li  ui-sref-active="active">
+                <a data-ui-sref="EmpIndex" >Сотрудники</a>
+              </li>
+              <li  ui-sref-active="active">
+                <a data-ui-sref="CompIndex" >Компьютеры</a>
+              </li>
+            </ul>
+         
+
+            <div ui-view>
+
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>

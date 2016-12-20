@@ -7,9 +7,18 @@ using System.ComponentModel;
 
 namespace BL
 {
-    public class Comp: INotifyPropertyChanged
+    public class Comp: Mc,INotifyPropertyChanged
     {
         public int Id { get; set; }
+
+        public override string Name
+        {
+            get
+            {
+                string result = "Сист.блок: ";
+                return result;
+            }
+        }
 
         private DicData _compType;
         public virtual DicData CompType

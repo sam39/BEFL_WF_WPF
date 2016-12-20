@@ -1,0 +1,43 @@
+﻿<html ng-app="testApp" >
+
+    <script src="../../Scripts/angular.js" type="text/javascript"></script>
+
+        <script> 
+            var app = angular.module('testApp', []);
+
+            app.controller('TestCtrl', function($scope) {
+
+              $scope.save = function() {
+                alert($scope.TestForm.$pristine);
+              };
+            });
+
+        </script> 
+
+
+
+        <div ng-controller="TestCtrl">
+        <form name="TestForm" class="form-horizontal">
+
+          <label>E-mail</label>
+          <input type="email" ng-model="user.email" name="email">
+          <label>Last name</label>
+          <input type="text" ng-model="user.lastName" name="lastName">
+          <label>First name</label>
+          <input type="text" ng-model="user.firstName" name="firstName">
+          <label>Website</label>
+          <input type="url" ng-model="user.website" name="website">
+          <label>Description</label>
+          <textarea ng-model="user.description" name="description"></textarea>
+          <label>Password</label>
+          <input type="password" ng-model="user.password" name="password">
+          <label>Password (repeat)</label>
+          <input type="password" ng-model="repeatPassword" name="repeatPassword">
+          <label>Roles</label>
+          <label class="checkbox"><input type="checkbox" ng-model="user.admin" name="admin"> Is Administrator</label>
+          <button ng-click="save()" >Save</button>
+
+        </form>
+        </div>
+
+    </html>

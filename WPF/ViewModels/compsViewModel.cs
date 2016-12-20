@@ -149,41 +149,52 @@ namespace WPF.ViewModels
                 try
                 {
                     scope.Connect();
-                    comp.CpuName = getWmiProp("Win32_Processor", new string[] { "Name", "NumberOfCores"}, scope);
-                    comp.Memory = getWmiProp("Win32_PhysicalMemory", new string[] { "BankLabel", "Capacity", "Speed" }, scope);
-                    comp.Hdd = getWmiProp("Win32_Volume", new string[] { "DriveLetter", "Capacity", "FileSystem" }, scope);
-                    comp.MainBoard = getWmiProp("Win32_BaseBoard", new string[] { "Manufacturer", "Product" }, scope);
-                    comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
-                    comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
-                    comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
-                    comp.Monitor = getWmiProp("Win32_Desktopmonitor", new string[] { "Caption", "ScreenWidth", "ScreenHeight" }, scope);
                 }
-                catch
+                    catch
                 {
                     System.Windows.MessageBox.Show("Невозможно связаться с " + comp.NetName);
+                    return;
                 }
+                comp.CpuName = getWmiProp("Win32_Processor", new string[] { "Name", "NumberOfCores"}, scope);
+                comp.Memory = getWmiProp("Win32_PhysicalMemory", new string[] { "BankLabel", "Capacity", "Speed" }, scope);
+                comp.Hdd = getWmiProp("Win32_Volume", new string[] { "DriveLetter", "Capacity", "FileSystem" }, scope);
+                comp.MainBoard = getWmiProp("Win32_BaseBoard", new string[] { "Manufacturer", "Product" }, scope);
+                comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
+                comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
+                comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
+                comp.Monitor = getWmiProp("Win32_Desktopmonitor", new string[] { "Caption", "ScreenWidth", "ScreenHeight" }, scope);
+
 
             }
         }
 
         private string getWmiProp(string key, string[] prop, ManagementScope scope)
         {
-            ObjectQuery query = new ObjectQuery("SELECT * FROM " + key);
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
             string result = string.Empty;
-            foreach (ManagementObject queryObj in searcher.Get())
+            try
             {
-                if (result != string.Empty) result += "\n";
-                foreach (string pr in prop)
-                {
-                    if (pr == "Capacity")
-                        result += Math.Round(System.Convert.ToDouble(queryObj[pr]) / 1024 / 1024 / 1024, 2) + " Gb; ";
-                    else
-                        result += queryObj[pr] + "; ";
-                }
+                ObjectQuery query = new ObjectQuery("SELECT * FROM " + key);
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
 
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    if (result != string.Empty) result += "\n";
+                    foreach (string pr in prop)
+                    {
+                        if (pr == "Capacity")
+                            result += Math.Round(System.Convert.ToDouble(queryObj[pr]) / 1024 / 1024 / 1024, 2) + " Gb; ";
+                        else
+                            result += queryObj[pr] + "; ";
+                    }
+                }
+                return result;
             }
-            return result;
+            catch
+            {
+                System.Windows.MessageBox.Show("Ошибка при запросе класса " + key);
+                return string.Empty;
+            }
+           
         }
 
         public bool CanExecuteSysInfoUpdateCommand(object parametr)
