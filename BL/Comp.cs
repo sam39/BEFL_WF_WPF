@@ -16,6 +16,8 @@ namespace BL
             get
             {
                 string result = "Сист.блок: ";
+                if (CpuName != string.Empty) result += CpuName;
+
                 return result;
             }
         }

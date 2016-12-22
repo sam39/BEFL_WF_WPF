@@ -39,7 +39,7 @@ namespace BL
         {
             IEnumerable<BL.Mc> listMon = MonitorRepository.GetAll();
             IEnumerable<BL.Mc> listMsc = MiscRepository.GetAll();
-            IEnumerable<BL.Mc> listAll = listMon.Concat(listMsc).Concat(PrinterRepository.GetAll());
+            IEnumerable<BL.Mc> listAll = listMon.Concat(listMsc).Concat(PrinterRepository.GetAll()).Concat(CompRepository.GetAll());
             return listAll;
         }
 
