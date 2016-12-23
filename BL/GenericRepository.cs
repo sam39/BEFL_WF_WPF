@@ -35,8 +35,9 @@ namespace BL
         //}
 
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll(bool proxy = true)
         {
+            context.Configuration.ProxyCreationEnabled = proxy;
             IQueryable<TEntity> query = dbSet;
             return query.ToList();
         }

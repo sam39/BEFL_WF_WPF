@@ -8,42 +8,39 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using BEFLSPR.Models;
 using BL;
 
-namespace WebApi.Controllers
+namespace BEFLSPR.Controllers
 {
-    public class CompController : ApiController
+    public class MCController : ApiController
     {
         private DbContextBEFL db = new DbContextBEFL();
 
-        // GET api/Comp
-        public IEnumerable<Comp> GetComps()
+        // GET api/MC
+        public IEnumerable<MC> GetMCs()
         {
-            var comps = db.Comps.Include(c => c.Emp);
-            //var mcs = db.MCs.Include(c => c.User);
-            return comps.AsEnumerable();
+            return db.MCs.AsEnumerable();
         }
 
-        // GET api/Comp/5
-        public Comp GetComp(int id)
+        // GET api/MC/5
+        public MC GetMC(int id)
         {
-            Comp comp = db.Comps.Find(id) as Comp;
-            if (comp == null)
+            MC mc = db.MCs.Find(id);
+            if (mc == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            return comp;
+            return mc;
         }
 
-        // PUT api/Comp/5
-        public HttpResponseMessage PutComp(int id, Comp comp)
+        // PUT api/MC/5
+        public HttpResponseMessage PutMC(int id, MC mc)
         {
-            if (ModelState.IsValid && id == comp.Id)
+            if (ModelState.IsValid && id == mc.Id)
             {
-                //comp.UserId = comp.User.Id;
-                //comp.User = null;
-                //db.Entry(comp).State = EntityState.Modified;
+                db.Entry(mc).State = EntityState.Modified;
 
                 try
                 {
@@ -62,18 +59,18 @@ namespace WebApi.Controllers
             }
         }
 
-        // POST api/Comp
-        public HttpResponseMessage PostComp(Comp comp)
+        // POST api/MC
+        public HttpResponseMessage PostMC()
         {
             if (ModelState.IsValid)
             {
-                comp.UserId = comp.User.Id;
-                comp.User = null;
-                db.MCs.Add(comp);
+                MC mc = new MC();
+                mc.InvNum = "testNum";
+                db.MCs.Add(mc);
                 db.SaveChanges();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, comp);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = comp.Id }));
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, mc);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = mc.Id }));
                 return response;
             }
             else
@@ -82,16 +79,16 @@ namespace WebApi.Controllers
             }
         }
 
-        // DELETE api/Comp/5
-        public HttpResponseMessage DeleteComp(int id)
+        // DELETE api/MC/5
+        public HttpResponseMessage DeleteMC(int id)
         {
-            Comp comp = db.Comps.Find(id);
-            if (comp == null)
+            MC mc = db.MCs.Find(id);
+            if (mc == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            db.Comps.Remove(comp);
+            db.MCs.Remove(mc);
 
             try
             {
@@ -102,7 +99,7 @@ namespace WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, comp);
+            return Request.CreateResponse(HttpStatusCode.OK, mc);
         }
 
         protected override void Dispose(bool disposing)

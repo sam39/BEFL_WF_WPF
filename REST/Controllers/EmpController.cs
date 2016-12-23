@@ -8,9 +8,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using BL;
 
-namespace WebApi.Controllers
+namespace REST.Controllers
 {
         
     public class EmpController : ApiController
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         // GET api/EmpApi
         public IEnumerable<Emp> GetEmps()
         {
-            return uow.EmpRepository.GetAll();
+            return uow.EmpRepository.GetAll(false);
 
             //var emps = db.Emps.Include(e => e.Pos).Include(e => e.Dep);
             //return emps.AsEnumerable();
@@ -45,12 +46,11 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid && id == emp.Id)
             {
-                //Устанавливем из локального репозитория
-                int depId = emp.Dep.Id;
-                int posId = emp.Pos.Id;
-                emp.Dep = uow.DivisionRepository.GetByID(depId);
-                emp.Pos = uow.PosRepository.GetByID(posId);
 
+                //emp.DepId = emp.Dep.Id;
+                //emp.PosId = emp.Pos.Id;
+                //emp.Dep = null;
+                //emp.Pos = null;
                 //db.Entry(emp).State = EntityState.Modified;
                 uow.EmpRepository.Update(emp);
 
@@ -77,16 +77,12 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Устанавливем из локального репозитория
-                int depId = emp.Dep.Id;
-                int posId = emp.Pos.Id;
-                emp.Dep = uow.DivisionRepository.GetByID(depId);
-                emp.Pos = uow.PosRepository.GetByID(posId);
-
-
                 uow.EmpRepository.Insert(emp);
                 uow.Save();
-
+                //emp.DepId  = emp.Dep.Id;
+                //emp.PosId = emp.Pos.Id;
+                //emp.Dep = null;
+                //emp.Pos = null;
                 //db.Emps.Add(emp);
                 //db.SaveChanges();
 

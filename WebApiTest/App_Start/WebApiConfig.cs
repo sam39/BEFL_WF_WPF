@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace WebApi.App_Start
+namespace WebApiTest.App_Start
 {
     public class WebApiConfig
     {

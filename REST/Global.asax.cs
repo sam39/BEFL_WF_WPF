@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Web.Http;
-using WebApi.App_Start;
+using System.Diagnostics;
+using REST.App_Start;
 
-namespace WebApi
+namespace REST
 {
-    public class Global : System.Web.HttpApplication
-    {
+    // Примечание: Инструкции по включению классического режима IIS6 или IIS7 
+    // см. по ссылке http://go.microsoft.com/?LinkId=9394801
 
-        protected void Application_Start(object sender, EventArgs e)
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Configure);
+            //AreaRegistration.RegisterAllAreas();
+
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
         }
 
         protected void Session_Start(object sender, EventArgs e)
