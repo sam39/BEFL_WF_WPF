@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+
+
+<h1>{{Comp.NetName}} {{CPU}} </h1>
+
+<form name="cont.CompEditForm" class="form-horizontal">
+  <fieldset>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4">
+                <div class="control-group">
+                    <label class="control-label" for="User">Пользователь</label>
+                      <div class="controls">
+                            <select name="User" ng-model="Comp.User" ng-options="Emp.LastName for Emp in Emps | orderBy:'LastName' track by Emp.Id "></select>
+                      </div>
+                </div>
+          </div>
+            <div class="col-md-4">
+                <div class="control-group">
+                    <label class="control-label" for="category">IP</label>
+                    <div class="controls">
+                    <input name="Ip" ng-model="Comp.Ip">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="control-group">
+                    <label class="control-label" for="category">Инв.№</label>
+                    <div class="controls">
+                    <input name="InvNum" ng-model="Comp.InvNum">
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="category">Имя</label>
+                      <div class="controls">
+                        <input name="NetName" ng-model="Comp.NetName">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">CPU</label>
+                      <div class="controls">
+                        <input name="CPU" ng-model="Comp.CPU">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">Мат.плата</label>
+                      <div class="controls">
+                        <input name="MainBoard" ng-model="Comp.MainBoard">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+        <div class="row">
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">ОЗУ</label>
+                      <div class="controls">
+                        <input name="RAM"  ng-model="Comp.RAM">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">HDD</label>
+                      <div class="controls">
+                        <input name="HDD" ng-model="Comp.HDD">
+                      </div>
+                    </div>
+              </div>
+              <div class="col-md-4">
+                    <div class="control-group">
+                      <label class="control-label" for="title">CD(DVD)ROM</label>
+                      <div class="controls">
+                        <input name="CDROM" ng-model="Comp.CDROM">
+                      </div>
+                    </div>
+              </div>
+        </div>
+
+ 
+
+<!--        <div class="row">
+          <div class="col-md-12">
+
+                <div class="control-group">
+                  <label class="control-label" for="title">Прочее</label>
+                  <div class="controls">
+                    <textarea name="Comments"  cols="120" rows="5" ng-model="Emp.Comments"></textarea>
+                  </div>
+                </div>
+
+          </div>
+        </div>-->
+
+        <div class="row">
+          <div class="col-md-12">
+                <div class="form-actions">
+                <br><br>
+                  <input type="button" ng-disabled="cont.EmpEditForm.$invalid||cont.EmpEditForm.$pristine" href="#/CompIndex" ng-click="AddComp(Comp)" class="btn btn-success" value="Сохранить">
+                   <input type="button" ng-click="CancelComp(Comp)" class="btn" value="Отмена">
+                </div>
+          </div>
+        </div>
+
+    </div>
+
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+</body>
+</html>

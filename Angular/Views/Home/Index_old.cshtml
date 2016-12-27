@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+            <table border="0" class="NavMenu" cellpadding="0" cellspacing="0" width="1200">
+                <tr>
+                    <td id="mnuOption1" url="Emp/IndexForAdmin">
+                            @Ajax.ActionLink("Сотрудники", "IndexForAdmin", "Emp", new AjaxOptions { UpdateTargetId = "page", InsertionMode = InsertionMode.InsertBefore, HttpMethod = "GET" })
+
+                    </td>
+                    <td id="mnuOption2">
+                            @Html.ActionLink("Компьютеры", "Index", "Comp")
+                    </td>
+
+                    <td id="mnuOption3">
+                            @Html.ActionLink("Мониторы", "Index", "Monitor")
+                    </td>
+                </tr>
+            </table>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".NavMenu td").click(function (e) {
+                        $(".NavMenu td").removeClass("NavSelected");
+                        $(this).addClass('NavSelected');
+
+                        $.ajax({
+                            url: $(this).attr("url"),
+                            success: function (html) {
+                                $("#page").html(html);
+                            }
+
+                        });
+                    });
+
+                });
+            </script>
+
+
+       <div id="page">
+       </div>

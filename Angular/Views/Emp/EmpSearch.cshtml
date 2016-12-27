@@ -1,0 +1,218 @@
+﻿@model IEnumerable<BL.Emp>
+
+@helper EmailTextBox(string email, string title) {
+    <a href="mailto:@email">@title</a>    
+}
+
+@helper SkypeTextBox(string SkypeName) {
+    <a href="skype:@SkypeName?call">@SkypeName</a>    
+}
+<table class="ContentTable" border="0"  width = "1200" style="table-layout: fixed">
+    <tr>
+        <th width = "115">
+            
+            @if (ViewData["ordName"] == "ordLastName")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordLastName" name="Фамилия" class ="ordLink">Фамилия &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordLastName" name="Фамилия" class ="ordLink">Фамилия &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordLastName" name="Фамилия" class ="ordLink">Фамилия</a>}
+        </th>
+        <th width =  "85">
+            @if (ViewData["ordName"] == "ordName")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordName" name="Имя"  class ="ordLink">Имя &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordName" name="Имя"  class ="ordLink">Имя &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordName" name="Имя"  class ="ordLink">Имя</a>}
+        </th>
+        <th width =  "115">
+            @if (ViewData["ordName"] == "ordSName")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordSName" class ="ordLink">Отчество &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordSName" class ="ordLink">Отчество &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordSName" class ="ordLink">Отчество</a>}
+        </th>
+        <th width =  "190">
+            @if (ViewData["ordName"] == "ordPos")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordPos" class ="ordLink">Должность &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordPos" class ="ordLink">Должность &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordPos" class ="ordLink">Должность</a>}
+        </th>
+        <th width =  "180">
+            @if (ViewData["ordName"] == "ordDep")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordDep" class ="ordLink">Отдел &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordDep" class ="ordLink">Отдел &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordDep" class ="ordLink">Отдел</a>}
+        </th>
+        <th width =  "110">
+            @if (ViewData["ordName"] == "ordSkype")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordSkype" class ="ordLink">Skype &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordSkype" class ="ordLink">Skype &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordSkype" class ="ordLink">Skype</a>}
+        </th>
+        <th width =  "140">
+            @if (ViewData["ordName"] == "ordEmail")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordEmail" class ="ordLink">e-mal &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordEmail" class ="ordLink">e-mal &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordEmail" class ="ordLink">e-mal</a>}
+        </th>
+        <th width =  "70">
+            @if (ViewData["ordName"] == "ordIntTel")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordIntTel" class ="ordLink">Вн.тел. &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordIntTel" class ="ordLink">Вн.тел. &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordIntTel" class ="ordLink">Вн.тел.</a>}
+        </th>
+        <th width =  "115">
+            @if (ViewData["ordName"] == "ordMobTel")
+            {
+                if (ViewData["ordDir"] == "asc")
+                {
+                    <a id="ordMobTel" class ="ordLink">Моб. &#8595;</a>
+                }
+                else
+                { 
+                    <a id="ordMobTel" class ="ordLink">Моб. &#8593;</a>
+                }
+            }
+            else
+            {<a id="ordMobTel" class ="ordLink">Моб.</a>}
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width = "115">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td width =  "85">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td width =  "115">
+                @Html.DisplayFor(modelItem => item.SName)
+            </td>
+            <td width =  "190">
+                @Html.DisplayFor(modelItem => item.Pos.Name)
+            </td>
+            <td width =  "180">
+                @Html.DisplayFor(modelItem => item.Dep.Name)
+            </td>
+            <td width =  "110">
+                @SkypeTextBox(item.SkypeName)
+            </td>
+            <td width =  "140">
+                @EmailTextBox(item.Email, item.Email)
+            </td>
+            <td width =  "70">
+                @Html.DisplayFor(modelItem => item.InternalTel)
+            </td>
+            <td width =  "115">
+                @Html.DisplayFor(modelItem => item.MobileTel)
+            </td>
+        </tr>
+    }
+
+</table>
+<hr>
+<div>Итого: @Model.Count()</div>
+<script language=javascript>
+    $(document).ready(function () {
+        $('tr:odd').addClass('odd');
+        $('tr:even').addClass('even');
+    });
+</script>
+            
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".ordLink").click(function (e) {
+
+                    if ($("#order").val() != $(this).attr("id")) {
+                        $("#order").val($(this).attr("id"));
+                        $("#orderDir").attr("checked", "checked");
+                    }
+                    else {
+                        //alert("та же сортировка");
+                        if ($("#orderDir").prop("checked")) {
+                            $("#orderDir").removeAttr("checked");
+                        }
+                        else {
+                            $("#orderDir").attr("checked", "checked");
+                        }
+                    }
+                    $("form:first").submit();
+                });
+            });
+        </script>
+
+
+<div id="detail">
+
+</div>

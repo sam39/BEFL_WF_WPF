@@ -21,15 +21,15 @@ namespace BL
             }
         }
 
-        private ICollection<Emp> _emps;
-        public ICollection<Emp> Emps
-        {
-            get { return _emps; }
-            set {
-                 _emps = value;
-                OnPropertyChanged("Emps");
-            }
-        }
+        //private ICollection<Emp> _emps;
+        //public ICollection<Emp> Emps
+        //{
+        //    get { return _emps; }
+        //    set {
+        //         _emps = value;
+        //        OnPropertyChanged("Emps");
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

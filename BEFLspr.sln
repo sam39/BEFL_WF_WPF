@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEFLSPR", "WebSpr\BEFLSPR.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REST", "REST\REST.csproj", "{DF79573E-583B-4125-94EF-1CCCE3E96305}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angular", "Angular\Angular.csproj", "{BD67F9F0-8D29-497C-8539-897F8A98BDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPWeb", "ASP\ASPWeb\ASPWeb.csproj", "{9B9788CC-A253-49E4-BB3E-389A1898634D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{DF79573E-583B-4125-94EF-1CCCE3E96305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF79573E-583B-4125-94EF-1CCCE3E96305}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF79573E-583B-4125-94EF-1CCCE3E96305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD67F9F0-8D29-497C-8539-897F8A98BDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD67F9F0-8D29-497C-8539-897F8A98BDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD67F9F0-8D29-497C-8539-897F8A98BDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD67F9F0-8D29-497C-8539-897F8A98BDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9788CC-A253-49E4-BB3E-389A1898634D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9788CC-A253-49E4-BB3E-389A1898634D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9788CC-A253-49E4-BB3E-389A1898634D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9788CC-A253-49E4-BB3E-389A1898634D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

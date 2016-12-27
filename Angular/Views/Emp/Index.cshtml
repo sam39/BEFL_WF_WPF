@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+        @using (Ajax.BeginForm("EmpSearch", null, new AjaxOptions
+        {
+            UpdateTargetId = "results"
+        }, new {@id = "srchFrm" }))
+        {
+            <table border="0" class="FilterTable" width = "1200" style="table-layout: fixed">
+                <tr>
+                    <td width = "115">
+                    <input type="text"  size="10"  id="SrchLastName" name="LastName" class="SrchForm" style="width: 105px"  autocomplete="off" />
+                    </td>
+                    <td width =  "85">
+                    <input type="text" size="10" id="SrchName" name="Name" class="SrchForm" style="width: 75px"  autocomplete="off"  /> 
+                    </td>
+                    <td width =  "115">
+                    <input type="text" size="10" id="SrchSName" name="SName" class="SrchForm" style="width: 105px"  autocomplete="off"  />  
+                    </td>
+                    <td width =  "190">
+                    @Html.DropDownList("Pos", (IEnumerable<SelectListItem>)ViewData["AllPos"], " ", new { Style = "width: 190px; height: 29px;" })
+                    </td>
+                    <td width =  "180">
+                    @Html.DropDownList("Dep", (IEnumerable<SelectListItem>)ViewData["AllDep"], " ", new { Style = "width: 180px; height: 29px;" })
+                    </td>
+                    <td width =  "110">
+                    <input type="text" size="10" id="SrchSkype" name="Skype" class="SrchForm" style="width: 100px"  autocomplete="off"  />
+                    </td>
+                    <td width =  "140">
+                    <input type="text" size="10" id="SrchEmail" name="Email" class="SrchForm" style="width: 130px"  autocomplete="off"  />
+                    </td>
+                    <td width =  "70">
+                    <input type="text" size="10" id="SrchIntTel" name="IntTel" class="SrchForm" style="width: 60px"  autocomplete="off"  />
+                    </td>
+                    <td width =  "115">
+                    <input type="text" size="10" id="SrchSrchMobTel" name="MobTel" class="SrchForm" style="width: 95px"  autocomplete="off"  />
+                    </td>
+                </tr>
+            </table>
+            <input id="order" type="hidden" name="order" runat="server" value="ordLastName" >
+            <input id="orderDir" name = "orderDir" style = "display: none"  type="checkbox"  checked="checked" />      
+        }
+
+
+
+        <div id="results">
+
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".SrchForm").keyup(function (e) {
+                    $("form:first").submit();
+                });
+                $("select").change(function (e) {
+
+                    $("form:first").submit();
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                    $("form:first").submit();
+            });
+        </script>

@@ -32,7 +32,6 @@ namespace BEFLSPR.Controllers
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
-
             return pos;
         }
 
