@@ -11,26 +11,24 @@ using System.Web.Http;
 using System.Web.Mvc;
 using BL;
 
-namespace REST.Controllers
+namespace BEFLSPR.Controllers
 {
         
-    public class EmpController : ApiController
+    public class EmpApiController : ApiController
     {
         private BL.UnitOfWork uow = new UnitOfWork();
         private DbContextBEFL db = new DbContextBEFL();
 
         // GET api/EmpApi
-        [System.Web.Mvc.Authorize(Roles = "admin")]
         public IEnumerable<Emp> GetEmps()
         {
-            //return uow.EmpRepository.GetAll(false);
-            db.Configuration.ProxyCreationEnabled = false;
-            var emps = db.Emps.Include(e => e.Pos).Include(e => e.Dep);
-            return emps.AsEnumerable();
+            return uow.EmpRepository.GetAll();
+
+            //var emps = db.Emps.Include(e => e.Pos).Include(e => e.Dep);
+            //return emps.AsEnumerable();
         }
 
         // GET api/EmpApi/5
-        //[Authorize(Roles = "admin")]
         public Emp GetEmp(int id)
         {
             Emp emp = uow.EmpRepository.GetByID(id);
@@ -44,7 +42,6 @@ namespace REST.Controllers
         }
 
         // PUT api/EmpApi/5
-        //[Authorize(Roles = "admin")]
         public HttpResponseMessage PutEmp(int id, [FromBody]Emp emp)
         {
             if (ModelState.IsValid && id == emp.Id)
@@ -76,7 +73,6 @@ namespace REST.Controllers
         }
 
         // POST api/EmpApi
-        //[Authorize(Roles = "admin")]
         public HttpResponseMessage PostEmp([FromBody]Emp emp)
         {
             if (ModelState.IsValid)
@@ -101,7 +97,6 @@ namespace REST.Controllers
         }
 
         // DELETE api/EmpApi/5
-        //[Authorize(Roles = "admin")]
         public HttpResponseMessage DeleteEmp(int id)
         {
             Emp emp = db.Emps.Find(id);
