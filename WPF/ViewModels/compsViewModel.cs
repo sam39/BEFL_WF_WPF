@@ -7,6 +7,9 @@ using GalaSoft.MvvmLight.Messaging;
 using WPF.Infrastrucrure;
 using System.Windows.Input;
 using System.Management;
+using System.Windows.Documents;
+using System.Windows;
+using System.Windows.Media;
 
 namespace WPF.ViewModels
 {
@@ -119,6 +122,94 @@ namespace WPF.ViewModels
         }
         #endregion Выбор Типа
 
+        #region Печать
+        RelayCommand _print;
+        public ICommand Print
+        {
+            get
+            {
+                if (_print == null)
+                    _print = new RelayCommand(ExecutePrintCommand, CanExecutePrintCommand);
+                return _print;
+            }
+        }
+
+        public void ExecutePrintCommand(object parameter)
+        {
+            FlowDocument document = new FlowDocument();
+            Run compName = new Run();
+            compName.Text = "Компьютеры";
+            Paragraph par = new Paragraph();
+            par.Inlines.Add(compName);
+            document.Blocks.Add(par);
+
+            //Добавляем таблицу
+            Table table = new Table();
+            table.Columns.Add(new TableColumn{ Width = new System.Windows.GridLength(150)});
+            table.Columns.Add(new TableColumn { Width = new System.Windows.GridLength(150) });
+            table.Columns.Add(new TableColumn { Width = new System.Windows.GridLength(150) });
+
+            table.RowGroups.Add(new TableRowGroup());
+            table.RowGroups[0].Rows.Add(new TableRow());
+            TableRow currentRow = table.RowGroups[0].Rows[0];
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Name"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Инв №"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Владелец"))));
+
+            //currentRow.FontWeight = FontWeight.;
+            currentRow.Background = Brushes.LightBlue;
+            currentRow.Foreground = Brushes.Gray;
+            int counter = 1;
+            foreach (BL.Comp comp in EntityList)
+            {
+
+                if (_empCollectionView.Contains(comp))
+                {
+                    TableRow currRow = new TableRow();
+                    currRow.Cells.Add(new TableCell(new Paragraph(new Run(comp.NetName))));
+                    currRow.Cells.Add(new TableCell(new Paragraph(new Run(comp.InvNum))));
+                    currRow.Cells.Add(new TableCell(new Paragraph(new Run(comp.Emp.FIO))));
+                    if ((counter & 1) == 0)
+                    {
+                        currRow.Background = Brushes.LightGray;
+                        currentRow.Foreground = Brushes.Gray;
+                    }
+                    else
+                    {
+                        currRow.Background = Brushes.White;
+                        currentRow.Foreground = Brushes.Gray;
+                    }
+
+
+                    table.RowGroups[0].Rows.Add(currRow);
+                    counter++;
+                }
+            }
+
+
+            //table.BorderThickness = new Thickness(1, 1, 1, 1);
+            //table.BorderBrush = Brushes.Black;
+            //table.Margin = new Thickness(0,0,0,0);
+            //currentRow.Cells[0].BorderThickness = new Thickness(1, 1, 1, 1);
+            //currentRow.Cells[0].BorderBrush = Brushes.Black;
+            //currentRow.Cells[1].BorderThickness = new Thickness(1, 1, 1, 1);
+            //currentRow.Cells[1].BorderBrush = Brushes.Black;
+            //currentRow.Cells[2].BorderThickness = new Thickness(1, 1, 1, 1);
+            //currentRow.Cells[2].BorderBrush = Brushes.Black;
+            document.Blocks.Add(table);
+
+            Messenger.Default.Send<FlowDocument>(document);
+        }
+
+
+
+        public bool CanExecutePrintCommand(object parametr)
+        {
+            return true;
+        }
+        #endregion Печать
+
+
         #region SysInfoUpdate
         RelayCommand _sysInfpUpdate;
         public ICommand SysInfoUpdate
@@ -163,8 +254,6 @@ namespace WPF.ViewModels
                 comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
                 comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
                 comp.Monitor = getWmiProp("Win32_Desktopmonitor", new string[] { "Caption", "ScreenWidth", "ScreenHeight" }, scope);
-
-
             }
         }
 

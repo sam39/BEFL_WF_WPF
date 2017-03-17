@@ -30,6 +30,15 @@ namespace WPF.View
             Messenger.Default.Register(this, new Action<string>(Back));
             Messenger.Default.Register(this, new Action<Infrastrucrure.PageMessage>(navigateToPage));
             Messenger.Default.Register(this, new Action<BL.Dic>(SelectFromDic));
+            Messenger.Default.Register(this, new Action<FlowDocument>(PrintDocument));
+        }
+
+        private void PrintDocument(FlowDocument doc)
+        {
+            Page v = new View.report();
+            ViewModels.reportViewModel vm = new ViewModels.reportViewModel(doc);
+            v.DataContext = vm;
+            MainFrame.Navigate(v);
         }
 
         private void SelectFromDic(BL.Dic dic)

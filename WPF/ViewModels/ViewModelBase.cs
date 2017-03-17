@@ -91,7 +91,6 @@ namespace WPF.ViewModels
                     _empCollectionView.Filter = Filter;
                 }
                 return _entityList;
-                
             }
         }
 

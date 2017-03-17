@@ -99,6 +99,7 @@
     <Compile Include="ViewModels\monitorViewModel.cs" />
     <Compile Include="ViewModels\possViewModel.cs" />
     <Compile Include="ViewModels\printerViewModel.cs" />
+    <Compile Include="ViewModels\reportViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -131,6 +132,9 @@
     </Compile>
     <Compile Include="View\printer.xaml.cs">
       <DependentUpon>printer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\report.xaml.cs">
+      <DependentUpon>report.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
@@ -184,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\printer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

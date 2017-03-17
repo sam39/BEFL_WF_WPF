@@ -55,7 +55,7 @@
             else
             {<a id="ordSName" class ="ordLink">Отчество</a>}
         </th>
-        <th width =  "190">
+        <th width =  "180">
             @if (ViewData["ordName"] == "ordPos")
             {
                 if (ViewData["ordDir"] == "asc")
@@ -85,7 +85,7 @@
             else
             {<a id="ordDep" class ="ordLink">Отдел</a>}
         </th>
-        <th width =  "110">
+        <th width =  "125">
             @if (ViewData["ordName"] == "ordSkype")
             {
                 if (ViewData["ordDir"] == "asc")
@@ -115,7 +115,7 @@
             else
             {<a id="ordEmail" class ="ordLink">e-mal</a>}
         </th>
-        <th width =  "70">
+        <th width =  "65">
             @if (ViewData["ordName"] == "ordIntTel")
             {
                 if (ViewData["ordDir"] == "asc")
@@ -159,19 +159,19 @@
             <td width =  "115">
                 @Html.DisplayFor(modelItem => item.SName)
             </td>
-            <td width =  "190">
+            <td width =  "180">
                 @Html.DisplayFor(modelItem => item.Pos.Name)
             </td>
             <td width =  "180">
                 @Html.DisplayFor(modelItem => item.Dep.Name)
             </td>
-            <td width =  "110">
+            <td width =  "125">
                 @SkypeTextBox(item.SkypeName)
             </td>
             <td width =  "140">
                 @EmailTextBox(item.Email, item.Email)
             </td>
-            <td width =  "70">
+            <td width =  "65" align="center">
                 @Html.DisplayFor(modelItem => item.InternalTel)
             </td>
             <td width =  "115">
