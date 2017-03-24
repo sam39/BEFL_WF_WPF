@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFAdmin", "Comp\WFAdmin.csproj", "{6E56D7CD-475A-4E32-8CC2-507803176306}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEFLSPR", "WebSpr\BEFLSPR.csproj", "{900B6FFA-FB53-41A7-8765-0EABE39D6E19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWINWebAPI", "OWINWebAPI\OWINWebAPI.csproj", "{E821E994-DC13-47D1-8D10-4AE5F67EDB56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Android", "Android\Android.csproj", "{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,12 @@ Global
 		{E821E994-DC13-47D1-8D10-4AE5F67EDB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E821E994-DC13-47D1-8D10-4AE5F67EDB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E821E994-DC13-47D1-8D10-4AE5F67EDB56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA79F99-DF90-4C8B-A1FA-389152CC3B1E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

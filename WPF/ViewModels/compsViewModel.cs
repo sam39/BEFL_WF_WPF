@@ -157,8 +157,8 @@ namespace WPF.ViewModels
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Владелец"))));
 
             //currentRow.FontWeight = FontWeight.;
-            currentRow.Background = Brushes.LightBlue;
-            currentRow.Foreground = Brushes.Gray;
+            currentRow.Background = System.Windows.Media.Brushes.Navy;
+            currentRow.Foreground = System.Windows.Media.Brushes.White;
             int counter = 1;
             foreach (BL.Comp comp in EntityList)
             {
