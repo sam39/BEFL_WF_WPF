@@ -23,6 +23,7 @@ namespace WPF.ViewModels
                 !(comp.NetName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
                 !(comp.CompTypeName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
                 !(comp.EmpLastName ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
+                !(comp.OS ?? string.Empty).ToLower().Contains(FindText.ToLower()) &&
                 !(comp.Id.ToString() ?? string.Empty).ToLower().Contains(FindText.ToLower())
                 )
             {
@@ -250,7 +251,7 @@ namespace WPF.ViewModels
                 comp.Memory = getWmiProp("Win32_PhysicalMemory", new string[] { "BankLabel", "Capacity", "Speed" }, scope);
                 comp.Hdd = getWmiProp("Win32_Volume", new string[] { "DriveLetter", "Capacity", "FileSystem" }, scope);
                 comp.MainBoard = getWmiProp("Win32_BaseBoard", new string[] { "Manufacturer", "Product" }, scope);
-                comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion" }, scope);
+                comp.OS = getWmiProp("Win32_OperatingSystem", new string[] { "Caption", "ServicePackMajorVersion", "OSArchitecture" }, scope);
                 comp.Video = getWmiProp("Win32_VideoController", new string[] { "Description" }, scope);
                 comp.CdRom = getWmiProp("Win32_CDROMDrive", new string[] { "Caption" }, scope);
                 comp.Monitor = getWmiProp("Win32_Desktopmonitor", new string[] { "Caption", "ScreenWidth", "ScreenHeight" }, scope);
