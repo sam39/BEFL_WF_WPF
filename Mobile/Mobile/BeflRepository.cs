@@ -3,57 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using SQLite;
+using SQLite;
 using Xamarin.Forms;
 
 
 namespace Mobile
 {
-    class BeflRepository
+    public class BeflRepository
     {
-    }
-
-
-
-
-namespace SQLiteApp
-    {
-        public class FriendRepository
+        SQLiteConnection database;
+        public BeflRepository(string filename)
         {
-            SQLiteConnection database;
-            public FriendRepository(string filename)
-            {
-                string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath(filename);
-                database = new SQLiteConnection(databasePath);
-                database.CreateTable<Friend>();
-            }
-            public IEnumerable<Friend> GetItems()
-            {
-                return (from i in database.Table<Friend>() select i).ToList();
+            string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath(filename);
+            database = new SQLiteConnection(databasePath);
+            database.CreateTable<BL.Pos>();
+            database.CreateTable<BL.Dep>();
+            database.CreateTable<BL.Emp>();
+        }
+        public IEnumerable<BL.Emp> GetItems()
+        {
+            return (from i in database.Table<BL.Emp>() select i).ToList();
 
-            }
-            public Friend GetItem(int id)
+        }
+        public BL.Emp GetItem(int id)
+        {
+            return database.Get<BL.Emp>(id);
+        }
+        public int DeleteItem(int id)
+        {
+            return database.Delete<BL.Emp>(id);
+        }
+        public int SaveItem(BL.Emp item)
+        {
+            if (item.Id != 0)
             {
-                return database.Get<Friend>(id);
+                database.Update(item);
+                return item.Id;
             }
-            public int DeleteItem(int id)
+            else
             {
-                return database.Delete<Friend>(id);
-            }
-            public int SaveItem(Friend item)
-            {
-                if (item.Id != 0)
-                {
-                    database.Update(item);
-                    return item.Id;
-                }
-                else
-                {
-                    return database.Insert(item);
-                }
+                return database.Insert(item);
             }
         }
     }
+
 
 
 

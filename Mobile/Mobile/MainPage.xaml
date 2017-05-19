@@ -4,8 +4,21 @@
              xmlns:local="clr-namespace:Mobile"
              x:Class="Mobile.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <StackLayout>
+        <ListView x:Name="friendsList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}" FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Добавить" Clicked="CreateFriend" />
+    </StackLayout>
 
 </ContentPage>
