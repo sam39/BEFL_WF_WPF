@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
+    [Serializable]
     public class Dep : INotifyPropertyChanged
     {
         public int Id { get; set; }

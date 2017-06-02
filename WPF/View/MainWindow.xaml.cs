@@ -181,6 +181,13 @@ namespace WPF.View
             MainFrame.Navigate(view);
         }
 
+        private void btnXML_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToXml exp = new ExportToXml();
+            exp.Deps();
+            exp.Emps();
+        }
+
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Send<PageMessage>

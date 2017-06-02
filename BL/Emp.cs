@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-
+using System.Xml.Serialization;
 namespace BL
 {
+    [Serializable]
     public class Emp : INotifyPropertyChanged
     {
         public int Id { get; set; }
