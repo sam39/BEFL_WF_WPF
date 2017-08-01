@@ -5,7 +5,7 @@
              x:Class="Mobile.MainPage">
 
     <StackLayout>
-        <ListView x:Name="friendsList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+        <ListView x:Name="friendsList" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -239,6 +239,7 @@ namespace WPF.ViewModels
                 {
                     //EntityList.Add(entity);
                     UoW.Repository<T>().Insert(entity);
+                    _addNewMode = false;
                 }
             }
             UoW.Save();

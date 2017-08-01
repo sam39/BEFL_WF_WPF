@@ -38,15 +38,27 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BeflRepository.cs" />
+    <Compile Include="Helpers\MessengingCenterAlert.cs" />
+    <Compile Include="Helpers\ObservableObject.cs" />
+    <Compile Include="Helpers\ObservableRangeCollection.cs" />
+    <Compile Include="IBeflRepository.cs" />
     <Compile Include="EmpPage.xaml.cs">
       <DependentUpon>EmpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ISQLite.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IDataStore.cs" />
+    <Compile Include="Services\MockDataStore.cs" />
+    <Compile Include="ViewModels\EmpDetailsViewModel.cs" />
+    <Compile Include="ViewModels\EmpListViewModel.cs" />
+    <Compile Include="Views\EmpDetails.xaml.cs">
+      <DependentUpon>EmpDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmpList.xaml.cs">
+      <DependentUpon>EmpList.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainPage.xaml">
@@ -89,6 +101,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EmpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EmpList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EmpDetails.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

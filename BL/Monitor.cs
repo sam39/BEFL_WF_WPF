@@ -45,6 +45,16 @@ namespace BL
             }
         }
 
+        public virtual string DiagName
+        {
+            get
+            {
+                if (_diagonal != null)
+                    return _diagonal.Name;
+                else return "";
+            }
+        }
+
         public override string Name
         {
             get

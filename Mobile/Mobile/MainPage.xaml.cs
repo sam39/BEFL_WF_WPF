@@ -14,9 +14,12 @@ namespace Mobile
             InitializeComponent();
         }
 
+        IBeflRepository repos = DependencyService.Get<IBeflRepository>();
+
         protected override void OnAppearing()
         {
-            friendsList.ItemsSource = App.Database.GetItems();
+            friendsList.ItemsSource = repos.GetEmps();
+            //friendsList.ItemsSource = DependencyService.Get<IEmpList>().EmpList;
             base.OnAppearing();
         }
         // обработка нажатия элемента в списке

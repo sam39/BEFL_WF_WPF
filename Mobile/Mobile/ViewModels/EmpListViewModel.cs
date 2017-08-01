@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mobile
+namespace Mobile.ViewModels
 {
-    public interface ISQLite
+    class EmpListViewModel
     {
-        string GetDatabasePath(string filename);
     }
 }

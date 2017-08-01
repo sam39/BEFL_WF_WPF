@@ -9,25 +9,26 @@ namespace Mobile
 {
     public partial class App : Application
     {
-        public const string DATABASE_NAME = "befl.db";
-        public static BeflRepository database;
-        public static BeflRepository Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new BeflRepository(DATABASE_NAME);
-                }
-                return database;
-            }
-        }
+        //public const string DATABASE_NAME = "emp.xml";
+        //public static BeflRepository database;
+        //public static BeflRepository Database
+        //{
+        //    get
+        //    {
+        //        if (database == null)
+        //        {
+        //            database = new BeflRepository(DATABASE_NAME);
+        //        }
+        //        return database;
+        //    }
+        //}
 
         public App()
         {
             InitializeComponent();
 
-            MainPage = new Mobile.MainPage();
+            //MainPage = new Mobile.MainPage();
+            MainPage = new Views.EmpList();
         }
 
         protected override void OnStart()

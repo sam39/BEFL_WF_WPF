@@ -9,10 +9,10 @@
         <Entry Text="{Binding Email}" />
         <Label Text="Телефон" />
         <Entry Text="{Binding MobileTel}" />
-        <StackLayout Orientation="Horizontal">
+        <!--<StackLayout Orientation="Horizontal">
             <Button Text="Сохранить" Clicked="SaveFriend" />
             <Button Text="Удалить" Clicked="DeleteFriend" />
             <Button Text="Отмена" Clicked="Cancel" />
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
 </ContentPage>
